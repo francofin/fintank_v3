@@ -11,7 +11,11 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'homepage/about.html')
+    francois = Francois.objects.all()
+    data = {
+        'francois':francois,
+    }
+    return render(request, 'homepage/about.html', data)
 
 def contact(request):
     return render(request, 'homepage/contact.html')
