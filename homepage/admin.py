@@ -11,7 +11,7 @@ class FrancoisAdmin(admin.ModelAdmin):
     thumbnail.short_description = 'Avatar'
 
     list_display = ('id','thumbnail', 'first_name', 'last_name', 'designation', 'last_update')
-    list_display_links = ('first_name','thumbnail',  'id')
+    list_display_links = ('first_name','thumbnail', 'id')
     search_fields = ('first_name', 'last_name', 'designation')
     list_filter = ('designation',)
 

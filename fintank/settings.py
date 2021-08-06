@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
+    'research.apps.ResearchConfig',
     'ckeditor',
+    'import_export',
 ]
 
 MIDDLEWARE = [

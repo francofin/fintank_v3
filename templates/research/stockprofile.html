@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="preload-content">
+            <div id="world-load"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- ***** Header Area Start ***** -->
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ********** Hero Area Start ********** -->
+    {% for item in page_images %}
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url({{item.images1.url}});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <!-- Catagory -->
+                        <h1 style="color: white; font-size: 52px;">Fintank</h1>
+                        <p style="color: white;  font-size: 28px;">Your Portfolio Just Got Easier To Manage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- ********** Hero Area End ********** -->
+
+    <!-- ***** Footer Area Start ***** -->
+  {% endblock %}

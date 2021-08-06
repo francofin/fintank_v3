@@ -18,8 +18,11 @@ from django.urls import path
 from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
+from research import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('upload/', views.upload),
     path('', include('homepage.urls')),
+    path('research/', include('research.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
