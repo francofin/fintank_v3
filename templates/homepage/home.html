@@ -3,6 +3,7 @@
 {% block content %}
 
 {% load static %}
+
 <!-- Preloader Start -->
     <div id="preloader">
         <div class="preload-content">
@@ -37,7 +38,7 @@
             <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images9.url}});"></div>
 
             <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images10.url}});"></div>
-            
+
             <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images11.url}});"></div>
         {% endfor %}
         </div>
@@ -149,6 +150,20 @@
                             </div>
                             <div class="single-slide d-flex align-items-center">
                                 <div class="post-title">
+                                  {% if gsptse_perc < 0 %}
+                                   <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
+                                   <p><b style="color: white;">Price: ${{ tsx60_price | safe }} </b> <br>
+                                      <b style="color: white;">Change: {{ tsx60_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
+                                      <b style="color: white;">{{tsx60_name}}</b>
+                                     {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
+                                     <p><b style="color: white;">Price: ${{ tsx60_price | safe }} </b> <br>
+                                        <b style="color: white;">Change: {{ tsx60_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
+                                        <b style="color: white;">{{tsx60_name}}</b>
+                                 {% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="single-slide d-flex align-items-center">
+                                <div class="post-title">
                                   {% if nikkei_perc < 0 %}
                                    <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
                                    <p><b style="color: white;">Price: ${{ nikkei_price | safe }} </b> <br>
@@ -224,4 +239,258 @@
         </div>
     </div>
 
+
+    <div class="main-content-wrapper section-padding-100">
+      <div class="container" style="margin: 25px;">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="post-content-area mb-50">
+              <div class="world-catagory-area">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="title" style="font-size: 20px;">Latest News</li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                    <div class="row">
+                      <div class="col-12 col-md-6">
+                        <div class="world-catagory-slider owl-carousel wow fadeInUpBig" data-wow-delay="0.1s">
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='polimage1' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">economy</a></div>
+                            </div>
+                            <!-- Post Content -->
+                             <div class="post-content">
+                              <a id='polurl1' class="headline">
+                                <h5 id='polnewsTitle1'></h5>
+                              </a>
+                              <p id = "poldescription1"></p>
+
+                              <div class="post-meta">
+                                <p id='polsource1'></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='dowimage1' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">markets</a></div>
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                              <a id='dowurl1' class="headline">
+                                <h5 id='downewsTitle1'></h5>
+                              </a>
+                              <p id = "dowdescription1"></p>
+                              <!-- Post Meta -->
+                              <div class="post-meta">
+                                <p id='dowsource1'></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='ecoimage1' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">markets</a></div>
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                              <a id='ecourl1' class="headline">
+                                <h5 id='econewsTitle1'></h5>
+                              </a>
+                              <p id = "ecodescription1"></p>
+                              <!-- Post Meta -->
+                              <div class="post-meta">
+                                <p id='ecosource1'></p>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='polimage2' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">economy</a></div>
+                            </div>
+                            <!-- Post Content -->
+                             <div class="post-content">
+                              <a id='polurl2' class="headline">
+                                <h5 id='polnewsTitle2'></h5>
+                              </a>
+                              <p id = "poldescription2"></p>
+
+                              <div class="post-meta">
+                                <p id='polsource2'></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='dowimage2' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">markets</a></div>
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                              <a id='dowurl2' class="headline">
+                                <h5 id='downewsTitle2'></h5>
+                              </a>
+                              <p id = "dowdescription2"></p>
+                              <!-- Post Meta -->
+                              <div class="post-meta">
+                                <p id='dowsource2'></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="single-blog-post">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                              <img id='ecoimage2' alt="">
+                              <!-- Catagory -->
+                              <div class="post-cta"><a href="#">markets</a></div>
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                              <a id='ecourl2' class="headline">
+                                <h5 id='econewsTitle2'></h5>
+                              </a>
+                              <p id = "ecodescription2"></p>
+                              <!-- Post Meta -->
+                              <div class="post-meta">
+                                <p id='ecosource2'></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='polimage3' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='polurl3' class="headline">
+                              <h5 id='polnewsTitle3'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='polsource3'></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='dowimage3' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='dowurl3' class="headline">
+                              <h5 id='downewsTitle3'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='dowsource3'></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage3' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='ecourl3' class="headline">
+                              <h5 id='econewsTitle3'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='ecosource3'></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='trendimage1' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='trendurl1' class="headline">
+                              <h5 id='trend1'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='trendsource1'></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='trendimage2' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='trendurl2' class="headline">
+                              <h5 id='trend2'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='trendsource2'></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                          <div class="post-thumbnail">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='trendimage3' alt="">
+                          </div>
+                          <div class="post-content">
+                            <a id='trendurl3' class="headline">
+                              <h5 id='trend3'></h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                              <p id='trendsource3'></p>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+<script> var accessKey = "{{ api_key }}"; var accessKey2 = "{{ rapidapi_key }}";</script>
+<script src="{% static 'js/homepage/newssearch.js' %}"></script>
 {% endblock %}
