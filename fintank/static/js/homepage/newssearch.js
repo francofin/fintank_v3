@@ -97,7 +97,33 @@ const displayNewsCafe = function(search_term, title1, title2, title3, url_1, url
         url_3.setAttribute("target", "_blank");
         img3.setAttribute("src", search_term[2].img);
         src3.textContent = search_term[2].source_name;
-        console.log(search_term[2])
+        // console.log(search_term[2])
+    }
+};
+
+
+const displayTrendingNews = function(search_term, title1, url1, src1, img1, des1) {
+    if (search_term) {
+        //news box 1
+        title1.textContent = search_term.value[0].name;
+        url1.setAttribute("href", search_term.value[0].url);
+        url1.setAttribute("target", "_blank");
+        img1.setAttribute("src", search_term.value[0].image.thumbnail.contentUrl);
+        src1.textContent = search_term.value[0].provider[0].name;
+        des1.textContent = search_term.value[0].description;
+        //
+        // title2.textContent = search_term[2].title;
+        // url_2.setAttribute("href", search_term[2].source_url);
+        // url_2.setAttribute("target", "_blank");
+        // img2.setAttribute("src", search_term[2].img);
+        // src2.textContent = search_term[2].source_name;
+        // //
+        // title3.textContent = search_term[2].title;
+        // url_3.setAttribute("href", search_term[2].source_url);
+        // url_3.setAttribute("target", "_blank");
+        // img3.setAttribute("src", search_term[2].img);
+        // src3.textContent = search_term[2].source_name;
+        console.log("trending", search_term.value[0].url);
     }
 };
 
@@ -133,7 +159,7 @@ const displayEconomicImageBing = function(search_term, img1, img2, img3) {
 
 
 
-const getRawNewsData = function(accessKey1, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
+const getRawNewsData = function(accessKey, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -151,7 +177,7 @@ const getRawNewsData = function(accessKey1, searchTerm, title1, title2, title3, 
 };
 
 
-const getRawDowJonesData = function(accessKey1, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
+const getRawDowJonesData = function(accessKey, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -168,7 +194,7 @@ const getRawDowJonesData = function(accessKey1, searchTerm, title1, title2, titl
   })
 };
 
-const getRawEconomyData = function(accessKey1, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
+const getRawEconomyData = function(accessKey, searchTerm, title1, title2, title3, url_1, url_2, url_3, des1, des2, src1, src2, src3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -185,7 +211,7 @@ const getRawEconomyData = function(accessKey1, searchTerm, title1, title2, title
   })
 };
 
-const getRawNewsImageData = function(accessKey1, searchTerm, img1, img2, img3) {
+const getRawNewsImageData = function(accessKey, searchTerm, img1, img2, img3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -202,7 +228,7 @@ const getRawNewsImageData = function(accessKey1, searchTerm, img1, img2, img3) {
   })
 };
 
-const getRawDowImageData = function(accessKey1, searchTerm, img1, img2, img3) {
+const getRawDowImageData = function(accessKey, searchTerm, img1, img2, img3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -219,7 +245,7 @@ const getRawDowImageData = function(accessKey1, searchTerm, img1, img2, img3) {
   })
 };
 
-const getRawEconomicImageData = function(accessKey1, searchTerm, img1, img2, img3) {
+const getRawEconomicImageData = function(accessKey, searchTerm, img1, img2, img3) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
       "method": "GET",
       "headers": {
@@ -236,11 +262,11 @@ const getRawEconomicImageData = function(accessKey1, searchTerm, img1, img2, img
   })
 };
 
-const getRawNewsCafe = function(accessKey2, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3) {
+const getRawNewsCafe = function(accessKey, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3) {
   const apiUrl = fetch("https://newscafapi.p.rapidapi.com/apirapid/news/?q=news", {
       "method": "GET",
       "headers": {
-        "x-rapidapi-key": accessKey2,
+        "x-rapidapi-key": accessKey,
         "x-rapidapi-host": "newscafapi.p.rapidapi.com"
       }
   })
@@ -253,10 +279,28 @@ const getRawNewsCafe = function(accessKey2, title1, title2, title3, url_1, url_2
       }
   })
 };
-//
-//
-// const getRawTrendingData = function(accessKey1) {
-//   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/trendingtopics", {
+
+
+const getRawTrendingData = function(accessKey, title1, url1, src1, img1, des1) {
+  const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news?category=World&mkt=en-us", {
+      "method": "GET",
+      "headers": {
+          "Ocp-Apim-Subscription-Key": accessKey,
+      }
+  })
+
+  apiUrl.then(function(response) {
+      if(response.ok) {
+         response.json().then(function(data) {
+             console.log("news", data);
+             displayTrendingNews(data, title1, url1, src1, img1, des1);
+         })
+      }
+  })
+};
+
+// const getRawTopNewsData = function(accessKey) {
+//   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=&mkt=en-us", {
 //       "method": "GET",
 //       "headers": {
 //           "Ocp-Apim-Subscription-Key": accessKey,
@@ -267,7 +311,7 @@ const getRawNewsCafe = function(accessKey2, title1, title2, title3, url_1, url_2
 //       if(response.ok) {
 //          response.json().then(function(data) {
 //              console.log("news", data);
-//              // displayArticle(data);
+//              // displayTopNews(data);
 //          })
 //       }
 //   })
@@ -305,6 +349,7 @@ const getNews = function(accessKey1, accessKey2) {
       getRawDowImageData(accessKey1, searchTerm2, dowimage1, dowimage2, dowimage3);
       getRawEconomicImageData(accessKey1, searchTerm3, ecoimage1, ecoimage2, ecoimage3);
       getRawNewsCafe(accessKey2, trend1, trend2, trend3, trendurl1, trendurl2, trendurl3, trendsource1, trendsource2, trendsource3, trendimage1, trendimage2, trendimage3);
+      getRawTrendingData(accessKey1, bingtrend1, bingtrendurl1, bingtrendsrc1, bingtrendimg1, bingtrenddes1);
 };
 
 
