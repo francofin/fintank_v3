@@ -102,7 +102,7 @@ const displayNewsCafe = function(search_term, title1, title2, title3, url_1, url
 };
 
 
-const displayTrendingNews = function(search_term, title1, url1, src1, img1, des1) {
+const displayTrendingNews = function(search_term, title1, title2, url1, url2, src1, src2, img1, img2, des1, des2) {
     if (search_term) {
         //news box 1
         title1.textContent = search_term.value[0].name;
@@ -112,11 +112,12 @@ const displayTrendingNews = function(search_term, title1, url1, src1, img1, des1
         src1.textContent = search_term.value[0].provider[0].name;
         des1.textContent = search_term.value[0].description;
         //
-        // title2.textContent = search_term[2].title;
-        // url_2.setAttribute("href", search_term[2].source_url);
-        // url_2.setAttribute("target", "_blank");
-        // img2.setAttribute("src", search_term[2].img);
-        // src2.textContent = search_term[2].source_name;
+        title2.textContent = search_term[1].title;
+        url2.setAttribute("href", search_term[1].source_url);
+        url2.setAttribute("target", "_blank");
+        img2.setAttribute("src", search_term[1].img);
+        src2.textContent = search_term[1].source_name;
+        des2.textContent = search_term.value[1].description;
         // //
         // title3.textContent = search_term[2].title;
         // url_3.setAttribute("href", search_term[2].source_url);
@@ -281,7 +282,7 @@ const getRawNewsCafe = function(accessKey, title1, title2, title3, url_1, url_2,
 };
 
 
-const getRawTrendingData = function(accessKey, title1, url1, src1, img1, des1) {
+const getRawTrendingData = function(accessKey, title1, title2, url1, url2, src1, src2, img1, img2, des1, des2) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news?category=World&mkt=en-us", {
       "method": "GET",
       "headers": {
@@ -293,7 +294,7 @@ const getRawTrendingData = function(accessKey, title1, url1, src1, img1, des1) {
       if(response.ok) {
          response.json().then(function(data) {
              console.log("news", data);
-             displayTrendingNews(data, title1, url1, src1, img1, des1);
+             displayTrendingNews(data, title1, title2, url1, url2, src1, src2, img1, img2, des1, des2);
          })
       }
   })
@@ -349,7 +350,7 @@ const getNews = function(accessKey1, accessKey2) {
       getRawDowImageData(accessKey1, searchTerm2, dowimage1, dowimage2, dowimage3);
       getRawEconomicImageData(accessKey1, searchTerm3, ecoimage1, ecoimage2, ecoimage3);
       getRawNewsCafe(accessKey2, trend1, trend2, trend3, trendurl1, trendurl2, trendurl3, trendsource1, trendsource2, trendsource3, trendimage1, trendimage2, trendimage3);
-      getRawTrendingData(accessKey1, bingtrend1, bingtrendurl1, bingtrendsrc1, bingtrendimg1, bingtrenddes1);
+      getRawTrendingData(accessKey1, bingtrend1, bingtrendurl1, bingtrendsrc1, bingtrendimg1, bingtrenddes1, bingtrend2, bingtrendurl2, bingtrendsrc2, bingtrendimg2, bingtrenddes2);
 };
 
 
