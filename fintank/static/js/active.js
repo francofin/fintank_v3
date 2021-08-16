@@ -73,7 +73,8 @@
         $('.world-catagory-slider, .world-catagory-slider2').owlCarousel({
             items: 1,
             margin: 0,
-            loop: true,
+            loop: false,
+            rewind:true,
             dots: false,
             autoplay: true,
             autoplayTimeout: 3500, // Autoplay Timeout 1s = 1000ms

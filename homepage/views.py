@@ -96,6 +96,7 @@ def home(request):
         'francois': francois,
         'api_key': settings.BING_SECRET_KEY,
         'rapidapi_key': settings.RAPID_SECRET_KEY,
+        "fmp_api":fmp_api,
         'vix_name':vix_name,
         'vix_price':vix_price,
         'vix_perc':vix_perc,
