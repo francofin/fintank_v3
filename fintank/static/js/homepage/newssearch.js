@@ -398,23 +398,24 @@ const getRawEconomicImageData = function(accessKey, searchTerm, img1, img2, img3
   })
 };
 
-// const getRawNewsCafe = function(accessKey, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3) {
-//   const apiUrl = fetch("https://newscafapi.p.rapidapi.com/apirapid/news/?q=news", {
-//       "method": "GET",
-//       "headers": {
-//         "x-rapidapi-key": accessKey,
-//         "x-rapidapi-host": "newscafapi.p.rapidapi.com"
-//       }
-//   })
-//
-//   apiUrl.then(function(response) {
-//       if(response.ok) {
-//          response.json().then(function(data) {
-//              displayNewsCafe(data, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3);
-//          })
-//       }
-//   })
-// };
+const getRawNewsCafe = function(accessKey, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3) {
+  const apiUrl = fetch("https://newscafapi.p.rapidapi.com/apirapid/news/world/", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-key": accessKey,
+        "x-rapidapi-host": "newscafapi.p.rapidapi.com"
+      }
+  })
+
+  apiUrl.then(function(response) {
+      if(response.ok) {
+         response.json().then(function(data) {
+           console.log("news cafe", data);
+             displayNewsCafe(data, title1, title2, title3, url_1, url_2, url_3, src1, src2, src3, img1, img2, img3);
+         })
+      }
+  })
+};
 
 
 // const getRawTrendingData = function(accessKey, title1, title2, url1, url2, src1, src2, img1, img2, des1) {
@@ -480,7 +481,7 @@ const getNews = function(accessKey1, accessKey2, accessKey3) {
       getRawEconomyData(accessKey1, searchTerm3, econewsTitle1, econewsTitle2, econewsTitle3, econewsTitle4, econewsTitle5, econewsTitle6, econewsTitle7, ecourl1, ecourl2, ecourl3, ecourl4, ecourl5, ecourl6, ecourl7, ecosource1, ecosource2, ecosource3, ecosource4, ecosource5, ecosource6, ecosource7);
       // getRawDowImageData(accessKey1, searchTerm2, dowimage1, dowimage2, dowimage3);
       getRawEconomicImageData(accessKey1, searchTerm3, ecoimage1, ecoimage2, ecoimage3, ecoimage4, ecoimage5, ecoimage6, ecoimage7);
-      // getRawNewsCafe(accessKey2, trend1, trend2, trend3, trendurl1, trendurl2, trendurl3, trendsource1, trendsource2, trendsource3, trendimage1, trendimage2, trendimage3);
+      getRawNewsCafe(accessKey2, newscafe1, newscafe2, newscafe3, newscafeurl1, newscafeurl2, newscafeurl3, newscafesrc1, newscafesrc2, newscafesrc3, newscafeimg1, newscafeimg2, newscafeimg3);
       // getRawTrendingData(accessKey1, bingtrend1, bingtrend2, bingtrendurl1, bingtrendurl2, bingtrendsrc1, bingtrendsrc2, bingtrendimg1, bingtrendimg2, bingtrenddes1);
       getRawFmpNewsData(accessKey3, fmptitle1, fmptitle2, fmptitle3, fmptitle4, fmptitle5, fmptitle6, fmptitle7, fmptitle8, fmptitle9, fmptitle10, fmptitle11, fmptitle12, fmpsymbol1, fmpsymbol2, fmpsymbol3, fmpsymbol4, fmpsymbol5, fmpsymbol6, fmpsymbol7, fmpsymbol8, fmpsymbol9, fmpsymbol10, fmpsymbol11, fmpsymbol12, fmpurl1, fmpurl2, fmpurl3, fmpurl4, fmpurl5, fmpurl6, fmpurl7, fmpurl8, fmpurl9, fmpurl10, fmpurl11, fmpurl12, fmpdes1, fmpdes2, fmpdes3, fmpdes4, fmpdes5, fmpdes6, fmpdes7, fmpdes8, fmpdes9, fmpdes10, fmpdes11, fmpdes12, fmpimage1, fmpimage2, fmpimage3, fmpimage4, fmpimage5, fmpimage6, fmpimage7, fmpimage8, fmpimage9, fmpimage10, fmpimage11, fmpimage12);
 

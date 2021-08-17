@@ -33,3 +33,17 @@ class Francois(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class GainersAndLoser(models.Model):
+    gainer1 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    gainer2 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    gainer3 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    gainer4 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    gainer5 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    loser1 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    loser2 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    loser3 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    loser4 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+    loser5 = models.ImageField(upload_to = 'photos/%Y/%m/%d/')
+
+    

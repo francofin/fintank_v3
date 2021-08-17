@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Francois
+from .models import Francois, GainersAndLoser
 from django.conf import settings
+from yahoo_fin.stock_info import *
 
 
 # Create your views here.
@@ -10,6 +11,8 @@ def home(request):
     import json
 
     francois = Francois.objects.all()
+
+    gainers_and_losers = GainersAndLoser.objects.all()
 
     fmp_api = settings.FMP_API
 
@@ -90,10 +93,71 @@ def home(request):
     nikkei_perc = nikkei['changesPercentage']
     nikkei_dollar = nikkei['change']
 
+    '''
+    Get Day Gainers and losers from yahoo_fin modules
 
+    '''
+
+
+    gainers = get_day_gainers()
+    gainers = gainers[gainers['Price (Intraday)'] > 10].values
+
+    gainer1_ticker = gainers[0][0]
+    gainer1_name = gainers[0][1]
+    gainer1_price = gainers[0][2]
+    gainer1_perc_change = gainers[0][4]
+
+    gainer2_ticker = gainers[1][0]
+    gainer2_name = gainers[1][1]
+    gainer2_price = gainers[1][2]
+    gainer2_perc_change = gainers[1][4]
+
+    gainer3_ticker = gainers[2][0]
+    gainer3_name = gainers[2][1]
+    gainer3_price = gainers[2][2]
+    gainer3_perc_change = gainers[2][4]
+
+    gainer4_ticker = gainers[3][0]
+    gainer4_name = gainers[3][1]
+    gainer4_price = gainers[3][2]
+    gainer4_perc_change = gainers[3][4]
+
+    gainer5_ticker = gainers[4][0]
+    gainer5_name = gainers[4][1]
+    gainer5_price = gainers[4][2]
+    gainer5_perc_change = gainers[4][4]
+
+    losers = get_day_losers()
+    losers = losers[losers['Price (Intraday)']>25].values
+
+    loser1_ticker = losers[0][0]
+    loser1_name = losers[0][1]
+    loser1_price = losers[0][2]
+    loser1_perc_change = losers[0][4]
+
+    loser2_ticker = losers[1][0]
+    loser2_name = losers[1][1]
+    loser2_price = losers[1][2]
+    loser2_perc_change = losers[1][4]
+
+    loser3_ticker = losers[2][0]
+    loser3_name = losers[2][1]
+    loser3_price = losers[2][2]
+    loser3_perc_change = losers[2][4]
+
+    loser4_ticker = losers[3][0]
+    loser4_name = losers[3][1]
+    loser4_price = losers[3][2]
+    loser4_perc_change = losers[3][4]
+
+    loser5_ticker = losers[4][0]
+    loser5_name = losers[4][1]
+    loser5_price = losers[4][2]
+    loser5_perc_change = losers[4][4]
 
     data = {
         'francois': francois,
+        'gainers_and_losers':gainers_and_losers,
         'api_key': settings.BING_SECRET_KEY,
         'rapidapi_key': settings.RAPID_SECRET_KEY,
         "fmp_api":fmp_api,
@@ -145,6 +209,46 @@ def home(request):
         'nikkei_price':nikkei_price,
         'nikkei_perc':nikkei_perc,
         'nikkei_dollar':nikkei_dollar,
+        'loser1_ticker':loser1_ticker,
+        'loser1_name': loser1_name,
+        'loser1_price': loser1_price,
+        'loser1_perc_change': loser1_perc_change,
+        'loser2_ticker':loser2_ticker,
+        'loser2_name': loser2_name,
+        'loser2_price': loser2_price,
+        'loser2_perc_change': loser2_perc_change,
+        'loser3_ticker':loser3_ticker,
+        'loser3_name': loser3_name,
+        'loser3_price': loser3_price,
+        'loser3_perc_change': loser3_perc_change,
+        'loser4_ticker':loser4_ticker,
+        'loser4_name': loser4_name,
+        'loser4_price': loser4_price,
+        'loser4_perc_change': loser4_perc_change,
+        'loser5_ticker':loser5_ticker,
+        'loser5_name': loser5_name,
+        'loser5_price': loser5_price,
+        'loser5_perc_change': loser5_perc_change,
+        'gainer1_ticker':gainer1_ticker,
+        'gainer1_name':gainer1_name,
+        'gainer1_price':gainer1_price,
+        'gainer1_perc_change':gainer1_perc_change,
+        'gainer2_ticker':gainer2_ticker,
+        'gainer2_name':gainer2_name,
+        'gainer2_price':gainer2_price,
+        'gainer2_perc_change':gainer2_perc_change,
+        'gainer3_ticker':gainer3_ticker,
+        'gainer3_name':gainer3_name,
+        'gainer3_price':gainer3_price,
+        'gainer3_perc_change':gainer3_perc_change,
+        'gainer4_ticker':gainer4_ticker,
+        'gainer4_name':gainer4_name,
+        'gainer4_price':gainer4_price,
+        'gainer4_perc_change':gainer4_perc_change,
+        'gainer5_ticker':gainer5_ticker,
+        'gainer5_name':gainer5_name,
+        'gainer5_price':gainer5_price,
+        'gainer5_perc_change':gainer5_perc_change,
     }
     return render(request, 'homepage/home.html', data)
 

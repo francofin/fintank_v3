@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Francois
 from django.utils.html import format_html
+from .models import GainersAndLoser
 # Register your models here.
 
 class FrancoisAdmin(admin.ModelAdmin):
@@ -16,3 +17,4 @@ class FrancoisAdmin(admin.ModelAdmin):
     list_filter = ('designation',)
 
 admin.site.register(Francois, FrancoisAdmin)
+admin.site.register(GainersAndLoser)
