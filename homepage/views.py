@@ -35,62 +35,62 @@ def home(request):
 
     vix_name = vix['name']
     vix_price = vix['price']
-    vix_perc = vix['changesPercentage']
+    vix_perc = round(vix['changesPercentage'],2)
     vix_dollar = vix['change']
 
     tsx60_name = tsx60['name']
     tsx60_price = tsx60['price']
-    tsx60_perc = tsx60['changesPercentage']
+    tsx60_perc = round(tsx60['changesPercentage'],2)
     tsx60_dollar = tsx60['change']
 
     ftse_name = ftse['name']
     ftse_price = ftse['price']
-    ftse_perc = ftse['changesPercentage']
+    ftse_perc = round(ftse['changesPercentage'],2)
     ftse_dollar = ftse['change']
 
     tyield_name = tyield['name']
     tyield_price = tyield['price']
-    tyield_perc = tyield['changesPercentage']
+    tyield_perc = round(tyield['changesPercentage'],2)
     tyield_dollar = tyield['change']
 
     tyield10_name = tyield10['name']
     tyield10_price = tyield10['price']
-    tyield10_perc = tyield10['changesPercentage']
+    tyield10_perc = round(tyield10['changesPercentage'],2)
     tyield10_dollar = tyield10['change']
 
     dji_name = dji['name']
     dji_price = dji['price']
-    dji_perc = dji['changesPercentage']
+    dji_perc = round(dji['changesPercentage'],2)
     dji_dollar = dji['change']
 
     gspc_name = gspc['name']
     gspc_price = gspc['price']
-    gspc_perc = gspc['changesPercentage']
+    gspc_perc = round(gspc['changesPercentage'],2)
     gspc_dollar = gspc['change']
 
     ixic_name = ixic['name']
     ixic_price = ixic['price']
-    ixic_perc = ixic['changesPercentage']
+    ixic_perc = round(ixic['changesPercentage'],2)
     ixic_dollar = ixic['change']
 
     gsptse_name = gsptse['name']
     gsptse_price = gsptse['price']
-    gsptse_perc = gsptse['changesPercentage']
+    gsptse_perc = round(gsptse['changesPercentage'],2)
     gsptse_dollar = gsptse['change']
 
     rut_name = rut['name']
     rut_price = rut['price']
-    rut_perc = rut['changesPercentage']
+    rut_perc = round(rut['changesPercentage'],2)
     rut_dollar = rut['change']
 
     rutone_name = rutone['name']
     rutone_price = rutone['price']
-    rutone_perc = rutone['changesPercentage']
+    rutone_perc = round(rutone['changesPercentage'],2)
     rutone_dollar = rutone['change']
 
     nikkei_name = nikkei['name']
     nikkei_price = nikkei['price']
-    nikkei_perc = nikkei['changesPercentage']
+    nikkei_perc = round(nikkei['changesPercentage'],2)
     nikkei_dollar = nikkei['change']
 
     '''

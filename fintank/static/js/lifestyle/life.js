@@ -130,8 +130,7 @@ const displayTechArticleBing = function(search_term, title1, title2, title3, tit
     }
 };
 
-const displayTrendingArticleBing = function(search_term, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11,
-  src12, src13, src14, src15, src16, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16) {
+const displayTrendingArticleBing = function(search_term, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, title17, title18, title19, title20, title21, title22, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19, url20, url21, url22, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, des17, des18, des19, des20, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11, src12, src13, src14, src15, src16, src17, src18, src19, src20, src21, src22, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22) {
     if (search_term) {
         //news box 1
 
@@ -257,6 +256,48 @@ const displayTrendingArticleBing = function(search_term, title1, title2, title3,
         img16.setAttribute("src", newsList[15].image.thumbnail.contentUrl);
         src16.textContent = search_term.value[15].provider[0].name;
 
+        title17.textContent = newsList[16].name;
+        url17.setAttribute("href", newsList[16].url);
+        url17.setAttribute("target", "_blank");
+        img17.setAttribute("src", newsList[16].image.thumbnail.contentUrl);
+        des17.textContent = newsList[16].description.slice(0,200)+"...";
+        src17.textContent = search_term.value[16].provider[0].name;
+
+        title18.textContent = newsList[17].name;
+        url18.setAttribute("href", newsList[17].url);
+        url18.setAttribute("target", "_blank");
+        img18.setAttribute("src", newsList[17].image.thumbnail.contentUrl);
+        des18.textContent = newsList[17].description.slice(0,200)+"...";
+        src18.textContent = search_term.value[17].provider[0].name;
+
+        title19.textContent = newsList[18].name;
+        url19.setAttribute("href", newsList[18].url);
+        url19.setAttribute("target", "_blank");
+        img19.setAttribute("src", newsList[18].image.thumbnail.contentUrl);
+        des19.textContent = newsList[18].description.slice(0,200)+"...";
+        src19.textContent = search_term.value[18].provider[0].name;
+
+        title20.textContent = newsList[19].name;
+        url20.setAttribute("href", newsList[19].url);
+        url20.setAttribute("target", "_blank");
+        img20.setAttribute("src", newsList[19].image.thumbnail.contentUrl);
+        des20.textContent = newsList[19].description.slice(0,200)+"...";
+        src20.textContent = search_term.value[19].provider[0].name;
+
+        title21.textContent = newsList[20].name;
+        url21.setAttribute("href", newsList[20].url);
+        url21.setAttribute("target", "_blank");
+        img21.setAttribute("src", newsList[20].image.thumbnail.contentUrl);
+        src21.textContent = search_term.value[20].provider[0].name;
+
+        title22.textContent = newsList[21].name;
+        url22.setAttribute("href", newsList[21].url);
+        url22.setAttribute("target", "_blank");
+        img22.setAttribute("src", newsList[21].image.thumbnail.contentUrl);
+        src22.textContent = search_term.value[21].provider[0].name;
+
+
+
     }
 };
 
@@ -373,7 +414,7 @@ const getRawsocialhData = function(accessKey, title1, title2, title3, title4, ti
   apiUrl.then(function(response) {
       if(response.ok) {
          response.json().then(function(data) {
-           console.log("social", data);
+
                displaySocialArticleBing(data, title1, title2, title3, title4, title5, title6, title7, title8, title9, url1, url2, url3, url4, url5, url6, url7, url8, url9, des1, des2, des3, des4, des5, des6, des7, des8, des9, src1, src2, src3, src4, src5, src6, src7, src8, src9, img1, img2, img3, img4, img5, img6, img7, img8, img9);
            })
         }
@@ -381,8 +422,7 @@ const getRawsocialhData = function(accessKey, title1, title2, title3, title4, ti
 };
 
 
-const getRawTrendingData = function(accessKey, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11,
-  src12, src13, src14, src15, src16, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16) {
+const getRawTrendingData = function(accessKey, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, title17, title18, title19, title20, title21, title22, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19, url20, url21, url22, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, des17, des18, des19, des20, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11, src12, src13, src14, src15, src16, src17, src18, src19, src20, src21, src22, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=&count=50&mkt=en-us", {
       "method": "GET",
       "headers": {
@@ -393,8 +433,8 @@ const getRawTrendingData = function(accessKey, title1, title2, title3, title4, t
   apiUrl.then(function(response) {
       if(response.ok) {
          response.json().then(function(data) {
-               displayTrendingArticleBing(data, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11,
-                 src12, src13, src14, src15, src16, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16);
+           console.log("social", data);
+               displayTrendingArticleBing(data, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, title13, title14, title15, title16, title17, title18, title19, title20, title21, title22, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19, url20, url21, url22, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, des17, des18, des19, des20, src1, src2, src3, src4, src5, src6, src7, src8, src9, src10, src11, src12, src13, src14, src15, src16, src17, src18, src19, src20, src21, src22, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22);
            })
         }
     })
@@ -407,10 +447,9 @@ const getNews = function(accessKey1, accessKey2) {
         newsurl1, newsurl2, newsurl3, newsurl4, newsurl5, newsurl6, newsurl7, newsurl8, newsurl9, newsurl10, newsurl11, newsurl12, newsurl13, newsurl14, newsurl15, newsurl16, newsdes1, newsdes2, newsdes3, newsdes4, newsdes5, newsdes6, newsdes7, newsdes8,
         newsdes9, newssrc1, newssrc2, newssrc3, newssrc4, newssrc5, newssrc6, newssrc7, newssrc8, newssrc9, newssrc10, newssrc11, newssrc12, newssrc13, newssrc14, newssrc15, newssrc16,
         newsimg1, newsimg2, newsimg3, newsimg4, newsimg5, newsimg6, newsimg7, newsimg8, newsimg9, newsimg10, newsimg11, newsimg12, newsimg13, newsimg14, newsimg15, newsimg16);
-        getRawTrendingData(accessKey1, trendtitle1, trendtitle2,trendtitle3, trendtitle4, trendtitle5, trendtitle6, trendtitle7, trendtitle8, trendtitle9, trendtitle10, trendtitle11, trendtitle12, trendtitle13, trendtitle14, trendtitle15, trendtitle16,
-        trendurl1,trendurl2, trendurl3, trendurl4, trendurl5, trendurl6, trendurl7, trendurl8, trendurl9, trendurl10, trendurl11,trendurl12, trendurl13, trendurl14, trendurl15, trendurl16, trenddes1, trenddes2, trenddes3,trenddes4, trenddes5, trenddes6, trenddes7, trenddes8, trenddes9, trenddes10, trenddes11, trenddes12,
-        trendsrc1, trendsrc2, trendsrc3, trendsrc4, trendsrc5, trendsrc6, trendsrc7, trendsrc8, trendsrc9, trendsrc10, trendsrc11, trendsrc12, trendsrc13, trendsrc14, trendsrc15, trendsrc16, trendimg1, trendimg2, trendimg3, trendimg4, trendimg5, trendimg6, trendimg7, trendimg8, trendimg9, trendimg10, trendimg11, trendimg12, trendimg13,
-        trendimg14,trendimg15, trendimg16);
+        getRawTrendingData(accessKey1, trendtitle1, trendtitle2,trendtitle3, trendtitle4, trendtitle5, trendtitle6, trendtitle7, trendtitle8, trendtitle9, trendtitle10, trendtitle11, trendtitle12, trendtitle13, trendtitle14, trendtitle15, trendtitle16, trendtitle17, trendtitle18, trendtitle19, trendtitle20, trendtitle21, trendtitle22,
+        trendurl1,trendurl2, trendurl3, trendurl4, trendurl5, trendurl6, trendurl7, trendurl8, trendurl9, trendurl10, trendurl11,trendurl12, trendurl13, trendurl14, trendurl15, trendurl16, trendurl17, trendurl18, trendurl19, trendurl20, trendurl21, trendurl22, trenddes1, trenddes2, trenddes3,trenddes4, trenddes5, trenddes6, trenddes7, trenddes8, trenddes9, trenddes10, trenddes11, trenddes12,
+        trenddes17, trenddes18, trenddes19, trenddes20, trendsrc1, trendsrc2, trendsrc3, trendsrc4, trendsrc5, trendsrc6, trendsrc7, trendsrc8, trendsrc9, trendsrc10, trendsrc11, trendsrc12, trendsrc13, trendsrc14, trendsrc15, trendsrc16, trendsrc17, trendsrc18, trendsrc19, trendsrc20, trendsrc21, trendsrc22, trendimg1, trendimg2, trendimg3, trendimg4, trendimg5, trendimg6, trendimg7, trendimg8, trendimg9, trendimg10, trendimg11, trendimg12, trendimg13, trendimg14,trendimg15, trendimg16,trendimg17, trendimg18, trendimg19, trendimg20, trendimg21, trendimg22);
         getRawsocialhData(accessKey1, soctitle1, soctitle2, soctitle3, soctitle4, soctitle5, soctitle6, soctitle7, soctitle8, soctitle9, socurl1,socurl2, socurl3, socurl4, socurl5,socurl6, socurl7, socurl8, socurl9, socdes1,socdes1, socdes3, socdes4, socdes5, socdes6, socdes7, socdes8, socdes9,
         socsrc1, socsrc2, socsrc3, socsrc4, socsrc5, socsrc6, socsrc7, socsrc8, socsrc9, socimg1,socimg2,socimg3,socimg4, socimg5, socimg6,socimg7, socimg8, socimg9)
 };

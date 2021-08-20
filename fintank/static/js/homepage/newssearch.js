@@ -256,43 +256,60 @@ const displayNewsCafe = function(search_term, title1, title2, title3, url_1, url
 };
 
 
-const displayTrendingNews = function(search_term, title1, title2, url1, url2, src1, src2, img1, img2, des1) {
+const displayTrendArticleBing = function(search_term, title1, title2, title3, title4, title5, title6, url1, url2, url3, url4, url5, url6, des1, des2, des3, des4, src1, src2, src3, src4, src5, src6, img1, img2, img3, img4, img5, img6) {
     if (search_term) {
         //news box 1
-        title1.textContent = search_term.value[0].name;
-        url1.setAttribute("href", search_term.value[0].url);
+
+        let newsList = [];
+        for (var i = 0; i<search_term.value.length; i++) {
+          if (search_term.value[i].image) {
+            newsList.push(search_term.value[i])
+          }
+        }
+
+        title1.textContent = newsList[0].name;
+        url1.setAttribute("href", newsList[0].url);
         url1.setAttribute("target", "_blank");
-        img1.setAttribute("src", search_term.value[0].image.thumbnail.contentUrl);
+        img1.setAttribute("src", newsList[0].image.thumbnail.contentUrl);
+        des1.textContent = newsList[0].description.slice(0,150)+"...";
         src1.textContent = search_term.value[0].provider[0].name;
-        des1.textContent = search_term.value[0].description;
-        //
-        title2.textContent = search_term.value[1].name;
-        url2.setAttribute("href", search_term.value[1].url);
+
+        title2.textContent = newsList[1].name;
+        url2.setAttribute("href", newsList[1].url);
         url2.setAttribute("target", "_blank");
-        img2.setAttribute("src", search_term.value[0].image.thumbnail.contentUrl);
+        img2.setAttribute("src", newsList[1].image.thumbnail.contentUrl);
+        des2.textContent = newsList[1].description.slice(0,150)+"...";
         src2.textContent = search_term.value[1].provider[0].name;
 
-        // //
-        // title3.textContent = search_term[2].title;
-        // url_3.setAttribute("href", search_term[2].source_url);
-        // url_3.setAttribute("target", "_blank");
-        // img3.setAttribute("src", search_term[2].img);
-        // src3.textContent = search_term[2].source_name;
-        // console.log("trending", search_term.value[1].image.thumbnail);
+        title3.textContent = newsList[2].name;
+        url3.setAttribute("href", newsList[2].url);
+        url3.setAttribute("target", "_blank");
+        img3.setAttribute("src", newsList[2].image.thumbnail.contentUrl);
+        des3.textContent = newsList[2].description.slice(0,150)+"...";
+        src3.textContent = search_term.value[2].provider[0].name;
+
+        title4.textContent = newsList[3].name;
+        url4.setAttribute("href", newsList[3].url);
+        url4.setAttribute("target", "_blank");
+        img4.setAttribute("src", newsList[3].image.thumbnail.contentUrl);
+        des4.textContent = newsList[3].description.slice(0,150)+"...";
+        src4.textContent = search_term.value[3].provider[0].name;
+
+        title5.textContent = newsList[4].name;
+        url5.setAttribute("href", newsList[4].url);
+        url5.setAttribute("target", "_blank");
+        img5.setAttribute("src", newsList[4].image.thumbnail.contentUrl);
+        src5.textContent = search_term.value[4].provider[0].name;
+
+        title6.textContent = newsList[5].name;
+        url6.setAttribute("href", newsList[5].url);
+        url6.setAttribute("target", "_blank");
+        img6.setAttribute("src", newsList[5].image.thumbnail.contentUrl);
+        src6.textContent = search_term.value[5].provider[0].name;
+
+
     }
 };
-
-// const displayNewsImageBing = function(search_term, img1, img2, img3) {
-//     if (search_term) {
-//         //news box 1
-//         img1.setAttribute("src", search_term.value[0].thumbnailUrl);
-//         img2.setAttribute("src", search_term.value[1].thumbnailUrl);
-//         img3.setAttribute("src", search_term.value[2].thumbnailUrl);
-//
-//         console.log("images", search_term);
-//
-//     }
-// };
 
 
 const displayEconomicImageBing = function(search_term, img1, img2, img3, img4, img5, img6, img7) {
@@ -347,39 +364,6 @@ const getRawEconomyData = function(accessKey, searchTerm, search_term, title1, t
   })
 };
 
-// const getRawNewsImageData = function(accessKey, searchTerm, img1, img2, img3) {
-//   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
-//       "method": "GET",
-//       "headers": {
-//           "Ocp-Apim-Subscription-Key": accessKey,
-//       }
-//   })
-//
-//   apiUrl.then(function(response) {
-//       if(response.ok) {
-//          response.json().then(function(data) {
-//              displayNewsImageBing(data, img1, img2, img3);
-//          })
-//       }
-//   })
-// };
-
-// const getRawDowImageData = function(accessKey, searchTerm, img1, img2, img3) {
-//   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
-//       "method": "GET",
-//       "headers": {
-//           "Ocp-Apim-Subscription-Key": accessKey,
-//       }
-//   })
-//
-//   apiUrl.then(function(response) {
-//       if(response.ok) {
-//          response.json().then(function(data) {
-//              displayDowJonesImageBing(data, img1, img2, img3);
-//          })
-//       }
-//   })
-// };
 
 const getRawEconomicImageData = function(accessKey, searchTerm, img1, img2, img3, img4, img5, img6, img7) {
   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="+searchTerm, {
@@ -418,24 +402,6 @@ const getRawNewsCafe = function(accessKey, title1, title2, title3, url_1, url_2,
 };
 
 
-// const getRawTrendingData = function(accessKey, title1, title2, url1, url2, src1, src2, img1, img2, des1) {
-//   const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news?category=World&mkt=en-us", {
-//       "method": "GET",
-//       "headers": {
-//           "Ocp-Apim-Subscription-Key": accessKey,
-//       }
-//   })
-//
-//   apiUrl.then(function(response) {
-//       if(response.ok) {
-//          response.json().then(function(data) {
-//              console.log("news", data);
-//              displayTrendingNews(data, title1, title2, url1, url2, src1, src2, img1, img2, des1);
-//          })
-//       }
-//   })
-// };
-
 const getRawFmpNewsData = function(accessKey, title1, title2, title3, title4, title5, title6, title7, title8, title9, title10, title11, title12, symbol1, symbol2, symbol3, symbol4, symbol5, symbol6, symbol7, symbol8, symbol9, symbol10, symbol11, symbol12, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, des11, des12, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12) {
   const apiUrl = fetch("https://fmpcloud.io/api/v3/stock_news?limit=100&apikey="+accessKey, {
       "method": "GET",
@@ -450,28 +416,25 @@ const getRawFmpNewsData = function(accessKey, title1, title2, title3, title4, ti
       }
   })
 };
-//
 
-//
-//
-// const getRawTechNewsCafe = function(accessKey2) {
-//   const apiUrl = fetch("https://newscafapi.p.rapidapi.com/apirapid/news/technology/?q=news", {
-//       "method": "GET",
-//       "headers": {
-//         "x-rapidapi-key": accessKey2,
-//         "x-rapidapi-host": "newscafapi.p.rapidapi.com"
-//       }
-//   })
-//
-//   apiUrl.then(function(response) {
-//       if(response.ok) {
-//          response.json().then(function(data) {
-//              console.log("news", data);
-//              // displayArticle(data);
-//          })
-//       }
-//   })
-// };
+const getRawTrendData = function(accessKey, title1, title2, title3, title4, title5, title6, url1, url2, url3, url4, url5, url6, des1, des2, des3, des4, src1, src2, src3, src4, src5, src6, img1, img2, img3, img4, img5, img6) {
+  const apiUrl = fetch("https://api.cognitive.microsoft.com/bing/v7.0/news?category=Business&count=50&mkt=en-us", {
+      "method": "GET",
+      "headers": {
+          "Ocp-Apim-Subscription-Key": accessKey,
+      }
+  })
+
+  apiUrl.then(function(response) {
+      if(response.ok) {
+         response.json().then(function(data) {
+               displayTrendArticleBing(data, title1, title2, title3, title4, title5, title6, url1, url2, url3, url4, url5, url6, des1, des2, des3, des4, src1, src2, src3, src4, src5, src6, img1, img2, img3, img4, img5, img6);
+           })
+        }
+    })
+};
+
+
 
 
 
@@ -484,6 +447,7 @@ const getNews = function(accessKey1, accessKey2, accessKey3) {
       getRawNewsCafe(accessKey2, newscafe1, newscafe2, newscafe3, newscafeurl1, newscafeurl2, newscafeurl3, newscafesrc1, newscafesrc2, newscafesrc3, newscafeimg1, newscafeimg2, newscafeimg3);
       // getRawTrendingData(accessKey1, bingtrend1, bingtrend2, bingtrendurl1, bingtrendurl2, bingtrendsrc1, bingtrendsrc2, bingtrendimg1, bingtrendimg2, bingtrenddes1);
       getRawFmpNewsData(accessKey3, fmptitle1, fmptitle2, fmptitle3, fmptitle4, fmptitle5, fmptitle6, fmptitle7, fmptitle8, fmptitle9, fmptitle10, fmptitle11, fmptitle12, fmpsymbol1, fmpsymbol2, fmpsymbol3, fmpsymbol4, fmpsymbol5, fmpsymbol6, fmpsymbol7, fmpsymbol8, fmpsymbol9, fmpsymbol10, fmpsymbol11, fmpsymbol12, fmpurl1, fmpurl2, fmpurl3, fmpurl4, fmpurl5, fmpurl6, fmpurl7, fmpurl8, fmpurl9, fmpurl10, fmpurl11, fmpurl12, fmpdes1, fmpdes2, fmpdes3, fmpdes4, fmpdes5, fmpdes6, fmpdes7, fmpdes8, fmpdes9, fmpdes10, fmpdes11, fmpdes12, fmpimage1, fmpimage2, fmpimage3, fmpimage4, fmpimage5, fmpimage6, fmpimage7, fmpimage8, fmpimage9, fmpimage10, fmpimage11, fmpimage12);
+      getRawTrendData(accessKey1, trendtitle1,trendtitle2, trendtitle3, trendtitle4, trendtitle5, trendtitle6, trendurl1, trendurl2, trendurl3, trendurl4, trendurl5, trendurl6, trenddes1, trenddes2, trenddes3, trenddes4, trendsrc1, trendsrc2, trendsrc3, trendsrc4, trendsrc5, trendsrc6, trendimg1, trendimg2, trendimg3, trendimg4, trendimg5, trendimg6)
 
 };
 
