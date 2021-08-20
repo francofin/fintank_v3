@@ -25,4 +25,5 @@ urlpatterns = [
     path('upload/', views.upload),
     path('', include('homepage.urls')),
     path('research/', include('research.urls')),
+    path('lifestyle/', include('lifestyle.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -41,6 +41,16 @@
                                 class="nav-link"
                                  href="{% url 'contact' %}">Contact</a>
                             </li>
+                            <li
+                                {% if 'lifestyle' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}>
+                                <a
+                                class="nav-link"
+                                 href="{% url 'lifestyle' %}">Lifestyle</a>
+                            </li>
 
 
                         </ul>

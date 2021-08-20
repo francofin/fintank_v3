@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
     'research.apps.ResearchConfig',
+    'lifestyle.apps.LifestyleConfig',
     'ckeditor',
     'import_export',
 ]

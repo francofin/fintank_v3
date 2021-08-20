@@ -12,7 +12,6 @@
 </div>
 <!-- Preloader End -->
 
-
 <div class="hero-area">
   {% for item in francois %}
   <!-- Hero Slides Area -->
@@ -54,192 +53,10 @@
           </h1>
           <p style="color: white;  font-size: 32px;">Your Portfolio Just Got Easier To Manage</p>
         </div>
-
-
-
-    <div class="row">
-        <div class="col-12">
-            <div class="hero-post-slide">
-                <!-- Single Slide -->
-                <div class="single-slide d-flex align-items-center">
-                    <div class="post-title">
-                      {% if dji_perc < 0 %}
-                       <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                       <p><b style="color: white;">Price: ${{ dji_price | safe }} </b> <br>
-                          <b style="color: white;">Change: {{ dji_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                          <b style="color: white;">{{dji_name}}</b>
-                         {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                         <p><b style="color: white;">Price: ${{ dji_price | safe }} </b> <br>
-                            <b style="color: white;">Change: {{ dji_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                            <b style="color: white;">{{dji_name}}</b>
-                     {% endif %}</p>
-                    </div>
-                </div>
-                        <!-- Single Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if gspc_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ gspc_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ gspc_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{gspc_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ gspc_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ gspc_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{gspc_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <!-- Single Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if ixic_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ ixic_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ ixic_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{ixic_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ ixic_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ ixic_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{ixic_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <!-- Single Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if rut_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ rut_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ rut_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{rut_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ rut_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ rut_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{rut_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if rutone_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ rutone_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ rutone_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{rutone_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ rutone_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ rutone_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{rutone_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if gsptse_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ gsptse_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ gsptse_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{gsptse_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ gsptse_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ gsptse_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{gsptse_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if gsptse_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ tsx60_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ tsx60_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{tsx60_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ tsx60_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ tsx60_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{tsx60_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if nikkei_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ nikkei_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ nikkei_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{nikkei_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ nikkei_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ nikkei_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{nikkei_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if tyield_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ tyield_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ tyield_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{tyield_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ tyield_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ tyield_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{tyield_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if tyield10_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ tyield10_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ tyield10_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{tyield10_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ tyield10_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ tyield10_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{tyield10_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if ftse_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: ${{ ftse_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ ftse_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{ftse_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: ${{ ftse_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ ftse_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{ftse_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-title">
-                              {% if vix_perc < 0 %}
-                               <h5><span style="color: red;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                               <p><b style="color: white;">Price: {{ vix_price | safe }} </b> <br>
-                                  <b style="color: white;">Change: {{ vix_perc }}% <span style="color: red;"><font size="5">-</font></span></b> <br>
-                                  <b style="color: white;">{{vix_name}}</b>
-                                 {% else %} <h5><span style="color: green;"><font size="5"><i class="fas fa-line-chart fa-4x mr-2"></i></font></span></h5>
-                                 <p><b style="color: white;">Price: {{ vix_price | safe }} </b> <br>
-                                    <b style="color: white;">Change: {{ vix_perc }}% <span style="color: green;"><font size="5">+</font></span></b> <br>
-                                    <b style="color: white;">{{vix_name}}</b>
-                             {% endif %}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
-<!-- Whole Page Div and container-->
 <div class="main-content-wrapper section-padding-100">
   <div class="container">
     <div class="row justify-content-center">
@@ -247,7 +64,7 @@
         <div class="post-content-area mb-50">
           <div class="world-catagory-area">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="title" style="font-size: 20px;">Latest News</li>
+              <li class="title" style="font-size: 20px;">Interesting Lifestyle Reads</li>
             </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
@@ -372,105 +189,105 @@
                       <div class="col-12 col-md-6">
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage1' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg10' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl1' class="headline">
-                              <h5 id='econewsTitle1'></h5>
+                            <a id='newsurl10' class="headline">
+                              <h5 id='newstitle10'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource1'></p>
+                              <p id='newssrc10'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.3s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage2' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg11' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl2' class="headline">
-                              <h5 id='econewsTitle2'></h5>
+                            <a id='newsurl11' class="headline">
+                              <h5 id='newstitle11'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource2'></p>
+                              <p id='newssrc11'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage3' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg12' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl3' class="headline">
-                              <h5 id='econewsTitle3'></h5>
+                            <a id='newsurl12' class="headline">
+                              <h5 id='newstitle12'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource3'></p>
+                              <p id='newssrc12'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage4' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg13' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl4' class="headline">
-                              <h5 id='econewsTitle4'></h5>
+                            <a id='newsurl13' class="headline">
+                              <h5 id='newstitle13'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource4'></p>
+                              <p id='newssrc13'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage5' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg14' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl5' class="headline">
-                              <h5 id='econewsTitle5'></h5>
+                            <a id='newsurl14' class="headline">
+                              <h5 id='newstitle14'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource5'></p>
+                              <p id='newssrc14'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage6' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg15' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl6' class="headline">
-                              <h5 id='econewsTitle6'></h5>
+                            <a id='newsurl15' class="headline">
+                              <h5 id='newstitle15'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource6'></p>
+                              <p id='newssrc15'></p>
                             </div>
                           </div>
                         </div>
 
                         <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
                           <div class="post-thumbnail">
-                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='ecoimage7' alt="">
+                            <img  style="min-height: 75px; max-height: 75px; min-width: 100px; max-width: 100px;" id='newsimg16' alt="">
                           </div>
                           <div class="post-content">
-                            <a id='ecourl7' class="headline">
-                              <h5 id='econewsTitle7'></h5>
+                            <a id='newsurl16' class="headline">
+                              <h5 id='newstitle16'></h5>
                             </a>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                              <p id='ecosource7'></p>
+                              <p id='newssrc16'></p>
                             </div>
                           </div>
                         </div>
@@ -721,7 +538,7 @@
                         <div class="col-12 col-md-6" style="max-height: 500px; min-height:500px">
                           <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.2s">
                             <div class="post-thumbnail">
-                              <img id='newsimg7' alt="">
+                              <img  id='newsimg7' alt="">
                               <!-- Catagory -->
                               <div class="post-cta"><a href="#">trending</a></div>
                             </div>
@@ -767,14 +584,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage1' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg1' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl1' class="headline">
-                                          <h5 id='fmptitle1'></h5>
+                                        <a id='trendurl1' class="headline">
+                                          <h5 id='trendtitle1'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes1'></p> <p id='fmpsymbol1'></p>
+                                          <p id='trenddes1'></p> <p id='trendsrc1'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -782,14 +599,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage2' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg2' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl2' class="headline">
-                                          <h5 id='fmptitle2'></h5>
+                                        <a id='trendurl2' class="headline">
+                                          <h5 id='trendtitle2'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes2'></p><p id='fmpsymbol2'></p>
+                                          <p id='trenddes2'></p><p id='trendsrc2'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -797,14 +614,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage3' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg3' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl3' class="headline">
-                                          <h5 id='fmptitle3'></h5>
+                                        <a id='trendurl3' class="headline">
+                                          <h5 id='trendtitle3'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes3'></p><p id='fmpsymbol3'></p>
+                                          <p id='trenddes3'></p><p id='trendsrc3'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -812,78 +629,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage4' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg4' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl4' class="headline">
-                                          <h5 id='fmptitle4'></h5>
+                                        <a id='trendurl4' class="headline">
+                                          <h5 id='trendtitle4'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes4'></p><p id='fmpsymbol4'></p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="single-cata-slide" style="padding-top:100px;">
-                                <div class="row">
-                                  <div class="col-12 col-md-6">
-                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
-                                      <div class="post-thumbnail">
-                                        <img id='fmpimage5' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
-                                      </div>
-                                      <div class="post-content">
-                                        <a id='fmpurl5' class="headline">
-                                          <h5 id='fmptitle5'></h5>
-                                        </a>
-                                        <div class="post-meta">
-                                          <p id='fmpdes5'></p><p id='fmpsymbol5'></p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12 col-md-6">
-                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
-                                      <div class="post-thumbnail">
-                                        <img id='fmpimage6' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
-                                      </div>
-                                      <div class="post-content">
-                                        <a id='fmpurl6' class="headline">
-                                          <h5 id='fmptitle6'></h5>
-                                        </a>
-                                        <div class="post-meta">
-                                          <p id='fmpdes6'></p><p id='fmpsymbol6'></p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12 col-md-6">
-                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
-                                      <div class="post-thumbnail">
-                                        <img id='fmpimage7' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
-                                      </div>
-                                      <div class="post-content">
-                                        <a id='fmpurl7' class="headline">
-                                          <h5 id='fmptitle7'></h5>
-                                        </a>
-                                        <div class="post-meta">
-                                          <p id='fmpdes7'></p><p id='fmpsymbol7'></p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12 col-md-6">
-                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
-                                      <div class="post-thumbnail">
-                                        <img id='fmpimage8' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
-                                      </div>
-                                      <div class="post-content">
-                                        <a id='fmpurl8' class="headline">
-                                          <h5 id='fmptitle8'></h5>
-                                        </a>
-                                        <div class="post-meta">
-                                          <p id='fmpdes8'></p><p id='fmpsymbol8'></p>
+                                          <p id='trenddes4'></p><p id='trendsrc4'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -895,14 +648,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage9' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg5' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl9' class="headline">
-                                          <h5 id='fmptitle9'></h5>
+                                        <a id='trendurl5' class="headline">
+                                          <h5 id='trendtitle5'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes9'></p><p id='fmpsymbol9'></p>
+                                          <p id='trenddes5'></p><p id='trendsrc5'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -910,14 +663,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage10' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg6' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl10' class="headline">
-                                          <h5 id='fmptitle10'></h5>
+                                        <a id='trendurl6' class="headline">
+                                          <h5 id='trendtitle6'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes10'></p><p id='fmpsymbol10'></p>
+                                          <p id='trenddes6'></p><p id='trendsrc6'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -925,14 +678,14 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage11' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg7' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl11' class="headline">
-                                          <h5 id='fmptitle11'></h5>
+                                        <a id='trendurl7' class="headline">
+                                          <h5 id='trendtitle7'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes11'></p><p id='fmpsymbol11'></p>
+                                          <p id='trenddes7'></p><p id='trendsrc7'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -940,14 +693,78 @@
                                   <div class="col-12 col-md-6">
                                     <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
                                       <div class="post-thumbnail">
-                                        <img id='fmpimage12' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                        <img id='trendimg8' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
                                       </div>
                                       <div class="post-content">
-                                        <a id='fmpurl12' class="headline">
-                                          <h5 id='fmptitle12'></h5>
+                                        <a id='trendurl8' class="headline">
+                                          <h5 id='trendtitle8'></h5>
                                         </a>
                                         <div class="post-meta">
-                                          <p id='fmpdes12'></p><p id='fmpsymbol12'></p>
+                                          <p id='trenddes8'></p><p id='trendsrc8'></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="single-cata-slide" style="padding-top:100px;">
+                                <div class="row">
+                                  <div class="col-12 col-md-6">
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
+                                      <div class="post-thumbnail">
+                                        <img id='trendimg9' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                      </div>
+                                      <div class="post-content">
+                                        <a id='trendurl9' class="headline">
+                                          <h5 id='trendtitle9'></h5>
+                                        </a>
+                                        <div class="post-meta">
+                                          <p id='trenddes9'></p><p id='trendsrc9'></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-6">
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
+                                      <div class="post-thumbnail">
+                                        <img id='trendimg10' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                      </div>
+                                      <div class="post-content">
+                                        <a id='trendurl10' class="headline">
+                                          <h5 id='trendtitle10'></h5>
+                                        </a>
+                                        <div class="post-meta">
+                                          <p id='trenddes10'></p><p id='trendsrc10'></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-6">
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
+                                      <div class="post-thumbnail">
+                                        <img id='trendimg11' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                      </div>
+                                      <div class="post-content">
+                                        <a id='trendurl11' class="headline">
+                                          <h5 id='trendtitle11'></h5>
+                                        </a>
+                                        <div class="post-meta">
+                                          <p id='trenddes11'></p><p id='trendsrc11'></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-6">
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center mb-1" style="max-height: 130px; min-height:130px;">
+                                      <div class="post-thumbnail">
+                                        <img id='trendimg12' style="max-height: 110px; min-height:110px; min-width: 110px; max-width:110px;" alt="">
+                                      </div>
+                                      <div class="post-content">
+                                        <a id='trendurl12' class="headline">
+                                          <h5 id='trendtitle12'></h5>
+                                        </a>
+                                        <div class="post-meta">
+                                          <p id='trenddes12'></p><p id='trendsrc12'></p>
                                         </div>
                                       </div>
                                     </div>
@@ -974,19 +791,18 @@
               </div>
               <!-- Widget Area -->
               <div class="sidebar-widget-area">
-                <h5 class="title">Day's Top Gainers</h5>
+                <h5 class="title">Trendings</h5>
                 <div class="widget-content">
-                  {% for item in gainers_and_losers %}
                   <!-- Single Blog Post -->
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.gainer1.url }}" alt="">
+                      <img id='trendimg16' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ gainer1_ticker }} - {{ gainer1_name}} &nbsp; <span style="color: green;"><font size="3"> <br> +</font></span> ${{gainer1_price}}: {{ gainer1_perc_change }}%</h5>
+                      <a id='trendurl16' class="headline">
+                        <h5 style="font-size: 12px;" id ='trendtitle16' class="mb-0"></h5><p id='trendsrc16'></p>
                       </a>
                     </div>
                   </div>
@@ -994,12 +810,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.gainer2.url }}" alt="">
+                      <img id='socimg1' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ gainer2_ticker }} - {{ gainer2_name}} &nbsp; <span style="color: green;"><font size="3"> <br> +</font></span> ${{gainer2_price}}: {{ gainer2_perc_change }}%</h5>
+                      <a id='socurl1' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle1' class="mb-0"></h5><p id='socdes1'></p>
+                        <p id='socsrc1'></p>
                       </a>
                     </div>
                   </div>
@@ -1007,12 +824,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.gainer3.url }}" alt="">
+                      <img id='socimg2' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ gainer3_ticker }} - {{ gainer3_name}} &nbsp; <span style="color: green;"><font size="3"> <br> +</font></span> ${{gainer3_price}}: {{ gainer3_perc_change }}%</h5>
+                      <a id='socurl2' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle2' class="mb-0"></h5><p id='socdes2'></p>
+                        <p id='socsrc2'></p>
                       </a>
                     </div>
                   </div>
@@ -1020,12 +838,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.gainer4.url }}" alt="">
+                      <img id='socimg3' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ gainer4_ticker }} - {{ gainer4_name}} &nbsp; <span style="color: green;"><font size="3"> <br> +</font></span> ${{gainer4_price}}: {{ gainer4_perc_change }}%</h5>
+                      <a id='socurl3' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle3' class="mb-0"></h5><p id='socdes3'></p>
+                        <p id='socsrc3'></p>
                       </a>
                     </div>
                   </div>
@@ -1033,33 +852,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.gainer5.url }}" alt="">
+                      <img id='socimg4' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ gainer5_ticker }} - {{ gainer5_name}} &nbsp; <span style="color: green;"><font size="3"> <br> +</font></span> ${{gainer5_price}}: {{ gainer5_perc_change }}%</h5>
-                      </a>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-              <!-- Widget Area -->
-              <div class="sidebar-widget-area">
-                <h5 class="title">Day's Top Losers</h5>
-                <div class="widget-content">
-                  {% for item in gainers_and_losers %}
-                  <!-- Single Blog Post -->
-                  <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                    <!-- Post Thumbnail -->
-                    <div class="post-thumbnail">
-                      <img src="{{ item.loser1.url }}" alt="">
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ loser1_ticker }} - {{ loser1_name}} &nbsp; <span style="color: red;"><font size="3"> <br> -</font></span> ${{loser1_price}}: {{ loser1_perc_change }}%</h5>
+                      <a id='socurl4' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle4' class="mb-0"></h5><p id='socdes4'></p>
+                        <p id='socsrc4'></p>
                       </a>
                     </div>
                   </div>
@@ -1067,12 +866,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.loser2.url }}" alt="">
+                      <img id='socimg5' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ loser2_ticker }} - {{ loser2_name}} &nbsp; <span style="color: red;"><font size="3"> <br> -</font></span> ${{loser2_price}}: {{ loser2_perc_change }}%</h5>
+                      <a id='socurl5' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle5' class="mb-0"></h5><p id='socdes5'></p>
+                        <p id='socsrc5'></p>
                       </a>
                     </div>
                   </div>
@@ -1080,12 +880,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.loser3.url }}" alt="">
+                      <img id='socimg6' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ loser3_ticker }} - {{ loser3_name}} &nbsp; <span style="color: red;"><font size="3"> <br> -</font></span> ${{loser3_price}}: {{ loser3_perc_change }}%</h5>
+                      <a id='socurl6' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle6' class="mb-0"></h5><p id='socdes6'></p>
+                        <p id='socsrc6'></p>
                       </a>
                     </div>
                   </div>
@@ -1093,12 +894,13 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.loser4.url }}" alt="">
+                      <img id='socimg7' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ loser4_ticker }} - {{ loser4_name}} &nbsp; <span style="color: red;"><font size="3"> <br> -</font></span> ${{loser4_price}}: {{ loser4_perc_change }}%</h5>
+                      <a id='socurl7' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle7' class="mb-0"></h5><p id='socdes7'></p>
+                        <p id='socsrc7'></p>
                       </a>
                     </div>
                   </div>
@@ -1106,16 +908,30 @@
                   <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                      <img src="{{ item.loser5.url }}" alt="">
+                      <img id='socimg8' alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                      <a href="#" class="headline">
-                        <h5 style="font-size: 16px;" class="mb-0">{{ loser5_ticker }} - {{ loser5_name}} &nbsp; <span style="color: red;"><font size="3"> <br> -</font></span> ${{loser5_price}}: {{ loser5_perc_change }}%</h5>
+                      <a id='socurl8' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle8' class="mb-0"></h5><p id='socdes8'></p>
+                        <p id='socsrc8'></p>
                       </a>
                     </div>
                   </div>
-                  {% endfor %}
+                  <!-- Single Blog Post -->
+                  <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                    <!-- Post Thumbnail -->
+                    <div class="post-thumbnail">
+                      <img id='socimg9' alt="">
+                    </div>
+                    <!-- Post Content -->
+                    <div class="post-content">
+                      <a id='socurl9' class="headline">
+                        <h5 style="font-size: 12px;" id='soctitle9' class="mb-0"></h5><p id='socdes9'></p>
+                        <p id='socsrc9'></p>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1158,65 +974,66 @@
         <div class="row justify-content-center">
           <!-- ========== Single Blog Post ========== -->
           <div class="col-12 col-md-6 col-lg-4">
-            <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.2s">
-              <!-- Post Thumbnail -->
-              <div class="post-thumbnail">
-                <img id='newscafeimg1' alt="">
-                <!-- Post Content -->
-                <div class="post-content d-flex align-items-center justify-content-between">
-                  <!-- Catagory -->
-                  <div class="post-tag"></div>
-                  <!-- Headline -->
-                  <a id='newscafeurl1' class="headline">
-                    <h5 id='newscafe1'></h5>
-                  </a>
-                  <!-- Post Meta -->
-                  <div class="post-meta">
-                    <p id='newscafesrc1'></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ========== Single Blog Post ========== -->
-          <div class="col-12 col-md-6 col-lg-4">
             <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.4s">
               <!-- Post Thumbnail -->
               <div class="post-thumbnail">
-                <img id='newscafeimg2' alt="">
+                <img id='trendimg13' style="max-height:300px; min-height:300px;" alt="">
                 <!-- Post Content -->
                 <div class="post-content d-flex align-items-center justify-content-between">
                   <!-- Catagory -->
-                  <div class="post-tag"><a href="#">{{ health_des | safe }}</a></div>
+                  <div class="post-tag"><a href="#">Breaking</a></div>
                   <!-- Headline -->
-                  <a id='newscafeurl2' class="headline">
-                    <h5 id='newscafe2'></h5>
+                  <a id='trendurl13' class="headline">
+                    <h5 id='trendtitle13'></h5>
                   </a>
                   <!-- Post Meta -->
                   <div class="post-meta">
-                    <p id='newscafesrc2'></p>
+                    <p id='trendsrc13'></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- ========== Single Blog Post ========== -->
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.6s">
-              <!-- Post Thumbnail -->
-              <div class="post-thumbnail">
-                <img id='newscafeimg3' alt="">
-                <!-- Post Content -->
-                <div class="post-content d-flex align-items-center justify-content-between">
-                  <!-- Catagory -->
-                  <div class="post-tag"><a href="#">{{ tech2_des | safe }}</a></div>
-                  <!-- Headline -->
-                  <a id='newscafeurl3' class="headline">
-                    <h5 id='newscafe3'></h5>
-                  </a>
-                  <!-- Post Meta -->
-                  <div class="post-meta">
-                    <p id='newscafesrc3'></p>
+
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.4s">
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img id='trendimg14' style="max-height:300px; min-height:300px;" alt="">
+                  <!-- Post Content -->
+                  <div class="post-content d-flex align-items-center justify-content-between">
+                    <!-- Catagory -->
+                    <div class="post-tag"><a href="#">Breaking</a></div>
+                    <!-- Headline -->
+                    <a id='trendurl14' class="headline">
+                      <h5 id='trendtitle14'></h5>
+                    </a>
+                    <!-- Post Meta -->
+                    <div class="post-meta">
+                      <p id='trendsrc14'></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.6s">
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img id='trendimg15' style="max-height:300px; min-height:300px;" alt="">
+                  <!-- Post Content -->
+                  <div class="post-content d-flex align-items-center justify-content-between">
+                    <!-- Catagory -->
+                    <div class="post-tag"><a href="#">Breaking</a></div>
+                    <!-- Headline -->
+                    <a id='trendurl15' class="headline">
+                      <h5 id='trendtitle15'></h5>
+                    </a>
+                    <!-- Post Meta -->
+                    <div class="post-meta">
+                      <p id='trendsrc15'></p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1224,10 +1041,10 @@
           </div>
         </div>
       </div>
-    </div>
 
 
 
-<script> var accessKey = "{{ api_key }}"; var accessKey2 = "{{ rapidapi_key }}"; var accessKey3 = "{{ fmp_api }}";</script>
-<script src="{% static 'js/homepage/newssearch.js' %}"></script>
+
+    <script> var accessKey = "{{ api_key }}"; var accessKey2 = "{{ rapidapi_key }}";</script>
+    <script src="{% static 'js/lifestyle/life.js' %}"></script>
 {% endblock %}
