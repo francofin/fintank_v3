@@ -1,0 +1,3 @@
+Add stocks ranked by dividend for the universes
+Include micro,
+Add trend analysis and mean rversion

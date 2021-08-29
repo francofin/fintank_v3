@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'research.apps.ResearchConfig',
     'lifestyle.apps.LifestyleConfig',
+    'canadian_equities.apps.CanadianEquitiesConfig',
+    'us_equities.apps.UsEquitiesConfig',
+    'stock_profile.apps.StockProfileConfig',
     'ckeditor',
     'import_export',
 ]

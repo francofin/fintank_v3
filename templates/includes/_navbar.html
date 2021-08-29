@@ -32,6 +32,25 @@
                                 href="{% url 'about' %}">About</a>
                             </li>
                             <li
+                                {% if 'stock_profile' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}>
+                                <a
+                                class="nav-link"
+                                href="{% url 'stock_profile' %}">Stock Profiles</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Equities By Region
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{% url 'canadian_equities' %}">Canadian Equities</a>
+                                <a class="nav-link" href="{% url 'us_equities' %}">US Equities</a>
+                              </div>
+                            </li>
+                            <li
                                 {% if 'contact' in request.path %}
                                 class="nav-item active"
                                 {% else %}

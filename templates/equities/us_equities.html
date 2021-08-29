@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="preloader">
+  <div class="preload-content">
+    <div id="world-load"></div>
+  </div>
+</div>
+
+<div class="hero-area">
+  {% for item in francois %}
+  <!-- Hero Slides Area -->
+  <div class="hero-slides owl-carousel">
+    <!-- Single Slide -->
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images1.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images2.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images3.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images4.url}});"></div>
+
+    <!-- Single Slide -->
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images5.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images6.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images7.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images8.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images9.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images10.url}});"></div>
+
+    <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images11.url}});"></div>
+    {% endfor %}
+  </div>
+
+
+
+    <!-- Hero Post Slide -->
+    <div class="hero-post-area">
+      <div class="container">
+        <div style = "text-align: center; padding-bottom: 100px;">
+          <h1 class="display-4 mb-4" style="color: white; font-size: 72px;">
+            FINTANK
+          </h1>
+          <p style="color: white;  font-size: 32px;">Your Portfolio Just Got Easier To Manage</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content-wrapper section-padding-150" style="padding-top:20px;">
+  <div class="jumbotron jumbotron-fluid" style="margin :20px;">
+    <div class='container-fluid'>
+    <h1 class="display-4">US Universe Equity Listing</h1>
+     <p class="lead">All US Equities Listed In our Universe. Select an Equity below to find out more about the company</p>
+     <hr class="my-4">
+    </div>
+  </div>
+  <div class="container" style="margin-left:100px;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-12">
+        <div class="row justify-content-md-center row-eq-height">
+
+
+          <div class="col-12 col-lg-12">
+            <div class="single-blog-content mb-100">
+              <div class="post-meta">
+                <h5>Search Results:
+                  Showing: {{ length | safe }}
+                </h5>
+              </div>
+              <table class="table" style="margin-right:70px">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Ticker</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Market Cap</th>
+                    <th scope="col">Earning Per Share</th>
+                    <th scope="col">Price to Earnings Ratio</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">% Change</th>
+                    <th scope="col">Year Low</th>
+                    <th scope="col">Year High</th>
+                    <th scope="col">50 Day moving Average</th>
+                    <th scope="col">200 Day Moving Average</th>
+                    <th scope="col">Exchange</th>
+                    <th scope="col">Average Volume</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in combined_us_markets_ex_etf %}
+                  <tr>
+                    <th scope='row'><a href="#" id="search_item" target="_blank">{{ item.symbol }}</a></th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.marketCap }}</td>
+                    <td>{{ item.eps }}</td>
+                    <td>{{ item.pe }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.changesPercentage }}</td>
+                    <td>{{ item.yearLow }}</td>
+                    <td>{{ item.yearHigh }}</td>
+                    <td>{{ item.priceAvg50 }}</td>
+                    <td>{{ item.priceAvg200 }}</td>
+                    <td>{{ item.exchange }}</td>
+                    <td>{{ item.avgVolume }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <nav aria-label="Page navigation example" style="padding-left:200px;">
+                {% if combined_us_markets_ex_etf.has_other_pages %}
+                <ul class="pagination justify-content-center pagination-md">
+                  {% if combined_us_markets_ex_etf.has_previous%}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{combined_us_markets_ex_etf.previous_page_number}}" tabindex="-1">Previous</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                  </li>
+                  {% endif %}
+                  {% for pg in page_range %}
+                    {% if combined_us_markets_ex_etf.number == pg %}
+                      <li class="page-item active"><a class="page-link" href="#">{{pg}}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if combined_us_markets_ex_etf.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{combined_us_markets_ex_etf.next_page_number}}" tabindex="-1">Next</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                  </li>
+                  {% endif %}
+                </ul>
+                {% endif %}
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
