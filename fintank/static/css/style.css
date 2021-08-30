@@ -805,7 +805,7 @@ img {
   border-bottom: 2px solid;
   border-color: #f1f1f1;
   margin-bottom: 30px;
-  width: 125%;}
+  width: 140%;}
   .single-blog-content .post-meta p {
     margin-bottom: 0;
     font-size: 14px;
@@ -820,7 +820,7 @@ img {
     margin-top: 30px; }
 .single-blog-content .post-content {
   padding: 60px 55px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); }
+  width: 140%;}
   @media only screen and (max-width: 767px) {
     .single-blog-content .post-content {
       padding: 0px 25px; } }

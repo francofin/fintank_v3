@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'stock_profile.apps.StockProfileConfig',
     'ckeditor',
     'import_export',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

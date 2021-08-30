@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/francofin/fintank_v3#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "chart.js-rangeslider": "^1.2.5",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "rangeslider-js": "^3.2.5"
   }
 }
