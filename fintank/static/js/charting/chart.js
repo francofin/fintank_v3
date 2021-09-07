@@ -1,4 +1,67 @@
 let ctx = document.getElementById("stock-chart").getContext("2d");
+let ctx2 = document.getElementById("pe-chart").getContext("2d");
+
+
+const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, chartFactor, element) {
+
+  const data = {
+      datasets:[
+        {
+          label:"Above Average",
+          labels:aboveAverageLabels,
+          data: aboveAverageData,
+          borderColor: 'rgb(67, 154, 191)',
+          backgroundColor: 'rgb(67, 154, 191)'
+        },
+        {
+          label:"Below Average",
+          labels:belowAverageLabels,
+          data: belowAverageData,
+          borderColor: 'rgb(235, 218, 143)',
+          backgroundColor: 'rgb(235, 218, 143)'
+        },
+        {
+          label:stock,
+          data: stockData,
+          borderColor: 'rgb(160, 240, 144)',
+          backgroundColor: 'rgb(160, 240, 144)'
+        },
+      ]
+  }
+
+  let options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+        tooltip: {
+            callbacks: {
+                label: function(element) {
+                    // console.log(ctx);
+                    let label = element.dataset.labels[element.dataIndex];
+                    label += " ("+ element.parsed.y + ")";
+                    return label;
+                }
+            }
+        },
+        title: {
+          display: true,
+          text: chartFactor
+        }
+    }
+}
+
+
+  let chart = new Chart(element, {
+    type: "scatter",
+    data: data,
+    options: options,
+  });
+
+console.log(element);
+
+}
 
 
 const charting = function(dataDates, chartData, stock, companyName) {
@@ -90,3 +153,4 @@ const charting = function(dataDates, chartData, stock, companyName) {
 
 
 charting(dataDates, chartData, stock, companyName);
+bubbleChart(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, "P/E Comparison", ctx2);
