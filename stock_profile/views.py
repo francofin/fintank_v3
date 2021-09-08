@@ -167,20 +167,78 @@ def stock_profile(request):
     quotes =json.loads(requests.get(f'https://fmpcloud.io/api/v3/quote/{query_string}?apikey={fmp_api}').content)
     stock_quote =json.loads(requests.get(f'https://fmpcloud.io/api/v3/quote/{stock}?apikey={fmp_api}').content)
 
-    quote_list = [x['symbol'] for x in quotes if x['marketCap'] !=None and x['pe'] !=None]
-    pe_list =  [x['pe'] for x in quotes if x['marketCap'] !=None and x['pe'] !=None]
+    if currency == 'USD':
+        stock_quote['price'] = stock_quote['price']
+    elif currency == 'CAD':
+        exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CAD'][0])
+        stock_quote['price'] = stock_quote['price']/exchange_rate
+    elif fx_pair in pairings:
+        exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == fx_pair][0])
+        stock_quote['price'] = stock_quote['price']*exchange_rate
+    elif fx_pair_reverse in pairings:
+        exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == fx_pair_reverse][0])
+        stock_quote['price'] = stock_quote['price']/exchange_rate
+    else:
+        stock_quote['price'] = stock_quote['price']
+
+    #Align prices for comparison charts
+    for quote in quotes:
+        if quote['exchange'] == 'EURONEXT':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
+            quote['price'] = quote['price']*exchange_rate
+        elif quote['exchange'] == 'VIE':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
+            quote['price'] = quote['price']*exchange_rate
+        elif quote['exchange'] == 'GER':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
+            quote['price'] = quote['price']*exchange_rate
+        elif quote['exchange'] == 'HEL':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
+            quote['price'] = quote['price']*exchange_rate
+        elif quote['exchange'] == 'LSE':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
+            quote['price'] = quote['price']*exchange_rate
+        elif quote['exchange'] == 'HKSE':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/HKD'][0])
+            quote['price'] = quote['price']/exchange_rate
+        elif quote['exchange'] == 'SIX':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CHF'][0])
+            quote['price'] = quote['price']/exchange_rate
+        elif quote['exchange'] == 'OSE':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/NOK'][0])
+            quote['price'] = quote['price']/exchange_rate
+        elif quote['exchange'] == 'TSX':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CAD'][0])
+            quote['price'] = quote['price']/exchange_rate
+        elif quote['exchange'] == 'NSE':
+            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/INR'][0])
+            quote['price'] = quote['price']/exchange_rate
+        elif quote['exchange'] == 'MCX':
+            quote['price'] = quote['price']/0.014
+        elif quote['exchange'] == 'KRW':
+            quote['price'] = quote['price']/0.00086
+        elif quote['exchange'] == 'SHZ':
+            quote['price'] = quote['price']/0.15
+        else:
+            quote['price'] = quote['price']
+
+    quote_list = [x['symbol'] for x in quotes if x['marketCap'] !=None]
+    quote_list_filtered_high_pe = [x['symbol'] for x in quotes if  x['pe'] !=None and x['pe'] < 80]
+    pe_list =  [x['pe'] for x in quotes if  x['pe'] !=None and x['pe'] < 80]
     mean_pe = np.mean(pe_list)
-    market_cap_list = [x['marketCap'] for x in quotes if x['marketCap'] !=None and x['pe'] !=None]
+    market_cap_list = [x['marketCap'] for x in quotes if x['marketCap'] !=None]
     market_cap_normalized = [(x - np.min(market_cap_list))/(np.max(market_cap_list) - np.min(market_cap_list)) for x in market_cap_list]
     mean_mcap = np.mean(market_cap_normalized)
-    ma_50_200 = [x['priceAvg50']/x['priceAvg200'] for x in quotes if x['marketCap'] !=None and x['pe'] !=None]
+    quote_list_filtered_ma = [x['symbol'] for x in quotes if  x['priceAvg50'] !=None and x['priceAvg200'] !=None]
+    ma_50_200 = [x['priceAvg50']/x['priceAvg200'] for x in quotes if x['priceAvg50'] !=None and x['priceAvg200'] !=None]
     mean_ma = np.mean(ma_50_200)
-    price_list =  [x['price'] for x in quotes if x['marketCap'] !=None and x['pe'] !=None]
+    quote_list_for_prices = [x['symbol'] for x in quotes if x['exchange'] !=None]
+    price_list =  [x['price'] for x in quotes if x['exchange'] !=None]
     #add conditionaloty to confirm price data
 
-    quote_pe_list = [dict(zip(quote_list, pe_list))]
+    quote_pe_list = [dict(zip(quote_list_filtered_high_pe, pe_list))]
     quote_marketcap_list = [dict(zip(quote_list, market_cap_normalized))]
-    quote_ma_list = [dict(zip(quote_list, ma_50_200))]
+    quote_ma_list = [dict(zip(quote_list_filtered_ma, ma_50_200))]
     quote_price_list = [dict(zip(quote_list, price_list))]
     stock_price_data = [dict({live_quote_data['symbol']: live_quote_data['price']})]
     price_range = [x for x in np.arange(np.min(price_list),np.max(price_list), 2)]
