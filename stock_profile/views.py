@@ -100,11 +100,13 @@ def stock_profile(request):
             min_market_cap_for_sector_analysis = market_cap
         max_market_cap_for_sector_analysis = market_cap + 1000000000
     else:
+        market_cap = 0
         min_market_cap_for_sector_analysis = 10000000000
         max_market_cap_for_sector_analysis = 40000000000
 
+
     #this first set of data is puller directly aloing with the screener api
-    sector_data = json.loads(requests.get(f'https://fmpcloud.io/api/v3/stock-screener?sector=technology&marketCapLowerThan={max_market_cap_for_sector_analysis}&marketCapMoreThan={min_market_cap_for_sector_analysis}&limit=5000&apikey={fmp_api}').content)
+    sector_data = json.loads(requests.get(f'https://fmpcloud.io/api/v3/stock-screener?sector=technology&marketCapLowerThan={max_market_cap_for_sector_analysis}&marketCapMoreThan={min_market_cap_for_sector_analysis}&limit=10000&apikey={fmp_api}').content)
     equity_list = [x['symbol'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
     beta_list = [x['beta'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
     div_list = [x['lastAnnualDividend'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
@@ -135,7 +137,7 @@ def stock_profile(request):
 
         return [above_average_data], [below_average_data]
 
-
+    #Beta Ranks
     above_average_beta_list = create_stock_value_pair(equity_beta_list, mean_beta)[0]
     below_average_beta_list = create_stock_value_pair(equity_beta_list, mean_beta)[1]
     try:
@@ -145,18 +147,29 @@ def stock_profile(request):
     above_averge_beta_chart_range =  [x for x in range(0, len(above_average_beta_list[0]), 1)]
     below_averge_beta_chart_range =  [x for x in range(0, len(below_average_beta_list[0]), 1)]
     axis_labels = ['x', 'y']
-    above_beta_data_for_chart =  [dict(zip(axis_labels, [list(above_average_beta_list[0].values())[i], above_averge_beta_chart_range[i]])) for i in range(0, len(above_average_beta_list[0]))]
-    below_beta_data_for_chart =  [dict(zip(axis_labels, [list(below_average_beta_list[0].values())[i], below_averge_beta_chart_range[i]])) for i in range(0, len(below_average_beta_list[0]))]
+    above_beta_data_for_chart =  [dict(zip(axis_labels, [above_averge_beta_chart_range[i], list(above_average_beta_list[0].values())[i]])) for i in range(0, len(above_average_beta_list[0]))]
+    below_beta_data_for_chart =  [dict(zip(axis_labels, [below_averge_beta_chart_range[i], list(below_average_beta_list[0].values())[i]])) for i in range(0, len(below_average_beta_list[0]))]
+    stock_beta_data_for_chart = [dict(zip(axis_labels, [max(above_averge_beta_chart_range), stock_beta_data[0][live_quote_data['symbol']]]))]
     above_average_beta_labels = list(above_average_beta_list[0].keys())
     below_average_beta_labels = list(below_average_beta_list[0].keys())
+    stock_beta_label = live_quote_data['symbol']
 
+    #Dividend Yield
     above_average_div_list = create_stock_value_pair(equity_div_list, mean_div)[0]
     below_average_div_list = create_stock_value_pair(equity_div_list, mean_div)[1]
     try:
         stock_div_data = [dict({live_quote_data['symbol']: live_quote_data['lastDiv']})]
     except:
         stock_div_data = [dict({live_quote_data['symbol']: 0})]
-
+    above_averge_div_chart_range =  [x for x in range(0, len(above_average_div_list[0]), 1)]
+    below_averge_div_chart_range =  [x for x in range(0, len(below_average_div_list[0]), 1)]
+    axis_labels = ['x', 'y']
+    above_div_data_for_chart =  [dict(zip(axis_labels, [above_averge_div_chart_range[i], list(above_average_div_list[0].values())[i]])) for i in range(0, len(above_average_div_list[0]))]
+    below_div_data_for_chart =  [dict(zip(axis_labels, [below_averge_div_chart_range[i], list(below_average_div_list[0].values())[i]])) for i in range(0, len(below_average_div_list[0]))]
+    stock_div_data_for_chart = [dict(zip(axis_labels, [max(above_averge_div_chart_range), stock_div_data[0][live_quote_data['symbol']]]))]
+    above_average_div_labels = list(above_average_div_list[0].keys())
+    below_average_div_labels = list(below_average_div_list[0].keys())
+    stock_div_label = live_quote_data['symbol']
     # Batch queries for additional data
     query_string = ''
     i = 0
@@ -168,18 +181,18 @@ def stock_profile(request):
     stock_quote =json.loads(requests.get(f'https://fmpcloud.io/api/v3/quote/{stock}?apikey={fmp_api}').content)
 
     if currency == 'USD':
-        stock_quote['price'] = stock_quote['price']
+        stock_quote[0]['price'] = stock_quote[0]['price']
     elif currency == 'CAD':
         exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CAD'][0])
-        stock_quote['price'] = stock_quote['price']/exchange_rate
+        stock_quote[0]['price'] = stock_quote[0]['price']/exchange_rate
     elif fx_pair in pairings:
         exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == fx_pair][0])
-        stock_quote['price'] = stock_quote['price']*exchange_rate
+        stock_quote[0]['price'] = stock_quote[0]['price']*exchange_rate
     elif fx_pair_reverse in pairings:
         exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == fx_pair_reverse][0])
-        stock_quote['price'] = stock_quote['price']/exchange_rate
+        stock_quote[0]['price'] = stock_quote[0]['price']/exchange_rate
     else:
-        stock_quote['price'] = stock_quote['price']
+        stock_quote[0]['price'] = stock_quote[0]['price']
 
     #Align prices for comparison charts
     for quote in quotes:
@@ -223,8 +236,8 @@ def stock_profile(request):
             quote['price'] = quote['price']
 
     quote_list = [x['symbol'] for x in quotes if x['marketCap'] !=None]
-    quote_list_filtered_high_pe = [x['symbol'] for x in quotes if  x['pe'] !=None and x['pe'] < 80]
-    pe_list =  [x['pe'] for x in quotes if  x['pe'] !=None and x['pe'] < 80]
+    quote_list_filtered_high_pe = [x['symbol'] for x in quotes if  x['pe'] !=None and x['pe'] < 200]
+    pe_list =  [x['pe'] for x in quotes if  x['pe'] !=None and x['pe'] < 200]
     mean_pe = np.mean(pe_list)
     market_cap_list = [x['marketCap'] for x in quotes if x['marketCap'] !=None]
     market_cap_normalized = [(x - np.min(market_cap_list))/(np.max(market_cap_list) - np.min(market_cap_list)) for x in market_cap_list]
@@ -241,36 +254,54 @@ def stock_profile(request):
     quote_ma_list = [dict(zip(quote_list_filtered_ma, ma_50_200))]
     quote_price_list = [dict(zip(quote_list, price_list))]
     stock_price_data = [dict({live_quote_data['symbol']: live_quote_data['price']})]
-    price_range = [x for x in np.arange(np.min(price_list),np.max(price_list), 2)]
-
+    price_range =  [x for x in range(0, len(price_list), 1)]
+    #Price to Earnings
     above_average_pe_list = create_stock_value_pair(quote_pe_list, mean_pe)[0]
     below_average_pe_list = create_stock_value_pair(quote_pe_list, mean_pe)[1]
-    try:
-        stock_pe_data = [dict({live_quote_data['symbol']: quote_pe_list[0][0][live_quote_data['symbol']]})]
-    except:
+    if stock_quote[0]['pe']:
+        stock_pe_data = [dict({live_quote_data['symbol']: stock_quote[0]['pe']})]
+    else:
         stock_pe_data = [dict({live_quote_data['symbol']: 0})]
     above_averge_pe_chart_range =  [x for x in range(0, len(above_average_pe_list[0]), 1)]
     below_averge_pe_chart_range =  [x for x in range(0, len(below_average_pe_list[0]), 1)]
     above_pe_data_for_chart =  [dict(zip(axis_labels, [above_averge_pe_chart_range[i], list(above_average_pe_list[0].values())[i]])) for i in range(0, len(above_average_pe_list[0]))]
     below_pe_data_for_chart =  [dict(zip(axis_labels, [below_averge_pe_chart_range[i], list(below_average_pe_list[0].values())[i]])) for i in range(0, len(below_average_pe_list[0]))]
+    stock_pe_data_for_chart = [dict(zip(axis_labels, [max(above_averge_pe_chart_range), stock_pe_data[0][live_quote_data['symbol']]]))]
     above_average_pe_labels = list(above_average_pe_list[0].keys())
     below_average_pe_labels = list(below_average_pe_list[0].keys())
+    stock_pe_label = live_quote_data['symbol']
 
+    #Market Cap
     above_average_marketcap_list = create_stock_value_pair(quote_marketcap_list, mean_mcap)[0]
     below_average_marketcap_list = create_stock_value_pair(quote_marketcap_list, mean_mcap)[1]
-    try:
-        stock_mcap_data = [dict({live_quote_data['symbol']: quote_marketcap_list[0][0][live_quote_data['symbol']]})]
-    except:
-        stock_mcap_data = [dict({live_quote_data['symbol']: (market_cap - np.min(market_cap_list))/(np.max(market_cap_list) - np.min(market_cap_list))})]
-    mcap_range = [x for x in np.arange(np.min(market_cap_normalized),np.max(market_cap_normalized), 0.1)]
+    if stock_quote[0]['marketCap']:
+        stock_mcap_data = [dict({live_quote_data['symbol']: (stock_quote[0]['marketCap'] - np.min(market_cap_list))/(np.max(market_cap_list) - np.min(market_cap_list))})]
+    else:
+        stock_mcap_data = [dict({live_quote_data['symbol']: 0})]
+    above_averge_mcap_chart_range =  [x for x in range(0, len(above_average_marketcap_list[0]), 1)]
+    below_averge_mcap_chart_range =  [x for x in range(0, len(below_average_marketcap_list[0]), 1)]
+    above_mcap_data_for_chart =  [dict(zip(axis_labels, [above_averge_mcap_chart_range[i], list(above_average_marketcap_list[0].values())[i]])) for i in range(0, len(above_average_marketcap_list[0]))]
+    below_mcap_data_for_chart =  [dict(zip(axis_labels, [below_averge_mcap_chart_range[i], list(below_average_marketcap_list[0].values())[i]])) for i in range(0, len(below_average_marketcap_list[0]))]
+    stock_mcap_data_for_chart = [dict(zip(axis_labels, [max(above_averge_mcap_chart_range), stock_mcap_data[0][live_quote_data['symbol']]]))]
+    above_average_mcap_labels = list(above_average_marketcap_list[0].keys())
+    below_average_mcap_labels = list(below_average_marketcap_list[0].keys())
+    stock_mcap_label = live_quote_data['symbol']
+
     above_average_ma_list = create_stock_value_pair(quote_ma_list, mean_ma)[0]
     below_average_ma_list = create_stock_value_pair(quote_ma_list, mean_ma)[1]
     try:
         stock_ma_data = [dict({live_quote_data['symbol']: stock_quote[0]['priceAvg50']/stock_quote[0]['priceAvg200']})]
     except:
         stock_ma_data = [dict({live_quote_data['symbol']: 0})]
+    above_averge_ma_chart_range =  [x for x in range(0, len(above_average_ma_list[0]), 1)]
+    below_averge_ma_chart_range =  [x for x in range(0, len(below_average_ma_list[0]), 1)]
+    above_ma_data_for_chart =  [dict(zip(axis_labels, [above_averge_ma_chart_range[i], list(above_average_ma_list[0].values())[i]])) for i in range(0, len(above_average_ma_list[0]))]
+    below_ma_data_for_chart =  [dict(zip(axis_labels, [below_averge_ma_chart_range[i], list(below_average_ma_list[0].values())[i]])) for i in range(0, len(below_average_ma_list[0]))]
+    stock_ma_data_for_chart = [dict(zip(axis_labels, [max(above_averge_ma_chart_range), stock_ma_data[0][live_quote_data['symbol']]]))]
+    above_average_ma_labels = list(above_average_ma_list[0].keys())
+    below_average_ma_labels = list(below_average_ma_list[0].keys())
+    stock_ma_label = live_quote_data['symbol']
 
-    ma_range = [x for x in np.arange(np.min(ma_50_200),np.max(ma_50_200), 0.1)]
     stock_peers = json.loads(requests.get(f'https://fmpcloud.io/api/v4/stock_peers?symbol='+str(stock)+'&apikey='+fmp_api).content)
     try:
         peer_list = stock_peers[0]['peersList']
@@ -320,25 +351,36 @@ def stock_profile(request):
     'live_quote_data':live_quote_data,
     'json_prices':json_prices,
     'json_dates':json_dates,
-    'above_average_beta_list':above_average_beta_list,
-    'below_average_beta_list': below_average_beta_list,
-    'stock_beta_data':stock_beta_data,
-    'above_average_div_list':above_average_div_list,
-    'below_average_div_list': below_average_div_list,
-    'stock_div_data':stock_div_data,
     'above_pe_data_for_chart':above_pe_data_for_chart,
     'below_pe_data_for_chart':below_pe_data_for_chart,
     'above_average_pe_labels':above_average_pe_labels,
     'below_average_pe_labels':below_average_pe_labels,
-    'stock_pe_data':stock_pe_data,
-    'above_average_marketcap_list':above_average_marketcap_list,
-    'below_average_marketcap_list':below_average_marketcap_list,
-    'stock_mcap_data':stock_mcap_data,
-    'above_average_ma_list':above_average_ma_list,
-    'below_average_ma_list':below_average_ma_list,
-    'stock_ma_data':stock_ma_data,
-    'quote_price_list':quote_price_list,
-    'stock_price_data':stock_price_data,
+    'stock_pe_data_for_chart':stock_pe_data_for_chart,
+    'stock_pe_label':stock_pe_label,
+    'above_beta_data_for_chart':above_beta_data_for_chart,
+    'below_beta_data_for_chart':below_beta_data_for_chart,
+    'above_average_beta_labels':above_average_beta_labels,
+    'below_average_beta_labels':below_average_beta_labels,
+    'stock_beta_data_for_chart':stock_beta_data_for_chart,
+    'stock_beta_label':stock_pe_label,
+    'above_div_data_for_chart':above_div_data_for_chart,
+    'below_div_data_for_chart':below_div_data_for_chart,
+    'above_average_div_labels':above_average_div_labels,
+    'below_average_div_labels':below_average_div_labels,
+    'stock_div_data_for_chart':stock_div_data_for_chart,
+    'stock_div_label':stock_div_label,
+    'above_mcap_data_for_chart':above_mcap_data_for_chart,
+    'below_mcap_data_for_chart':below_mcap_data_for_chart,
+    'above_average_mcap_labels':above_average_mcap_labels,
+    'below_average_mcap_labels':below_average_mcap_labels,
+    'stock_mcap_data_for_chart':stock_mcap_data_for_chart,
+    'stock_mcap_label':stock_mcap_label,
+    'above_ma_data_for_chart':above_ma_data_for_chart,
+    'below_ma_data_for_chart':below_ma_data_for_chart,
+    'above_average_ma_labels':above_average_ma_labels,
+    'below_average_ma_labels':below_average_ma_labels,
+    'stock_ma_data_for_chart':stock_ma_data_for_chart,
+    'stock_ma_label':stock_ma_label,
     'ytd':ytd,
     'min_market_cap_for_sector_analysis':min_market_cap_for_sector_analysis,
     # 'divyield':divyield,

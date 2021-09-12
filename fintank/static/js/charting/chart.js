@@ -1,6 +1,6 @@
 let ctx = document.getElementById("stock-chart").getContext("2d");
 let ctx2 = document.getElementById("pe-chart").getContext("2d");
-
+let ctx3 = document.getElementById("ma-chart").getContext("2d");
 
 const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, chartFactor, element) {
 
@@ -11,20 +11,24 @@ const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLab
           labels:aboveAverageLabels,
           data: aboveAverageData,
           borderColor: 'rgb(67, 154, 191)',
-          backgroundColor: 'rgb(67, 154, 191)'
+          backgroundColor: 'rgb(67, 154, 191)',
+          pointRadius: 5
         },
         {
           label:"Below Average",
           labels:belowAverageLabels,
           data: belowAverageData,
           borderColor: 'rgb(235, 218, 143)',
-          backgroundColor: 'rgb(235, 218, 143)'
+          backgroundColor: 'rgb(235, 218, 143)',
+          pointRadius: 5
         },
         {
           label:stock,
+          labels:stock,
           data: stockData,
           borderColor: 'rgb(160, 240, 144)',
-          backgroundColor: 'rgb(160, 240, 144)'
+          backgroundColor: 'rgb(160, 240, 144)',
+          pointRadius: 5
         },
       ]
   }
@@ -39,9 +43,16 @@ const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLab
             callbacks: {
                 label: function(element) {
                     // console.log(ctx);
-                    let label = element.dataset.labels[element.dataIndex];
-                    label += " ("+ element.parsed.y + ")";
-                    return label;
+                    if (typeof element.dataset.labels == 'string') {
+                      let label = element.dataset.labels;
+                      label += " ("+ element.parsed.y + ")";
+                      return label;
+                    }
+                    else {
+                      let label = element.dataset.labels[element.dataIndex];
+                      label += " ("+ element.parsed.y + ")";
+                      return label;
+                    }
                 }
             }
         },
@@ -153,4 +164,5 @@ const charting = function(dataDates, chartData, stock, companyName) {
 
 
 charting(dataDates, chartData, stock, companyName);
-bubbleChart(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, "P/E Comparison", ctx2);
+bubbleChart(aboveAveragePeData, belowAveragePeData, aboveAveragePeLabels, belowAveragePeLabels, stockPeData, stockPe, "P/E Comparison", ctx2);
+bubbleChart(aboveAverageMaData, belowAverageMaData, aboveAverageMaLabels, belowAverageMaLabels, stockMaData, stockMa, "Momentum Comparison", ctx3);

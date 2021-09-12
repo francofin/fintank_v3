@@ -53,20 +53,22 @@
             <!-- Post Content -->
             <div class="post-content">
               <canvas id="stock-chart" width="400" height="150" data-url="{% url 'stock_profile' %}"></canvas>
-            </div>
-            <div class="post-content" style="padding-top:10px;">
+              <br>
               <p style="font-family:Work Sans; font-size:15px;">{{ live_quote_data.description}}</p>
             </div>
           </div>
         </div>
+        </div>
 
-        <div class="col-12 col-lg-8">
-          <div class="single-blog-content mb-100">
-            <!-- Post Meta -->
-            <!-- Post Content -->
-            <div class="post-content">
-              <canvas id="pe-chart" width="400" height="150" data-url="{% url 'stock_profile' %}"></canvas>
-            </div>
+        <div class="row justify-content-center">
+        <div class="col-5 col-lg-4">
+          <div class="single-blog-content mb-50">
+              <canvas id="pe-chart" width="300" height="300" data-url="{% url 'stock_profile' %}"></canvas>
+          </div>
+        </div>
+        <div class="col-5 col-lg-4">
+          <div class="single-blog-content mb-50">
+              <canvas id="ma-chart" width="300" height="300" data-url="{% url 'stock_profile' %}"></canvas>
           </div>
         </div>
 
@@ -81,7 +83,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
   <!-- <script> var dataDates = '{{ json_dates | safe}}'; var chartData = "{{ json_prices }}"; var stock = "{{live_quote_data.symbol}}"; </script> -->
   <script> var dataDates = {{json_dates|safe}}; var chartData={{json_prices|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
-  <script> var aboveAverageData = {{above_pe_data_for_chart | safe}}; var belowAverageData = {{below_pe_data_for_chart | safe}}; var aboveAverageLabels = {{above_average_pe_labels | safe}}; var belowAverageLabels = {{below_average_pe_labels | safe}};var stockData = {{stock_pe_data | safe}}; var stock = '{{live_quote_data.symbol}}'; console.log(aboveAverageData)</script>
+  <script> var aboveAveragePeData = {{above_pe_data_for_chart | safe}}; var belowAveragePeData = {{below_pe_data_for_chart | safe}}; var aboveAveragePeLabels = {{above_average_pe_labels | safe}}; var belowAveragePeLabels = {{below_average_pe_labels | safe}}; var stockPeData = {{stock_pe_data_for_chart | safe}}; var stockPe = '{{stock_pe_label }}';</script>
+  <script> var aboveAverageMaData = {{above_ma_data_for_chart | safe}}; var belowAverageMaData = {{below_ma_data_for_chart | safe}}; var aboveAverageMaLabels = {{above_average_ma_labels | safe}}; var belowAverageMaLabels = {{below_average_ma_labels | safe}}; var stockMaData = {{stock_ma_data_for_chart | safe}}; var stockMa = '{{stock_ma_label }}';</script>
+
   <script src="{% static 'js/charting/chart.js' %}"></script>
 
 
