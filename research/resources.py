@@ -1,11 +1,16 @@
 from import_export import resources
-from .models import Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF
+from .models import Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF, ProfileStock
 
 
 class StockResource(resources.ModelResource):
 
     class meta:
         model = Stock
+
+class ProfileStockResource(resources.ModelResource):
+
+    class meta:
+        model = ProfileStock
 
 class SP500Resource(resources.ModelResource):
 

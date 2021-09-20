@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from research.models import TSX
 from homepage.models import Francois
-from research.models import Stock
+from research.models import Stock, ProfileStock
 from django.contrib import messages
 from django.conf import settings
 from yahoo_fin.stock_info import *
 from yahoo_fin.options import *
 import html5lib
+from heapq import nlargest
 
 
 def stock_profile(request):
@@ -29,7 +30,7 @@ def stock_profile(request):
     fmp_api = settings.FMP_API
 
     francois = Francois.objects.all()
-    all_stocks = Stock.objects.all()
+    all_stocks = ProfileStock.objects.all()
 
     stock = random.choice(list(all_stocks))
 
@@ -95,35 +96,47 @@ def stock_profile(request):
         else:
             market_cap = live_quote_data['mktCap']
 
-        min_market_cap_for_sector_analysis = market_cap - 10000000000
+        min_market_cap_for_sector_analysis = market_cap - 1000000000
         if min_market_cap_for_sector_analysis < 0:
             min_market_cap_for_sector_analysis = market_cap
-        max_market_cap_for_sector_analysis = market_cap + 1000000000
+        elif min_market_cap_for_sector_analysis > 50000000000:
+            min_market_cap_for_sector_analysis = 20000000000
+        max_market_cap_for_sector_analysis = market_cap + 5000000000
     else:
         market_cap = 0
         min_market_cap_for_sector_analysis = 10000000000
-        max_market_cap_for_sector_analysis = 40000000000
+        max_market_cap_for_sector_analysis = 999999999999
 
 
     #this first set of data is puller directly aloing with the screener api
     sector_data = json.loads(requests.get(f'https://fmpcloud.io/api/v3/stock-screener?sector=technology&marketCapLowerThan={max_market_cap_for_sector_analysis}&marketCapMoreThan={min_market_cap_for_sector_analysis}&limit=10000&apikey={fmp_api}').content)
-    equity_list = [x['symbol'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
-    beta_list = [x['beta'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
-    div_list = [x['lastAnnualDividend'] for x in sector_data if x['beta'] != 0 and x['lastAnnualDividend'] !=0]
+    equity_list = [x['symbol'] for x in sector_data]
+    equity_list_for_beta = [x['symbol'] for x in sector_data if x['beta'] != 0]
+    equity_list_for_div = [x['symbol'] for x in sector_data if x['lastAnnualDividend'] !=0]
+    beta_list = [x['beta'] for x in sector_data if x['beta'] != 0]
+    div_list = [x['lastAnnualDividend'] for x in sector_data if x['lastAnnualDividend'] !=0]
 
     if str(stock) in equity_list:
         pass
+    elif str(stock) in equity_list_for_beta:
+        pass
+    elif str(stock) in equity_list_for_div:
+        pass
     else:
         equity_list.append(str(stock))
+        equity_list_for_beta.append(str(stock))
+        equity_list_for_div.append(str(stock))
         beta_list.append(live_quote_data['beta'])
         div_list.append(live_quote_data['lastDiv'])
 
     mean_beta = np.mean(beta_list)
     mean_div = np.mean(div_list)
 
-    equity_beta_list = [dict(zip(equity_list, beta_list))]
-    equity_div_list = [dict(zip(equity_list, div_list))]
-
+    equity_beta_list = [dict(zip(equity_list_for_beta, beta_list))]
+    equity_div_list = [dict(zip(equity_list_for_div, div_list))]
+    dropped_largest_divs = nlargest(5, equity_div_list[0], key = equity_div_list[0].get)
+    for key in dropped_largest_divs:
+        del equity_div_list[0][key]
     #creates the list of the dictionaries used in the chart js bubble chart
 
     def create_stock_value_pair(dataset, factor_average):
@@ -202,36 +215,9 @@ def stock_profile(request):
         elif quote['exchange'] == 'VIE':
             exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
             quote['price'] = quote['price']*exchange_rate
-        elif quote['exchange'] == 'GER':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
-            quote['price'] = quote['price']*exchange_rate
-        elif quote['exchange'] == 'HEL':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
-            quote['price'] = quote['price']*exchange_rate
-        elif quote['exchange'] == 'LSE':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'EUR/USD'][0])
-            quote['price'] = quote['price']*exchange_rate
-        elif quote['exchange'] == 'HKSE':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/HKD'][0])
-            quote['price'] = quote['price']/exchange_rate
-        elif quote['exchange'] == 'SIX':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CHF'][0])
-            quote['price'] = quote['price']/exchange_rate
-        elif quote['exchange'] == 'OSE':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/NOK'][0])
-            quote['price'] = quote['price']/exchange_rate
         elif quote['exchange'] == 'TSX':
             exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/CAD'][0])
             quote['price'] = quote['price']/exchange_rate
-        elif quote['exchange'] == 'NSE':
-            exchange_rate = float([x['bid'] for x in currency_conversion if x['ticker'] == 'USD/INR'][0])
-            quote['price'] = quote['price']/exchange_rate
-        elif quote['exchange'] == 'MCX':
-            quote['price'] = quote['price']/0.014
-        elif quote['exchange'] == 'KRW':
-            quote['price'] = quote['price']/0.00086
-        elif quote['exchange'] == 'SHZ':
-            quote['price'] = quote['price']/0.15
         else:
             quote['price'] = quote['price']
 
@@ -245,14 +231,15 @@ def stock_profile(request):
     quote_list_filtered_ma = [x['symbol'] for x in quotes if  x['priceAvg50'] !=None and x['priceAvg200'] !=None]
     ma_50_200 = [x['priceAvg50']/x['priceAvg200'] for x in quotes if x['priceAvg50'] !=None and x['priceAvg200'] !=None]
     mean_ma = np.mean(ma_50_200)
-    quote_list_for_prices = [x['symbol'] for x in quotes if x['exchange'] !=None]
-    price_list =  [x['price'] for x in quotes if x['exchange'] !=None]
+    quote_list_for_prices = [x['symbol'] for x in quotes if x['price'] !=None]
+    price_list =  [x['price'] for x in quotes if x['price'] !=None]
+    mean_price = np.mean(price_list)
     #add conditionaloty to confirm price data
 
     quote_pe_list = [dict(zip(quote_list_filtered_high_pe, pe_list))]
     quote_marketcap_list = [dict(zip(quote_list, market_cap_normalized))]
     quote_ma_list = [dict(zip(quote_list_filtered_ma, ma_50_200))]
-    quote_price_list = [dict(zip(quote_list, price_list))]
+    quote_price_list = [dict(zip(quote_list_for_prices, price_list))]
     stock_price_data = [dict({live_quote_data['symbol']: live_quote_data['price']})]
     price_range =  [x for x in range(0, len(price_list), 1)]
     #Price to Earnings
@@ -270,6 +257,21 @@ def stock_profile(request):
     above_average_pe_labels = list(above_average_pe_list[0].keys())
     below_average_pe_labels = list(below_average_pe_list[0].keys())
     stock_pe_label = live_quote_data['symbol']
+
+    above_average_price_list = create_stock_value_pair(quote_price_list, mean_price)[0]
+    below_average_price_list = create_stock_value_pair(quote_price_list, mean_price)[1]
+    if stock_quote[0]['price']:
+        stock_price_data = [dict({live_quote_data['symbol']: stock_quote[0]['price']})]
+    else:
+        stock_price_data = [dict({live_quote_data['symbol']: 0})]
+    above_averge_price_chart_range =  [x for x in range(0, len(above_average_price_list[0]), 1)]
+    below_averge_price_chart_range =  [x for x in range(0, len(below_average_price_list[0]), 1)]
+    above_price_data_for_chart =  [dict(zip(axis_labels, [above_averge_price_chart_range[i], list(above_average_price_list[0].values())[i]])) for i in range(0, len(above_average_price_list[0]))]
+    below_price_data_for_chart =  [dict(zip(axis_labels, [below_averge_price_chart_range[i], list(below_average_price_list[0].values())[i]])) for i in range(0, len(below_average_price_list[0]))]
+    stock_price_data_for_chart = [dict(zip(axis_labels, [max(above_averge_price_chart_range), stock_price_data[0][live_quote_data['symbol']]]))]
+    above_average_price_labels = list(above_average_price_list[0].keys())
+    below_average_price_labels = list(below_average_price_list[0].keys())
+    stock_price_label = live_quote_data['symbol']
 
     #Market Cap
     above_average_marketcap_list = create_stock_value_pair(quote_marketcap_list, mean_mcap)[0]
@@ -381,6 +383,12 @@ def stock_profile(request):
     'below_average_ma_labels':below_average_ma_labels,
     'stock_ma_data_for_chart':stock_ma_data_for_chart,
     'stock_ma_label':stock_ma_label,
+    'above_price_data_for_chart':above_price_data_for_chart,
+    'below_price_data_for_chart':below_price_data_for_chart,
+    'above_average_price_labels':above_average_price_labels,
+    'below_average_price_labels':below_average_price_labels,
+    'stock_price_data_for_chart':stock_price_data_for_chart,
+    'stock_price_label':stock_price_label,
     'ytd':ytd,
     'min_market_cap_for_sector_analysis':min_market_cap_for_sector_analysis,
     # 'divyield':divyield,

@@ -28,8 +28,8 @@
 </div>
 {% endfor %}
 
-<div class="main-content-wrapper section-padding-100">
-  <div class="container" style="margin-left:20px;">
+<div class="main-content-wrapper section-padding-100-20">
+  <div class="container" style="max-width:80%;">
     <div class="row justify-content-center">
 
       <div class="col-12 col-lg-12">
@@ -42,40 +42,63 @@
                   <a href="{% url 'home'%}">
                     <i class="fas fa-home"></i> Home</a>
                   </li>
-                    <li class="breadcrumb-item">
+                  <li class="breadcrumb-item">
                     {% if live_quote_data %}
-                      &nbsp; &nbsp; Ticker: {{ live_quote_data.symbol }} &nbsp; |  Company Name: {{ live_quote_data.companyName }} &nbsp; | YTD: {{ ytd|floatformat:2|intcomma }}%  &nbsp; |  Beta: {{ live_quote_data.beta|floatformat:2|intcomma }} &nbsp; |  Price: {{ live_quote_data.currency | safe }}$ {{ live_quote_data.price|floatformat:2|intcomma }} &nbsp; |  Sector: {{ live_quote_data.sector | safe }} &nbsp; |  Industry: {{ live_quote_data.industry | safe }} &nbsp; | Exchange: {{ live_quote_data.exchangeShortName | safe }}
+                    &nbsp; &nbsp; Ticker: {{ live_quote_data.symbol }} &nbsp; |  Company Name: {{ live_quote_data.companyName }} &nbsp; | YTD: {{ ytd|floatformat:2|intcomma }}%  &nbsp; |  Beta: {{ live_quote_data.beta|floatformat:2|intcomma }} &nbsp; |  Price: {{ live_quote_data.currency | safe }}$ {{ live_quote_data.price|floatformat:2|intcomma }} &nbsp; |  Sector: {{ live_quote_data.sector | safe }} &nbsp; |  Industry: {{ live_quote_data.industry | safe }} &nbsp; | Exchange: {{ live_quote_data.exchangeShortName | safe }}
                     {% endif %}
                   </li>
                 </ol>
               </nav>
             </div>
             <!-- Post Content -->
-            <div class="post-content">
-              <canvas id="stock-chart" width="400" height="150" data-url="{% url 'stock_profile' %}"></canvas>
+            <div class="post-content" style="max-width:100%">
+              <canvas id="stock-chart" width="100" height="40" data-url="{% url 'stock_profile' %}"></canvas>
               <br>
               <p style="font-family:Work Sans; font-size:15px;">{{ live_quote_data.description}}</p>
             </div>
           </div>
         </div>
-        </div>
-
-        <div class="row justify-content-center">
-        <div class="col-5 col-lg-4">
-          <div class="single-blog-content mb-50">
-              <canvas id="pe-chart" width="300" height="300" data-url="{% url 'stock_profile' %}"></canvas>
-          </div>
-        </div>
-        <div class="col-5 col-lg-4">
-          <div class="single-blog-content mb-50">
-              <canvas id="ma-chart" width="300" height="300" data-url="{% url 'stock_profile' %}"></canvas>
-          </div>
-        </div>
-
-
       </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6 col-lg-6">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="ma-chart" width="220" height="150" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-6">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="pe-chart" width="220" height="150" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" style="padding-top:0px;">
+        <div class="col-6 col-lg-6">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="div-chart" width="220" height="150" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-6">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="beta-chart" width="220" height="150" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -83,8 +106,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
   <!-- <script> var dataDates = '{{ json_dates | safe}}'; var chartData = "{{ json_prices }}"; var stock = "{{live_quote_data.symbol}}"; </script> -->
   <script> var dataDates = {{json_dates|safe}}; var chartData={{json_prices|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
-  <script> var aboveAveragePeData = {{above_pe_data_for_chart | safe}}; var belowAveragePeData = {{below_pe_data_for_chart | safe}}; var aboveAveragePeLabels = {{above_average_pe_labels | safe}}; var belowAveragePeLabels = {{below_average_pe_labels | safe}}; var stockPeData = {{stock_pe_data_for_chart | safe}}; var stockPe = '{{stock_pe_label }}';</script>
-  <script> var aboveAverageMaData = {{above_ma_data_for_chart | safe}}; var belowAverageMaData = {{below_ma_data_for_chart | safe}}; var aboveAverageMaLabels = {{above_average_ma_labels | safe}}; var belowAverageMaLabels = {{below_average_ma_labels | safe}}; var stockMaData = {{stock_ma_data_for_chart | safe}}; var stockMa = '{{stock_ma_label }}';</script>
+  <script> var aboveAveragePeData = {{above_pe_data_for_chart | safe}}; var belowAveragePeData = {{below_pe_data_for_chart | safe}}; var aboveAveragePeLabels = {{above_average_pe_labels | safe}}; var belowAveragePeLabels = {{below_average_pe_labels | safe}};var stockPeData = {{stock_pe_data_for_chart | safe}}; var stockPe = "{{stock_pe_label | safe}}"; </script>
+  <script> var aboveAverageMaData = {{above_ma_data_for_chart | safe}}; var belowAverageMaData = {{below_ma_data_for_chart | safe}}; var aboveAverageMaLabels = {{above_average_ma_labels | safe}}; var belowAverageMaLabels = {{below_average_ma_labels | safe}};var stockMaData = {{stock_ma_data_for_chart | safe}}; var stockMa = "{{stock_ma_label | safe}}"; </script>
+  <script> var aboveAverageBetaData = {{above_beta_data_for_chart | safe}}; var belowAverageBetaData = {{below_beta_data_for_chart | safe}}; var aboveAverageBetaLabels = {{above_average_beta_labels | safe}}; var belowAverageBetaLabels = {{below_average_beta_labels | safe}};var stockBetaData = {{stock_beta_data_for_chart | safe}}; var stockBeta = "{{stock_beta_label | safe}}"; </script>
+  <script> var aboveAverageDivData = {{above_div_data_for_chart | safe}}; var belowAverageDivData = {{below_div_data_for_chart | safe}}; var aboveAverageDivLabels = {{above_average_div_labels | safe}}; var belowAverageDivLabels = {{below_average_div_labels | safe}};var stockDivData = {{stock_div_data_for_chart | safe}}; var stockDiv = "{{stock_div_label | safe}}"; </script>
 
   <script src="{% static 'js/charting/chart.js' %}"></script>
 

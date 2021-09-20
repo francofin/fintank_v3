@@ -1,6 +1,8 @@
 let ctx = document.getElementById("stock-chart").getContext("2d");
 let ctx2 = document.getElementById("pe-chart").getContext("2d");
 let ctx3 = document.getElementById("ma-chart").getContext("2d");
+let ctx4 = document.getElementById("beta-chart").getContext("2d");
+let ctx5 = document.getElementById("div-chart").getContext("2d");
 
 const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, chartFactor, element) {
 
@@ -54,7 +56,19 @@ const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLab
                       return label;
                     }
                 }
-            }
+            },
+            plugins: {
+            title: {
+              display: true,
+              text: companyName,
+              font: {
+                  family: 'Work Sans',
+                  size: 90,
+                  weight: 'bold',
+                  lineHeight: 1.2,
+                },
+            },
+          },
         },
         title: {
           display: true,
@@ -109,7 +123,10 @@ const charting = function(dataDates, chartData, stock, companyName) {
           }
           ctx.yStarted = true;
           return ctx.index * delayBetweenPoints;
-        }
+        },
+        ticks: {
+                fontSize: 60
+            }
       }
     };
 
@@ -152,7 +169,7 @@ const charting = function(dataDates, chartData, stock, companyName) {
           distribution: 'linear',
           display:false,
         }],
-      }
+      },
     }
   });
 
@@ -166,3 +183,5 @@ const charting = function(dataDates, chartData, stock, companyName) {
 charting(dataDates, chartData, stock, companyName);
 bubbleChart(aboveAveragePeData, belowAveragePeData, aboveAveragePeLabels, belowAveragePeLabels, stockPeData, stockPe, "P/E Comparison", ctx2);
 bubbleChart(aboveAverageMaData, belowAverageMaData, aboveAverageMaLabels, belowAverageMaLabels, stockMaData, stockMa, "Momentum Comparison", ctx3);
+bubbleChart(aboveAverageBetaData, belowAverageBetaData, aboveAverageBetaLabels, belowAverageBetaLabels, stockBetaData, stockBeta, "Beta Comparison", ctx4);
+bubbleChart(aboveAverageDivData, belowAverageDivData, aboveAverageDivLabels, belowAverageDivLabels, stockDivData, stockDiv, "Dividend Comparison", ctx5);

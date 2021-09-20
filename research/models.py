@@ -42,6 +42,14 @@ class SP500(models.Model):
     def __str__(self):
         return self.ticker
 
+class ProfileStock(models.Model):
+    ticker = models.CharField(max_length=300)
+    name = models.CharField(max_length=300)
+    exchange = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.ticker
+
 class Nasdaq(models.Model):
     ticker = models.CharField(max_length=300)
     name = models.CharField(max_length=300)
