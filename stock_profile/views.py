@@ -133,6 +133,9 @@ def stock_profile(request):
     mean_div = np.mean(div_list)
 
     equity_beta_list = [dict(zip(equity_list_for_beta, beta_list))]
+    dropped_largest_beta = nlargest(5, equity_beta_list[0], key = equity_beta_list[0].get)
+    for key in dropped_largest_beta:
+        del equity_beta_list[0][key]
     equity_div_list = [dict(zip(equity_list_for_div, div_list))]
     dropped_largest_divs = nlargest(5, equity_div_list[0], key = equity_div_list[0].get)
     for key in dropped_largest_divs:
@@ -241,7 +244,10 @@ def stock_profile(request):
     quote_ma_list = [dict(zip(quote_list_filtered_ma, ma_50_200))]
     quote_price_list = [dict(zip(quote_list_for_prices, price_list))]
     stock_price_data = [dict({live_quote_data['symbol']: live_quote_data['price']})]
-    price_range =  [x for x in range(0, len(price_list), 1)]
+    dropped_largest_price = nlargest(5, quote_price_list[0], key = quote_price_list[0].get)
+    for key in dropped_largest_price:
+        del quote_price_list[0][key]
+
     #Price to Earnings
     above_average_pe_list = create_stock_value_pair(quote_pe_list, mean_pe)[0]
     below_average_pe_list = create_stock_value_pair(quote_pe_list, mean_pe)[1]
@@ -304,6 +310,43 @@ def stock_profile(request):
     below_average_ma_labels = list(below_average_ma_list[0].keys())
     stock_ma_label = live_quote_data['symbol']
 
+    try:
+        recommendations = json.loads(requests.get(f'https://fmpcloud.io/api/v3/analyst-stock-recommendations/{stock}?limit=60&apikey={fmp_api}').content)
+        buy_rating = recommendations[0]['analystRatingsbuy']
+        hold_rating = recommendations[0]['analystRatingsHold']
+        sell_rating = recommendations[0]['analystRatingsSell']
+        strong_sell_rating = recommendations[0]['analystRatingsStrongSell']
+        strong_buy_rating = recommendations[0]['analystRatingsStrongBuy']
+        all_analyst_ratings = [strong_buy_rating, buy_rating, hold_rating, sell_rating, strong_sell_rating]
+    except:
+        all_analyst_ratings = "No Ratings are currently available for this {} in this category".format(stock)
+
+    try:
+        recommendations_by_factor = json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-rating/{stock}?limit=60&apikey={fmp_api}').content)
+        overall_rating_score = recommendations_by_factor[0]['ratingScore']
+        overall_rating_label = recommendations_by_factor[0]['ratingRecommendation']
+        rating = recommendations_by_factor[0]['rating']
+        dcf_rating = recommendations_by_factor[0]['ratingDetailsDCFScore']
+        dcf_label = recommendations_by_factor[0]['ratingDetailsDCFRecommendation']
+        roe_rating = recommendations_by_factor[0]['ratingDetailsROEScore']
+        roe_label = recommendations_by_factor[0]['ratingDetailsROERecommendation']
+        roa_rating = recommendations_by_factor[0]['ratingDetailsROAScore']
+        roa_label = recommendations_by_factor[0]['ratingDetailsROARecommendation']
+        de_rating = recommendations_by_factor[0]['ratingDetailsDEScore']
+        de_label = recommendations_by_factor[0]['ratingDetailsDERecommendation']
+        pe_rating = recommendations_by_factor[0]['ratingDetailsPEScore']
+        pe_label = recommendations_by_factor[0]['ratingDetailsPERecommendation']
+        pb_rating = recommendations_by_factor[0]['ratingDetailsPBScore']
+        pb_label = recommendations_by_factor[0]['ratingDetailsPBRecommendation']
+
+        all_factor_ratings = [overall_rating_score, dcf_rating, roe_rating, roa_rating, de_rating, pe_rating, pb_rating]
+        all_factor_labels = [overall_rating_label, dcf_label, roe_label, roa_label, de_label, pe_label, pb_label]
+    except:
+        rating = "Ratings are not available for {}".format(stock)
+        all_factor_labels = "Ratings are not available for {}".format(stock)
+        all_factor_ratings ="Ratings are not available for {}".format(stock)
+
+
     stock_peers = json.loads(requests.get(f'https://fmpcloud.io/api/v4/stock_peers?symbol='+str(stock)+'&apikey='+fmp_api).content)
     try:
         peer_list = stock_peers[0]['peersList']
@@ -342,6 +385,8 @@ def stock_profile(request):
         price_to_cash_flow = [x['priceCashFlowRatioTTM'] for x in all_peer_data]
     except:
         pass
+
+
 
 
 
@@ -391,6 +436,7 @@ def stock_profile(request):
     'stock_price_label':stock_price_label,
     'ytd':ytd,
     'min_market_cap_for_sector_analysis':min_market_cap_for_sector_analysis,
+    'all_analyst_ratings': all_analyst_ratings,
     # 'divyield':divyield,
     # 'pe':pe,
     # 'payout':payout,

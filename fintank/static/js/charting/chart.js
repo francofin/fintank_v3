@@ -3,6 +3,9 @@ let ctx2 = document.getElementById("pe-chart").getContext("2d");
 let ctx3 = document.getElementById("ma-chart").getContext("2d");
 let ctx4 = document.getElementById("beta-chart").getContext("2d");
 let ctx5 = document.getElementById("div-chart").getContext("2d");
+let ctx6 = document.getElementById("mcap-chart").getContext("2d");
+let ctx7 = document.getElementById("price-chart").getContext("2d");
+let ctx8 = document.getElementById("ratings-historical-chart").getContext("2d");
 
 const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, chartFactor, element) {
 
@@ -88,6 +91,49 @@ console.log(element);
 
 }
 
+const barChartHistroical = function(ratings, stock, element) {
+
+  const data = {
+    labels: ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+    datasets: [
+      {
+        label: "Analyst Recommendations for " + stock,
+        data: ratings,
+        backgroundColor: [
+          'rgba(26, 176, 18, 0.5)',
+          'rgba(18, 176, 147, 0.5)',
+          'rgba(13, 67, 214, 0.5)',
+          'rgba(102, 100, 96, 0.5)',
+          'rgba(214, 13, 30, 0.5)'
+        ],
+        borderColor: [
+          'rgba(26, 176, 18, 0.5)',
+          'rgba(18, 176, 147, 0.5)',
+          'rgba(13, 67, 214, 0.5)',
+          'rgba(102, 100, 96, 0.5)',
+          'rgba(214, 13, 30, 0.5)'
+        ],
+        borderWidth: 1
+      }
+    ]
+  };
+
+  let options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+
+    let chart = new Chart(element, {
+      type: "bar",
+      data: data,
+      options: options,
+    });
+
+  // console.log(element);
+}
 
 const charting = function(dataDates, chartData, stock, companyName) {
   var labels = [];
@@ -185,3 +231,6 @@ bubbleChart(aboveAveragePeData, belowAveragePeData, aboveAveragePeLabels, belowA
 bubbleChart(aboveAverageMaData, belowAverageMaData, aboveAverageMaLabels, belowAverageMaLabels, stockMaData, stockMa, "Momentum Comparison", ctx3);
 bubbleChart(aboveAverageBetaData, belowAverageBetaData, aboveAverageBetaLabels, belowAverageBetaLabels, stockBetaData, stockBeta, "Beta Comparison", ctx4);
 bubbleChart(aboveAverageDivData, belowAverageDivData, aboveAverageDivLabels, belowAverageDivLabels, stockDivData, stockDiv, "Dividend Comparison", ctx5);
+bubbleChart(aboveAverageMcapData, belowAverageMcapData, aboveAverageMcapLabels, belowAverageMcapLabels, stockMcapData, stockMcap, "Market Cap Comparison", ctx6);
+bubbleChart(aboveAveragePriceData, belowAveragePriceData, aboveAveragePriceLabels, belowAveragePriceLabels, stockPriceData, stockPrice, "Price Comparison", ctx7);
+barChartHistroical(historicalRatings, stockName, ctx8)
