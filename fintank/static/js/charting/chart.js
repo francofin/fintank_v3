@@ -4,8 +4,13 @@ let ctx3 = document.getElementById("ma-chart").getContext("2d");
 let ctx4 = document.getElementById("beta-chart").getContext("2d");
 let ctx5 = document.getElementById("div-chart").getContext("2d");
 let ctx6 = document.getElementById("mcap-chart").getContext("2d");
-let ctx7 = document.getElementById("price-chart").getContext("2d");
+let ctx7 = document.getElementById("price-chart").getContext("2d");;
 let ctx8 = document.getElementById("ratings-historical-chart").getContext("2d");
+let ctx9 = document.getElementById("ratings-historical-factor-chart").getContext("2d");
+let recommendations_section = document.getElementById("recommendation-chart");
+let factor_recommendations_section = document.getElementById("factor-recommendation-chart");
+
+
 
 const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLabels, belowAverageLabels, stockData, stock, chartFactor, element) {
 
@@ -91,7 +96,7 @@ console.log(element);
 
 }
 
-const barChartHistroical = function(ratings, stock, element) {
+const barChartHistorical = function(ratings, stock, element) {
 
   const data = {
     labels: ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
@@ -131,8 +136,52 @@ const barChartHistroical = function(ratings, stock, element) {
       data: data,
       options: options,
     });
+}
 
-  // console.log(element);
+const factorBarChartHistorical = function(ratings, labels, stock, element) {
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Analyst Recommendations for " + stock,
+        data: ratings,
+        backgroundColor: [
+          'rgba(26, 176, 18, 0.5)',
+          'rgba(232, 217, 12, 0.5)',
+          'rgba(18, 176, 147, 0.5)',
+          'rgba(13, 67, 214, 0.5)',
+          'rgba(13, 204, 214, 0.5)',
+          'rgba(102, 100, 96, 0.5)',
+          'rgba(214, 13, 30, 0.5)'
+        ],
+        borderColor: [
+          'rgba(26, 176, 18, 0.5)',
+          'rgba(232, 217, 12, 0.5)',
+          'rgba(18, 176, 147, 0.5)',
+          'rgba(13, 67, 214, 0.5)',
+          'rgba(13, 204, 214, 0.5)',
+          'rgba(102, 100, 96, 0.5)',
+          'rgba(214, 13, 30, 0.5)'
+        ],
+        borderWidth: 1
+      }
+    ]
+  };
+
+  let options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+
+    let chart = new Chart(element, {
+      type: "bar",
+      data: data,
+      options: options,
+    });
 }
 
 const charting = function(dataDates, chartData, stock, companyName) {
@@ -233,4 +282,18 @@ bubbleChart(aboveAverageBetaData, belowAverageBetaData, aboveAverageBetaLabels, 
 bubbleChart(aboveAverageDivData, belowAverageDivData, aboveAverageDivLabels, belowAverageDivLabels, stockDivData, stockDiv, "Dividend Comparison", ctx5);
 bubbleChart(aboveAverageMcapData, belowAverageMcapData, aboveAverageMcapLabels, belowAverageMcapLabels, stockMcapData, stockMcap, "Market Cap Comparison", ctx6);
 bubbleChart(aboveAveragePriceData, belowAveragePriceData, aboveAveragePriceLabels, belowAveragePriceLabels, stockPriceData, stockPrice, "Price Comparison", ctx7);
-barChartHistroical(historicalRatings, stockName, ctx8)
+if (historicalRatings[0] == 0 && historicalRatings[1] == 0 && historicalRatings[2] == 0 && historicalRatings[3] == 0 && historicalRatings[4] == 0 || historicalRatings.length == 0) {
+
+  recommendations_section.remove();
+}
+else {
+  barChartHistorical(historicalRatings, stockName, ctx8)
+}
+
+
+if (ctx9) {
+  factorBarChartHistorical(factorRatings, factorLabels, stockName, ctx9)
+}
+else {
+  factor_recommendations_section.remove()
+}

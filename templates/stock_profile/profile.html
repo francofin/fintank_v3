@@ -114,11 +114,21 @@
         </div>
       </div>
 
-      <div class="row justify-content-center" style="padding-top:0px;">
+      <div class="row justify-content-center" style="padding-top:0px;" id="recommendation-chart">
         <div class="col-12 col-lg-12">
           <div class="single-blog-content">
             <div class="post-content" style="max-width:100%">
-              <canvas id="ratings-historical-chart" width="100" height="40" data-url="{% url 'stock_profile' %}"></canvas>
+              <canvas id="ratings-historical-chart" width="100" height="30" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" style="padding-top:0px;" id="factor-recommendation-chart">
+        <div class="col-12 col-lg-12">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="ratings-historical-factor-chart" width="100" height="30" data-url="{% url 'stock_profile' %}"></canvas>
             </div>
           </div>
         </div>
@@ -141,6 +151,7 @@
   <script> var aboveAverageMcapData = {{above_mcap_data_for_chart | safe}}; var belowAverageMcapData = {{below_mcap_data_for_chart | safe}}; var aboveAverageMcapLabels = {{above_average_mcap_labels | safe}}; var belowAverageMcapLabels = {{below_average_mcap_labels | safe}};var stockMcapData = {{stock_mcap_data_for_chart | safe}}; var stockMcap = "{{stock_mcap_label | safe}}"; </script>
   <script> var aboveAveragePriceData = {{above_price_data_for_chart | safe}}; var belowAveragePriceData = {{below_price_data_for_chart | safe}}; var aboveAveragePriceLabels = {{above_average_price_labels | safe}}; var belowAveragePriceLabels = {{below_average_price_labels | safe}};var stockPriceData = {{stock_price_data_for_chart | safe}}; var stockPrice = "{{stock_price_label | safe}}"; </script>
   <script> var historicalRatings = {{all_analyst_ratings | safe}}; var stockName="{{stock_price_label | safe}}"</script>
+  <script> var factorRatings = {{all_factor_ratings | safe}}; var factorLabels = {{all_factor_labels | safe}}; var stockName="{{stock_price_label | safe}}"</script>
   <script src="{% static 'js/charting/chart.js' %}"></script>
 
 

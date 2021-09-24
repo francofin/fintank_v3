@@ -319,7 +319,8 @@ def stock_profile(request):
         strong_buy_rating = recommendations[0]['analystRatingsStrongBuy']
         all_analyst_ratings = [strong_buy_rating, buy_rating, hold_rating, sell_rating, strong_sell_rating]
     except:
-        all_analyst_ratings = "No Ratings are currently available for this {} in this category".format(stock)
+        all_analyst_ratings = []
+
 
     try:
         recommendations_by_factor = json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-rating/{stock}?limit=60&apikey={fmp_api}').content)
@@ -342,9 +343,9 @@ def stock_profile(request):
         all_factor_ratings = [overall_rating_score, dcf_rating, roe_rating, roa_rating, de_rating, pe_rating, pb_rating]
         all_factor_labels = [overall_rating_label, dcf_label, roe_label, roa_label, de_label, pe_label, pb_label]
     except:
-        rating = "Ratings are not available for {}".format(stock)
-        all_factor_labels = "Ratings are not available for {}".format(stock)
-        all_factor_ratings ="Ratings are not available for {}".format(stock)
+        rating = []
+        all_factor_labels = []
+        all_factor_ratings = []
 
 
     stock_peers = json.loads(requests.get(f'https://fmpcloud.io/api/v4/stock_peers?symbol='+str(stock)+'&apikey='+fmp_api).content)
@@ -437,6 +438,9 @@ def stock_profile(request):
     'ytd':ytd,
     'min_market_cap_for_sector_analysis':min_market_cap_for_sector_analysis,
     'all_analyst_ratings': all_analyst_ratings,
+    'all_factor_ratings':all_factor_ratings,
+    'all_factor_labels':all_factor_labels,
+    'rating':rating,
     # 'divyield':divyield,
     # 'pe':pe,
     # 'payout':payout,
