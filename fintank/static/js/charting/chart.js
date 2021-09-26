@@ -9,6 +9,7 @@ let ctx8 = document.getElementById("ratings-historical-chart").getContext("2d");
 let ctx9 = document.getElementById("ratings-historical-factor-chart").getContext("2d");
 let recommendations_section = document.getElementById("recommendation-chart");
 let factor_recommendations_section = document.getElementById("factor-recommendation-chart");
+let factor_list_variables = ['Overall Rating', 'Discounted Cash Flow Rating', 'Return On Equity Rating', 'Return on Assets Rating', 'Debt to Equity Rating', 'Price/Earnings Rating', 'Price to Book RatingS'];
 
 
 
@@ -80,7 +81,12 @@ const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLab
         },
         title: {
           display: true,
-          text: chartFactor
+          text: chartFactor,
+          font: {
+              family: 'Work Sans',
+              size: 20,
+              weight: 'bold'
+            },
         }
     }
 }
@@ -128,6 +134,20 @@ const barChartHistorical = function(ratings, stock, element) {
       y: {
         beginAtZero: true
       }
+    },
+    plugins: {
+      title: {
+        display: true,
+        text:"Analyst Recommendations for "+ stock,
+        font: {
+            family: 'Work Sans',
+            size: 20,
+            weight: 'bold'
+          },
+      },
+      legend: {
+        display: false
+      },
     }
   }
 
@@ -144,7 +164,8 @@ const factorBarChartHistorical = function(ratings, labels, stock, element) {
     labels: labels,
     datasets: [
       {
-        label: "Analyst Recommendations for " + stock,
+        label: '',
+        labels: factor_list_variables,
         data: ratings,
         backgroundColor: [
           'rgba(26, 176, 18, 0.5)',
@@ -174,6 +195,37 @@ const factorBarChartHistorical = function(ratings, labels, stock, element) {
       y: {
         beginAtZero: true
       }
+    },
+    plugins: {
+        tooltip: {
+            callbacks: {
+                label: function(element) {
+                    // console.log(ctx);
+                    if (typeof element.dataset.labels == 'string') {
+                      let label = element.dataset.labels;
+                      label += " ("+ element.parsed.y + ")";
+                      return label;
+                    }
+                    else {
+                      let label = element.dataset.labels[element.dataIndex];
+                      label += " ("+ element.parsed.y + ")";
+                      return label;
+                    }
+                }
+            },
+        },
+        title: {
+          display: true,
+          text:"Analyst Ratings for "+ stock,
+          font: {
+              family: 'Work Sans',
+              size: 20,
+              weight: 'bold'
+            },
+        },
+        legend: {
+          display: false
+        },
     }
   }
 
@@ -283,7 +335,6 @@ bubbleChart(aboveAverageDivData, belowAverageDivData, aboveAverageDivLabels, bel
 bubbleChart(aboveAverageMcapData, belowAverageMcapData, aboveAverageMcapLabels, belowAverageMcapLabels, stockMcapData, stockMcap, "Market Cap Comparison", ctx6);
 bubbleChart(aboveAveragePriceData, belowAveragePriceData, aboveAveragePriceLabels, belowAveragePriceLabels, stockPriceData, stockPrice, "Price Comparison", ctx7);
 if (historicalRatings[0] == 0 && historicalRatings[1] == 0 && historicalRatings[2] == 0 && historicalRatings[3] == 0 && historicalRatings[4] == 0 || historicalRatings.length == 0) {
-
   recommendations_section.remove();
 }
 else {
@@ -291,9 +342,9 @@ else {
 }
 
 
-if (ctx9) {
-  factorBarChartHistorical(factorRatings, factorLabels, stockName, ctx9)
+if (factorRatings.length==0 && factorLabels.length==0) {
+  factor_recommendations_section.remove()
 }
 else {
-  factor_recommendations_section.remove()
+  factorBarChartHistorical(factorRatings, factorLabels, stockName, ctx9)
 }

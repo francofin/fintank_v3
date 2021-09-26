@@ -29,7 +29,7 @@
 {% endfor %}
 
 <div class="main-content-wrapper section-padding-100-20">
-  <div class="container" style="max-width:80%;">
+  <div class="container" style="max-width:90%;">
     <div class="row justify-content-center">
 
       <div class="col-12 col-lg-12">
@@ -134,6 +134,10 @@
         </div>
       </div>
 
+      <div class="row justify-content-center" id='news-articles'>
+
+      </div>
+
     </div>
   </div>
 
@@ -152,7 +156,9 @@
   <script> var aboveAveragePriceData = {{above_price_data_for_chart | safe}}; var belowAveragePriceData = {{below_price_data_for_chart | safe}}; var aboveAveragePriceLabels = {{above_average_price_labels | safe}}; var belowAveragePriceLabels = {{below_average_price_labels | safe}};var stockPriceData = {{stock_price_data_for_chart | safe}}; var stockPrice = "{{stock_price_label | safe}}"; </script>
   <script> var historicalRatings = {{all_analyst_ratings | safe}}; var stockName="{{stock_price_label | safe}}"</script>
   <script> var factorRatings = {{all_factor_ratings | safe}}; var factorLabels = {{all_factor_labels | safe}}; var stockName="{{stock_price_label | safe}}"</script>
+  <script> var stock = "{{stock_price_label | safe}}"; var apiKey = "{{fmp_api | safe}}"</script>
   <script src="{% static 'js/charting/chart.js' %}"></script>
+  <script src="{% static 'js/stockNews/news.js' %}"></script>
 
 
 
