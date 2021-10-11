@@ -60,6 +60,33 @@
         </div>
       </div>
 
+      <div class="row justify-content-center" id='top-10-peers'>
+        <div class="col-4 col-lg-4">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="peer-div-yield" width="100" height="30" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="peer-pe" width="100" height="30" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="peer-ps" width="100" height="30" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div class="row justify-content-center">
         <div class="col-6 col-lg-6">
           <div class="single-blog-content">
@@ -153,6 +180,9 @@
   <script type="text/javascript" src="https://gitcdn.link/cdn/schme16/Chart.js-RangeSlider/2dc49a0980ca04ca2690bc5f1c9e3644e4207b5a/dist/RangeSlider-all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
   <!-- <script> var dataDates = '{{ json_dates | safe}}'; var chartData = "{{ json_prices }}"; var stock = "{{live_quote_data.symbol}}"; </script> -->
+  <script> var dividendPeers = {{divyield|safe}}; var peerList={{peer_list|safe}}; var stockDivYield={{stock_div_yield_for_peer | safe}}; var stockName='{{live_quote_data.symbol}}';</script>
+  <script> var pePeers = {{pe|safe}}; var peerList={{peer_list|safe}}; var stockPe={{stock_pe_for_peer | safe}}; var stockName='{{live_quote_data.symbol}}';</script>
+  <script> var psPeers = {{price_to_sales|safe}}; var peerList={{peer_list|safe}}; var stockPs={{stock_ps_for_peer | safe}}; var stockName='{{live_quote_data.symbol}}';</script>
   <script> var dataDates = {{json_dates|safe}}; var chartData={{json_prices|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
   <script> var aboveAveragePeData = {{above_pe_data_for_chart | safe}}; var belowAveragePeData = {{below_pe_data_for_chart | safe}}; var aboveAveragePeLabels = {{above_average_pe_labels | safe}}; var belowAveragePeLabels = {{below_average_pe_labels | safe}};var stockPeData = {{stock_pe_data_for_chart | safe}}; var stockPe = "{{stock_pe_label | safe}}"; </script>
   <script> var aboveAverageMaData = {{above_ma_data_for_chart | safe}}; var belowAverageMaData = {{below_ma_data_for_chart | safe}}; var aboveAverageMaLabels = {{above_average_ma_labels | safe}}; var belowAverageMaLabels = {{below_average_ma_labels | safe}};var stockMaData = {{stock_ma_data_for_chart | safe}}; var stockMa = "{{stock_ma_label | safe}}"; </script>

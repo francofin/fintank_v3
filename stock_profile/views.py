@@ -352,14 +352,16 @@ def stock_profile(request):
 
 
         stock_peers = json.loads(requests.get(f'https://fmpcloud.io/api/v4/stock_peers?symbol='+str(stock)+'&apikey='+fmp_api).content)
+        stock_quote_data_for_peers = "https://fmpcloud.io/api/v3/ratios-ttm/"+str(stock)+"?apikey="+fmp_api
         try:
             peer_list = stock_peers[0]['peersList']
             query_list = []
             j = 0
             while j < len(peer_list):
-                string =  "https://fmpcloud.io/api/v3/quote/"+peer_list[j]+"?apikey="+fmp_api
+                string =  "https://fmpcloud.io/api/v3/ratios-ttm/"+peer_list[j]+"?apikey="+fmp_api
                 query_list.append(string)
                 j+=1
+
 
             all_peer_data = []
             k = 0
@@ -372,15 +374,26 @@ def stock_profile(request):
                     all_peer_data.append(stock_data)
                 k+=1
 
+            stock_div_yield_for_peer = stock_quote_data_for_peers[0]['dividendYielPercentageTTM']
+            stock_pe_for_peer = stock_quote_data_for_peers[0]['priceEarningsRatioTTM']
+            stock_roa_for_peer = stock_quote_data_for_peers[0]['returnOnAssetsTTM']
+            stock_roe_for_peer = stock_quote_data_for_peers[0]['returnOnEquityTTM']
+            stock_roc_for_peer = stock_quote_data_for_peers[0]['returnOnCapitalEmployedTTM']
+            stock_de_for_peer = stock_quote_data_for_peers[0]['debtEquityRatioTTM']
+            stock_ic_for_peer = stock_quote_data_for_peers[0]['interestCoverageTTM']
+            stock_cfd_for_peer = stock_quote_data_for_peers[0]['cashFlowToDebtRatioTTM']
+            stock_fcf_for_peer = stock_quote_data_for_peers[0]['freeCashFlowOperatingCashFlowRatioTTM']
+            stock_pb_for_peer = stock_quote_data_for_peers[0]['priceToBookRatioTTM']
+            stock_ps_for_peer = stock_quote_data_for_peers[0]['priceToSalesRatioTTM']
+            stock_pcf_for_peer = stock_quote_data_for_peers[0]['priceCashFlowRatioTTM']
+
+
             divyield = [x['dividendYielPercentageTTM'] for x in all_peer_data]
             pe = [x['priceEarningsRatioTTM'] for x in all_peer_data]
-            payout = [x['payoutRatioTTM'] for x in all_peer_data]
-            operating_profit_margin = [x['operatingProfitMarginTTM'] for x in all_peer_data]
             return_on_assets = [x['returnOnAssetsTTM'] for x in all_peer_data]
             return_on_equity = [x['returnOnEquityTTM'] for x in all_peer_data]
             return_on_capital = [x['returnOnCapitalEmployedTTM'] for x in all_peer_data]
             debt_to_equity = [x['debtEquityRatioTTM'] for x in all_peer_data]
-            debt_to_capitalization = [x['totalDebtToCapitalizationTTM'] for x in all_peer_data]
             interest_coverage = [x['interestCoverageTTM'] for x in all_peer_data]
             cash_flow_to_debt = [x['cashFlowToDebtRatioTTM'] for x in all_peer_data]
             free_cash_flow = [x['freeCashFlowOperatingCashFlowRatioTTM'] for x in all_peer_data]
@@ -388,14 +401,36 @@ def stock_profile(request):
             price_to_sales = [x['priceToSalesRatioTTM'] for x in all_peer_data]
             price_to_cash_flow = [x['priceCashFlowRatioTTM'] for x in all_peer_data]
         except:
-            pass
+
+
+            stock_div_yield_for_peer = []
+            stock_pe_for_peer = []
+            stock_roa_for_peer = []
+            stock_roe_for_peer = []
+            stock_roc_for_peer = []
+            stock_de_for_peer = []
+            stock_ic_for_peer = []
+            stock_cfd_for_peer = []
+            stock_fcf_for_peer = []
+            stock_pb_for_peer = []
+            stock_ps_for_peer = []
+            stock_pcf_for_peer = []
+
+            divyield = []
+            pe = []
+            return_on_assets = []
+            return_on_equity = []
+            return_on_capital = []
+            debt_to_equity = []
+            interest_coverage = []
+            cash_flow_to_debt = []
+            free_cash_flow = []
+            price_to_book = []
+            price_to_sales = []
+            price_to_cash_flow = []
+            peer_list = []
     except:
         return redirect('stock_profile')
-
-
-
-
-
 
 
     data = {
@@ -447,22 +482,31 @@ def stock_profile(request):
     'all_factor_ratings':all_factor_ratings,
     'all_factor_labels':all_factor_labels,
     'rating':rating,
-    # 'divyield':divyield,
-    # 'pe':pe,
-    # 'payout':payout,
-    # 'operating_profit_margin':operating_profit_margin,
-    # 'return_on_assets':return_on_assets,
-    # 'return_on_equity':return_on_equity,
-    # 'debt_to_equity':debt_to_equity,
-    # 'debt_to_capitalization':debt_to_capitalization,
-    # 'interest_coverage':interest_coverage,
-    # 'cash_flow_to_debt':cash_flow_to_debt,
-    # 'free_cash_flow':free_cash_flow,
-    # 'price_to_book':price_to_book,
-    # 'price_to_sales':price_to_sales,
-    # 'price_to_cash_flow':price_to_cash_flow,
-    # 'peer_list':peer_list,
-
+    'divyield':divyield,
+    'pe':pe,
+    'return_on_assets':return_on_assets,
+    'return_on_equity':return_on_equity,
+    'return_on_capital':return_on_capital,
+    'debt_to_equity':debt_to_equity,
+    'interest_coverage':interest_coverage,
+    'cash_flow_to_debt':cash_flow_to_debt,
+    'free_cash_flow':free_cash_flow,
+    'price_to_book':price_to_book,
+    'price_to_sales':price_to_sales,
+    'price_to_cash_flow':price_to_cash_flow,
+    'peer_list':peer_list,
+    'stock_div_yield_for_peer':stock_div_yield_for_peer,
+    'stock_pe_for_peer':stock_pe_for_peer,
+    'stock_roa_for_peer':stock_roa_for_peer,
+    'stock_roe_for_peer' :stock_roe_for_peer,
+    'stock_roc_for_peer':stock_roc_for_peer,
+    'stock_de_for_peer': stock_de_for_peer,
+    'stock_ic_for_peer': stock_ic_for_peer,
+    'stock_cfd_for_peer':stock_cfd_for_peer,
+    'stock_fcf_for_peer':stock_fcf_for_peer,
+    'stock_pb_for_peer':stock_pb_for_peer,
+    'stock_ps_for_peer':stock_ps_for_peer,
+    'stock_pcf_for_peer':stock_pcf_for_peer
     }
 
 

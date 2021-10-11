@@ -1,3 +1,6 @@
+let divYieldPeer = document.getElementById("peer-div-yield").getContext("2d");
+let pePeer = document.getElementById("peer-pe").getContext("2d");
+let psPeer = document.getElementById("peer-ps").getContext("2d");
 let ctx = document.getElementById("stock-chart").getContext("2d");
 let ctx2 = document.getElementById("pe-chart").getContext("2d");
 let ctx3 = document.getElementById("ma-chart").getContext("2d");
@@ -9,6 +12,7 @@ let ctx8 = document.getElementById("ratings-historical-chart").getContext("2d");
 let ctx9 = document.getElementById("ratings-historical-factor-chart").getContext("2d");
 let recommendations_section = document.getElementById("recommendation-chart");
 let factor_recommendations_section = document.getElementById("factor-recommendation-chart");
+let topPeers = document.getElementById("top-10-peers");
 let factor_list_variables = ['Overall Rating', 'Discounted Cash Flow Rating', 'Return On Equity Rating', 'Return on Assets Rating', 'Debt to Equity Rating', 'Price/Earnings Rating', 'Price to Book RatingS'];
 
 
@@ -101,6 +105,58 @@ const bubbleChart = function(aboveAverageData, belowAverageData, aboveAverageLab
 console.log(element);
 
 }
+
+
+const verticalBarChartPeers = function(peerRanks, peers, stock_factor, stock, factor, element) {
+
+  let peer_list = peers.push(stock);
+
+  const data = {
+    labels: peer_list,
+    datasets: [
+      {
+        label: "Top 10 Peers",
+        data: peerRanks,
+        backgroundColor: 'rgba(46, 46, 46, 0.5)',
+        borderColor: 'rgba(46, 46, 46 0.5)',
+        borderWidth: 1
+      },
+      {
+        label: stock,
+        data: stock_factor,
+        backgroundColor: 'rgba(32, 119, 153, 0.5)',
+        borderColor: 'rgba(32, 119, 153, 0.5)',
+        borderWidth: 1
+      },
+    ]
+  };
+
+  let options = {
+    indexAxis: 'y',
+    plugins: {
+      title: {
+        display: true,
+        text:factor+" Ranking",
+        font: {
+            family: 'Work Sans',
+            size: 20,
+            weight: 'bold'
+          },
+      },
+      legend: {
+        display: true
+      },
+    }
+  }
+
+  let chart = new Chart(element, {
+    type: "bar",
+    data: data,
+    options: options,
+  });
+}
+
+
 
 const barChartHistorical = function(ratings, stock, element) {
 
@@ -341,6 +397,9 @@ else {
   barChartHistorical(historicalRatings, stockName, ctx8)
 }
 
+verticalBarChartPeers(dividendPeers, peerList, stockDivYield, stockName, 'Dividend Yield LTM', divYieldPeer);
+verticalBarChartPeers(pePeers, peerList, stockPe, stockName, 'Price to Earnings', pePeer);
+verticalBarChartPeers(psPeers, peerList, stockPs, stockName, 'Price to Sales', psPeer);
 
 if (factorRatings.length==0 && factorLabels.length==0) {
   factor_recommendations_section.remove()

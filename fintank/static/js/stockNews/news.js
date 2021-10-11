@@ -20,11 +20,15 @@ const createElements = function(articleImage, tagText, text, authorText, authorD
 
   const postTag = document.createElement('div');
   postTag.classList.add("post-tag");
-  postTag.innerText = tagText;
+
+  const postTagText = document.createElement('a')
+  postTagText.innerText = tagText;
 
   const headline = document.createElement('a');
   headline.classList.add("headline");
-  headline.innerText = text;
+
+  const headlineText = document.createElement('h5')
+  headlineText.innerText = text;
 
   const postMeta = document.createElement('div');
   postMeta.classList.add("post-meta");
@@ -43,8 +47,12 @@ const createElements = function(articleImage, tagText, text, authorText, authorD
 
   postMeta.append(metaText);
 
+  postTag.append(postTagText);
   postContent.append(postTag);
+
+  headline.append(headlineText);
   postContent.append(headline);
+
   postContent.append(postMeta);
 
   postThumb.append(image);
