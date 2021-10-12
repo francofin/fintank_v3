@@ -1,6 +1,15 @@
 let divYieldPeer = document.getElementById("peer-div-yield").getContext("2d");
 let pePeer = document.getElementById("peer-pe").getContext("2d");
 let psPeer = document.getElementById("peer-ps").getContext("2d");
+let pbPeer = document.getElementById("peer-pb").getContext("2d");
+let pcfPeer = document.getElementById("peer-pcf").getContext("2d");
+let fcfPeer = document.getElementById("peer-fcf").getContext("2d");
+let dePeer = document.getElementById("peer-de").getContext("2d");
+let cfdPeer = document.getElementById("peer-cfd").getContext("2d");
+let intcovPeer = document.getElementById("peer-intcov").getContext("2d");
+let roaPeer = document.getElementById("peer-roa").getContext("2d");
+let roePeer = document.getElementById("peer-roe").getContext("2d");
+let rocPeer = document.getElementById("peer-roc").getContext("2d");
 let ctx = document.getElementById("stock-chart").getContext("2d");
 let ctx2 = document.getElementById("pe-chart").getContext("2d");
 let ctx3 = document.getElementById("ma-chart").getContext("2d");
@@ -107,25 +116,46 @@ console.log(element);
 }
 
 
-const verticalBarChartPeers = function(peerRanks, peers, stock_factor, stock, factor, element) {
+let verticalBarChartPeers = function(peerRanks, peers, stock, factor, element) {
 
-  let peer_list = peers.push(stock);
+  let peer_list = peers;
+  let peer_ranks = peerRanks;
+
+
+
+  console.log(peer_ranks);
+  console.log(peer_list);
 
   const data = {
     labels: peer_list,
     datasets: [
       {
         label: "Top 10 Peers",
-        data: peerRanks,
-        backgroundColor: 'rgba(46, 46, 46, 0.5)',
-        borderColor: 'rgba(46, 46, 46 0.5)',
-        borderWidth: 1
-      },
-      {
-        label: stock,
-        data: stock_factor,
-        backgroundColor: 'rgba(32, 119, 153, 0.5)',
-        borderColor: 'rgba(32, 119, 153, 0.5)',
+        data: peer_ranks,
+        backgroundColor: ['rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(222, 204, 11, 0.5)',
+                          'rgba(46, 46, 46, 0.5)'
+      ],
+        borderColor: ['rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)',
+                          'rgba(46, 46, 46, 0.5)'
+      ],
         borderWidth: 1
       },
     ]
@@ -397,9 +427,24 @@ else {
   barChartHistorical(historicalRatings, stockName, ctx8)
 }
 
-verticalBarChartPeers(dividendPeers, peerList, stockDivYield, stockName, 'Dividend Yield LTM', divYieldPeer);
-verticalBarChartPeers(pePeers, peerList, stockPe, stockName, 'Price to Earnings', pePeer);
-verticalBarChartPeers(psPeers, peerList, stockPs, stockName, 'Price to Sales', psPeer);
+if (peerList.length<=5) {
+  topPeers.remove()
+}
+else {
+  verticalBarChartPeers(dividendPeers, peerList, stockName, 'Dividend Yield LTM', divYieldPeer);
+  verticalBarChartPeers(pePeers, peerList, stockName, 'Price to Earnings', pePeer);
+  verticalBarChartPeers(psPeers, peerList, stockName, 'Price to Sales', psPeer);
+  verticalBarChartPeers(pbPeers, peerList, stockName, 'Price to Book', pbPeer);
+  verticalBarChartPeers(pcfPeers, peerList, stockName, 'Price to Cash Flow', pcfPeer);
+  verticalBarChartPeers(fcfPeers, peerList, stockName, 'Free Cash Flow', fcfPeer);
+  verticalBarChartPeers(dePeers, peerList, stockName, 'Debt to Equity', dePeer);
+  verticalBarChartPeers(cfdPeers, peerList, stockName, 'Cash Flow to Debt', cfdPeer);
+  verticalBarChartPeers(intcovPeers, peerList, stockName, 'Interest Coverage', intcovPeer);
+  verticalBarChartPeers(roaPeers, peerList, stockName, 'Return on Assets', roaPeer);
+  verticalBarChartPeers(roePeers, peerList, stockName, 'Return on Equity', roePeer);
+  verticalBarChartPeers(rocPeers, peerList, stockName, 'Return on Capital Employed', rocPeer);
+}
+
 
 if (factorRatings.length==0 && factorLabels.length==0) {
   factor_recommendations_section.remove()
