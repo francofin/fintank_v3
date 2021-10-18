@@ -98,62 +98,117 @@ def home(request):
 
     '''
 
+    try:
+        gainers = get_day_gainers()
+        gainers = gainers[gainers['Price (Intraday)'] > 10].values
 
-    gainers = get_day_gainers()
-    gainers = gainers[gainers['Price (Intraday)'] > 10].values
+        gainer1_ticker = gainers[0][0]
+        gainer1_name = gainers[0][1]
+        gainer1_price = gainers[0][2]
+        gainer1_perc_change = gainers[0][4]
 
-    gainer1_ticker = gainers[0][0]
-    gainer1_name = gainers[0][1]
-    gainer1_price = gainers[0][2]
-    gainer1_perc_change = gainers[0][4]
+        gainer2_ticker = gainers[1][0]
+        gainer2_name = gainers[1][1]
+        gainer2_price = gainers[1][2]
+        gainer2_perc_change = gainers[1][4]
 
-    gainer2_ticker = gainers[1][0]
-    gainer2_name = gainers[1][1]
-    gainer2_price = gainers[1][2]
-    gainer2_perc_change = gainers[1][4]
+        gainer3_ticker = gainers[2][0]
+        gainer3_name = gainers[2][1]
+        gainer3_price = gainers[2][2]
+        gainer3_perc_change = gainers[2][4]
 
-    gainer3_ticker = gainers[2][0]
-    gainer3_name = gainers[2][1]
-    gainer3_price = gainers[2][2]
-    gainer3_perc_change = gainers[2][4]
+        gainer4_ticker = gainers[3][0]
+        gainer4_name = gainers[3][1]
+        gainer4_price = gainers[3][2]
+        gainer4_perc_change = gainers[3][4]
 
-    gainer4_ticker = gainers[3][0]
-    gainer4_name = gainers[3][1]
-    gainer4_price = gainers[3][2]
-    gainer4_perc_change = gainers[3][4]
+        gainer5_ticker = gainers[4][0]
+        gainer5_name = gainers[4][1]
+        gainer5_price = gainers[4][2]
+        gainer5_perc_change = gainers[4][4]
 
-    gainer5_ticker = gainers[4][0]
-    gainer5_name = gainers[4][1]
-    gainer5_price = gainers[4][2]
-    gainer5_perc_change = gainers[4][4]
+        losers = get_day_losers()
+        losers = losers[losers['Price (Intraday)']>25].values
 
-    losers = get_day_losers()
-    losers = losers[losers['Price (Intraday)']>25].values
+        loser1_ticker = losers[0][0]
+        loser1_name = losers[0][1]
+        loser1_price = losers[0][2]
+        loser1_perc_change = losers[0][4]
 
-    loser1_ticker = losers[0][0]
-    loser1_name = losers[0][1]
-    loser1_price = losers[0][2]
-    loser1_perc_change = losers[0][4]
+        loser2_ticker = losers[1][0]
+        loser2_name = losers[1][1]
+        loser2_price = losers[1][2]
+        loser2_perc_change = losers[1][4]
 
-    loser2_ticker = losers[1][0]
-    loser2_name = losers[1][1]
-    loser2_price = losers[1][2]
-    loser2_perc_change = losers[1][4]
+        loser3_ticker = losers[2][0]
+        loser3_name = losers[2][1]
+        loser3_price = losers[2][2]
+        loser3_perc_change = losers[2][4]
 
-    loser3_ticker = losers[2][0]
-    loser3_name = losers[2][1]
-    loser3_price = losers[2][2]
-    loser3_perc_change = losers[2][4]
+        loser4_ticker = losers[3][0]
+        loser4_name = losers[3][1]
+        loser4_price = losers[3][2]
+        loser4_perc_change = losers[3][4]
 
-    loser4_ticker = losers[3][0]
-    loser4_name = losers[3][1]
-    loser4_price = losers[3][2]
-    loser4_perc_change = losers[3][4]
+        loser5_ticker = losers[4][0]
+        loser5_name = losers[4][1]
+        loser5_price = losers[4][2]
+        loser5_perc_change = losers[4][4]
+    except:
+        gainers = json.loads(requests.get(f"https://fmpcloud.io/api/v3/gainers?apikey={fmp_api}").content)
+        gainers = [gainer for gainer in gainers if float(gainer['price']) > 10]
+        gainer1_ticker = gainers[0]['ticker']
+        gainer1_name = gainers[0]['companyName']
+        gainer1_price = gainers[0]['price']
+        gainer1_perc_change = gainers[0]['changesPercentage']
 
-    loser5_ticker = losers[4][0]
-    loser5_name = losers[4][1]
-    loser5_price = losers[4][2]
-    loser5_perc_change = losers[4][4]
+        gainer2_ticker = gainers[1]['ticker']
+        gainer2_name = gainers[1]['companyName']
+        gainer2_price = gainers[1]['price']
+        gainer2_perc_change = gainers[1]['changesPercentage']
+
+        gainer3_ticker = gainers[2]['ticker']
+        gainer3_name = gainers[2]['companyName']
+        gainer3_price = gainers[2]['price']
+        gainer3_perc_change = gainers[2]['changesPercentage']
+
+        gainer4_ticker = gainers[3]['ticker']
+        gainer4_name = gainers[3]['companyName']
+        gainer4_price = gainers[3]['price']
+        gainer4_perc_change = gainers[3]['changesPercentage']
+
+        gainer5_ticker = gainers[4]['ticker']
+        gainer5_name = gainers[4]['companyName']
+        gainer5_price = gainers[4]['price']
+        gainer5_perc_change = gainers[4]['changesPercentage']
+
+        losers = losers = json.loads(requests.get(f"https://fmpcloud.io/api/v3/losers?apikey={fmp_api}").content)
+        losers = [loser for loser in losers if float(loser['price']) > 10]
+
+        loser1_ticker = losers[0]['ticker']
+        loser1_name = losers[0]['companyName']
+        loser1_price = losers[0]['price']
+        loser1_perc_change = losers[0]['changesPercentage']
+
+        loser2_ticker = losers[1]['ticker']
+        loser2_name = losers[1]['companyName']
+        loser2_price = losers[1]['price']
+        loser2_perc_change = losers[1]['changesPercentage']
+
+        loser3_ticker = losers[2]['ticker']
+        loser3_name = losers[2]['companyName']
+        loser3_price = losers[2]['price']
+        loser3_perc_change = losers[2]['changesPercentage']
+
+        loser4_ticker = losers[3]['ticker']
+        loser4_name = losers[3]['companyName']
+        loser4_price = losers[3]['price']
+        loser4_perc_change = losers[3]['changesPercentage']
+
+        loser5_ticker = losers[4]['ticker']
+        loser5_name = losers[4]['companyName']
+        loser5_price = losers[4]['price']
+        loser5_perc_change = losers[4]['changesPercentage']
 
     data = {
         'francois': francois,

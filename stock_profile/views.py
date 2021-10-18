@@ -430,6 +430,45 @@ def stock_profile(request):
         except:
             price_to_cash_flow = []
 
+
+        income_statement = json.loads(requests.get(f"https://fmpcloud.io/api/v3/income-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        q1_is = [x for x in income_statement if x['period'] == 'Q1']
+        q2_is = [x for x in income_statement if x['period'] == 'Q2']
+        q3_is = [x for x in income_statement if x['period'] == 'Q3']
+        q4_is = [x for x in income_statement if x['period'] == 'Q4']
+        if len(income_statement)>4:
+            is_table = income_statement[0:4]
+            table_headers = []
+            for item in is_table:
+                table_headers.append(item['period'] + " "+ item['date'][0:4])
+        else:
+            is_table = income_statement
+            table_headers = []
+            for item in is_table:
+                table_headers.append(item['period'] + " "+ item['date'][0:4])
+
+        balance_sheet = json.loads(requests.get(f"https://fmpcloud.io/api/v3/balance-sheet-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        q1_bs = [x for x in balance_sheet if x['period'] == 'Q1']
+        q2_bs = [x for x in balance_sheet if x['period'] == 'Q2']
+        q3_bs = [x for x in balance_sheet if x['period'] == 'Q3']
+        q4_bs = [x for x in balance_sheet if x['period'] == 'Q4']
+        if len(balance_sheet)>4:
+            bs_table = balance_sheet[0:4]
+        else:
+            bs_table = balance_sheet
+
+        cash_flow_statement = json.loads(requests.get(f"https://fmpcloud.io/api/v3/cash-flow-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        q1_cf = [x for x in cash_flow_statement if x['period'] == 'Q1']
+        q2_cf = [x for x in cash_flow_statement if x['period'] == 'Q2']
+        q3_cf = [x for x in cash_flow_statement if x['period'] == 'Q3']
+        q4_cf = [x for x in cash_flow_statement if x['period'] == 'Q4']
+        if len(cash_flow_statement)>4:
+            cf_table = cash_flow_statement[0:4]
+        else:
+            cf_table = cash_flow_statement
+
+        metrics_list_is = ['Date', 'Revenue', 'Cost of Revenue', 'Gross Profit', 'Gross Profit Ratio', 'R&D', 'Selling/General/Admin Expenses', 'Operating Expenses', 'Interest Expense', 'Dep/Amort', 'EBITDA', 'EBITDA Ratio', 'Operating Income', 'Operating Income Ratio', 'Income Before Tax', 'Income Before Tax ratio', 'Income Tax Expense', 'Net Income', 'Net Income Ratio', 'EPS', 'Shares Outstanding (Weighted Avg)']
+        metrics_list_bs = ['Date', 'Cash and Short Term Investments','Net Receivables', 'Inventory', 'Total Current Assets', 'Property Plant Equipment', 'Long Term Investments', 'Total Non Current Assets', 'Total Assets', 'Accounts Payables', 'Short Term Debt', 'Tax Payables', 'Deferred Revenue (Current)', 'Total Current Liabilities', 'Long Term Debt', 'Deferred Revenue (Non Current)', 'Total Non Current Liabilities','Total Liabilities', 'Common Stock', 'Retained Earnings', 'Comprehensive income/Losss', 'Total Stockholders Equity', 'Liabilities and Equity', 'Total Investments', 'Total Debt', 'Net Debt']
     except:
         return redirect('stock_profile')
 
@@ -496,6 +535,12 @@ def stock_profile(request):
     'price_to_sales':price_to_sales,
     'price_to_cash_flow':price_to_cash_flow,
     'peer_list':peer_list,
+    'is_table':is_table,
+    'bs_table':bs_table,
+    'cf_table':cf_table,
+    'table_headers':table_headers,
+    'metrics_list_is':metrics_list_is,
+    'metrics_list_bs':metrics_list_bs
     }
 
 

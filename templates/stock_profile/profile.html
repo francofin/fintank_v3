@@ -243,6 +243,336 @@
         </div>
       </div>
 
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
+          <div class="single-blog-content mb-100">
+            <div class="post-meta">
+              <h5> Income Statement</h5>
+            </div>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Metric</th>
+                  {% for header in table_headers %}
+                  <th scope="col">{{header}}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% if metrics_list_is %}
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.0 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.date }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.1 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.revenue|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.2 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.costOfRevenue|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.3 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.grossProfit|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.4 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.grossProfitRatio|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.5 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.researchAndDevelopmentExpenses|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.6 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.sellingGeneralAndAdministrativeExpenses|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.7 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.operatingExpenses|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.8 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.interestExpense|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.9 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.depreciationAndAmortization|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.10 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.ebitda|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.11 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.ebitdaratio|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.12 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.operatingIncome|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.13 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.operatingIncomeRatio|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.14 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.incomeBeforeTax|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.15 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.incomeBeforeTaxRatio|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.16 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.incomeTaxExpense|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.17 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.netIncome|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.18 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.netIncomeRatio|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.19 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.eps|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_is.20 }}</b></th>
+                  {% for item2 in is_table %}
+                  <td>{{ item2.weightedAverageShsOut|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
+          <div class="single-blog-content mb-100">
+            <div class="post-meta">
+              <h5> Balance Sheet </h5>
+            </div>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Metric</th>
+                  {% for header in table_headers %}
+                  <th scope="col">{{header}}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% if metrics_list_bs %}
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.0 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.date }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.1 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.cashAndShortTermInvestments|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.2 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.netReceivables|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.3 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.inventory|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.4 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalCurrentAssets|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.5 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.propertyPlantEquipmentNet|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.6 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.longTermInvestments|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.7 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalNonCurrentAssets|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.8 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalAssets|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.9 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.accountPayables|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.10 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.shortTermDebt|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.11 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.taxPayables|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.12 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.deferredRevenue|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.13 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalCurrentLiabilities|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.14 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.longTermDebt|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.15 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.deferredRevenueNonCurrent|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.16 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalNonCurrentLiabilities|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.17 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalLiabilities|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.18 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.commonStock|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.19 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.retainedEarnings|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.20 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.accumulatedOtherComprehensiveIncomeLoss|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.21 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalStockholdersEquity|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.22 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalLiabilitiesAndStockholdersEquity|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.23 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalInvestments|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.24 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.totalDebt|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_bs.25 }}</b></th>
+                  {% for item2 in bs_table %}
+                  <td>{{ item2.netDebt|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div class="row justify-content-center" id='news-articles'>
 
       </div>
