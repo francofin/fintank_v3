@@ -432,12 +432,55 @@ def stock_profile(request):
 
 
         income_statement = json.loads(requests.get(f"https://fmpcloud.io/api/v3/income-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        income_statement.reverse()
+        income_sheet_data_for_chart =  [income_statement[x] for x in range(0, len(income_statement)) if datetime.fromisoformat(income_statement[x]['date']) > datetime(2011, 1, 1)]
+        try:
+            is_dates_for_chart = json.dumps([datetime.strptime(income_sheet_data_for_chart[x]['date'], "%Y-%m-%d").strftime('%b-%d-%Y') for x in range(0, len(income_sheet_data_for_chart))])
+        except:
+            is_dates_for_chart = []
+        try:
+            rev_for_chart = [income_sheet_data_for_chart[x]['revenue'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            rev_for_chart=[]
+        try:
+            cost_of_rev_for_chart = [income_sheet_data_for_chart[x]['costOfRevenue'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            cost_of_rev_for_chart = []
+        try:
+            gp_for_chart = [income_sheet_data_for_chart[x]['grossProfit'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            gp_for_chart = []
+        try:
+            rd_for_chart = [income_sheet_data_for_chart[x]['researchAndDevelopmentExpenses'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            rd_for_chart = []
+        try:
+            operating_expenses_for_chart = [income_sheet_data_for_chart[x]['operatingExpenses'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            operating_expenses_for_chart = []
+        try:
+            operating_income_equity_for_chart = [income_sheet_data_for_chart[x]['operatingIncome'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            operating_income_equity_for_chart = []
+        try:
+            net_income_equity_for_chart = [income_sheet_data_for_chart[x]['netIncome'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            net_income_equity_for_chart = []
+        try:
+            eps_equity_for_chart = [income_sheet_data_for_chart[x]['eps'] for x in range(0, len(income_sheet_data_for_chart))]
+        except:
+            eps_equity_for_chart = []
+
+        income_statement_data = [rev_for_chart, cost_of_rev_for_chart, gp_for_chart, rd_for_chart, operating_expenses_for_chart, operating_income_equity_for_chart, net_income_equity_for_chart,eps_equity_for_chart]
+        income_statement_labels = ['Revenue', 'Cost of Revenue', 'Gross Profit', 'R&D', 'Operating Expenses', 'Operating Income', 'Net Income', 'EPS']
+
+
         q1_is = [x for x in income_statement if x['period'] == 'Q1']
         q2_is = [x for x in income_statement if x['period'] == 'Q2']
         q3_is = [x for x in income_statement if x['period'] == 'Q3']
         q4_is = [x for x in income_statement if x['period'] == 'Q4']
         if len(income_statement)>4:
-            is_table = income_statement[0:4]
+            is_table = income_statement[-4:]
             table_headers = []
             for item in is_table:
                 table_headers.append(item['period'] + " "+ item['date'][0:4])
@@ -447,13 +490,48 @@ def stock_profile(request):
             for item in is_table:
                 table_headers.append(item['period'] + " "+ item['date'][0:4])
 
+
         balance_sheet = json.loads(requests.get(f"https://fmpcloud.io/api/v3/balance-sheet-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        balance_sheet.reverse()
+        balance_sheet_for_chart =  [balance_sheet[x] for x in range(0, len(balance_sheet)) if datetime.fromisoformat(balance_sheet[x]['date']) > datetime(2011, 1, 1)]
+        try:
+            bs_dates_for_chart = json.dumps([datetime.strptime(balance_sheet_for_chart[x]['date'], "%Y-%m-%d").strftime('%b-%d-%Y') for x in range(0, len(balance_sheet_for_chart))])
+        except:
+            bs_dates_for_chart = []
+        try:
+            cash_for_chart = [balance_sheet_for_chart[x]['cashAndCashEquivalents'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            cash_for_chart = []
+        try:
+            st_debt_for_chart = [balance_sheet_for_chart[x]['shortTermDebt'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            st_debt_for_chart = []
+        try:
+            cl_for_chart = [balance_sheet_for_chart[x]['totalCurrentLiabilities'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            cl_for_chart = []
+        try:
+            retained_earnings_for_chart = [balance_sheet_for_chart[x]['retainedEarnings'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            retained_earnings_for_chart = []
+        try:
+            lt_debt_for_chart = [balance_sheet_for_chart[x]['longTermDebt'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            lt_debt_for_chart = []
+        try:
+            stock_holder_equity_for_chart = [balance_sheet_for_chart[x]['totalStockholdersEquity'] for x in range(0, len(balance_sheet_for_chart))]
+        except:
+            stock_holder_equity_for_chart = []
+
+        balance_sheet_data = [cash_for_chart,st_debt_for_chart, cl_for_chart, retained_earnings_for_chart, lt_debt_for_chart, stock_holder_equity_for_chart ]
+        balance_sheet_labels = ['Cash Balance', 'Short Term Debt', 'Current Liabilities', 'Retained Earnings', 'Long Term Debt', 'Total Stockholder Equity']
+
         q1_bs = [x for x in balance_sheet if x['period'] == 'Q1']
         q2_bs = [x for x in balance_sheet if x['period'] == 'Q2']
         q3_bs = [x for x in balance_sheet if x['period'] == 'Q3']
         q4_bs = [x for x in balance_sheet if x['period'] == 'Q4']
         if len(balance_sheet)>4:
-            bs_table = balance_sheet[0:4]
+            bs_table = balance_sheet[-4:]
         else:
             bs_table = balance_sheet
 
@@ -540,7 +618,13 @@ def stock_profile(request):
     'cf_table':cf_table,
     'table_headers':table_headers,
     'metrics_list_is':metrics_list_is,
-    'metrics_list_bs':metrics_list_bs
+    'metrics_list_bs':metrics_list_bs,
+    'is_dates_for_chart':is_dates_for_chart,
+    'income_statement_data':income_statement_data,
+    'income_statement_labels':income_statement_labels,
+    'bs_dates_for_chart':bs_dates_for_chart,
+    'balance_sheet_data':balance_sheet_data,
+    'balance_sheet_labels':balance_sheet_labels
     }
 
 
