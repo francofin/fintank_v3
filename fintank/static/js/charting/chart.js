@@ -21,6 +21,7 @@ let ctx8 = document.getElementById("ratings-historical-chart").getContext("2d");
 let ctx9 = document.getElementById("ratings-historical-factor-chart").getContext("2d");
 let ctx10 = document.getElementById("income-statement-chart").getContext("2d");
 let ctx11 = document.getElementById("balance-sheet-chart").getContext("2d");
+let ctx12 = document.getElementById("cash-flow-chart").getContext("2d");
 let recommendations_section = document.getElementById("recommendation-chart");
 let factor_recommendations_section = document.getElementById("factor-recommendation-chart");
 let topPeers = document.getElementById("top-10-peers");
@@ -685,11 +686,146 @@ const balanceSheetCharting = function(dataDates, plotData , plotLabels, stock, c
   console.log(chart);
 }
 
+const cashFlowCharting = function(dataDates, plotData , plotLabels, stock, companyName) {
+  // var labels = [];
+  //   for (let i=0; i<dataDates.length; i++) {
+  //     labels.push(new Date(dataDates[i]));
+  //   }
 
+    const totalDuration = 2000;
+    const delayBetweenPoints = totalDuration / dataDates.length;
+    const previousY = (ctx12) => ctx12.index === 0 ? ctx12.chart.scales.y.getPixelForValue(100) : ctx12.chart.getDatasetMeta(ctx12.datasetIndex).data[ctx12.index - 1].getProps(['y'], true).y;
+    const animation = {
+      x: {
+        type: 'number',
+        easing: 'linear',
+        duration: delayBetweenPoints,
+        from: NaN, // the point is initially skipped
+        delay(ctx12) {
+          if (ctx12.type !== 'data' || ctx12.xStarted) {
+            return 0;
+          }
+          ctx12.xStarted = true;
+          return ctx12.index * delayBetweenPoints;
+        }
+      },
+      y: {
+        type: 'number',
+        easing: 'linear',
+        duration: delayBetweenPoints,
+        from: previousY,
+        delay(ctx12) {
+          if (ctx12.type !== 'data' || ctx12.yStarted) {
+            return 0;
+          }
+          ctx12.yStarted = true;
+          return ctx12.index * delayBetweenPoints;
+        },
+        ticks: {
+                fontSize: 60
+            }
+      }
+    };
+
+
+  let chart = new Chart(ctx12, {
+    type: "line",
+    data: {
+      labels: dataDates,
+      datasets: [
+          {
+            data: plotData[0],
+            backgroundColor: "#79AEC8",
+            borderColor: "#79AEC8",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[0],
+          },
+          {
+            data: plotData[1],
+            backgroundColor: "#fcba03",
+            borderColor: "#fcba03",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[1],
+          },
+          {
+            data: plotData[2],
+            backgroundColor: "#52fc03",
+            borderColor: "#52fc03",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[2],
+          },
+          {
+            data: plotData[3],
+            backgroundColor: "#fc036b",
+            borderColor: "#fc036b",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[3],
+          },
+          {
+            data: plotData[4],
+            backgroundColor: "#3b3236",
+            borderColor: "#3b3236",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[4],
+          },
+          {
+            data: plotData[5],
+            backgroundColor: "#15a3cf",
+            borderColor: "#15a3cf",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[5],
+          },
+          {
+            data: plotData[6],
+            backgroundColor: "#242222",
+            borderColor: "#242222",
+            borderWidth: 3,
+            radius: 0,
+            label: plotLabels[6],
+          },
+      ]
+    },
+    options: {
+    interaction: {
+      intersect: false
+    },
+      responsive: true,
+      plugins: {
+      paddingBelowLegends: false,
+      title: {
+        display: true,
+        text: companyName,
+        font: {
+            family: 'Work Sans',
+            size: 35,
+            weight: 'bold',
+            lineHeight: 1.2,
+          },
+      },
+    },
+      scales:{
+        xAxes: [{
+          type: 'time',
+          distribution: 'linear',
+          display:false,
+        }],
+      },
+    }
+  });
+
+  console.log(chart);
+}
 
 charting(dataDates, chartData, stock, companyName);
 annualStatementCharting(incomeStatementDates, incomeStatementData, incomeStatementLabels, stock, companyName);
 balanceSheetCharting(balanceSheetDates, balanceSheetData, balanceSheetLabels, stock, companyName);
+cashFlowCharting(cashFlowDates, cashFlowData, cashFlowLabels, stock, companyName);
 bubbleChart(aboveAveragePeData, belowAveragePeData, aboveAveragePeLabels, belowAveragePeLabels, stockPeData, stockPe, "P/E Comparison", ctx2);
 bubbleChart(aboveAverageMaData, belowAverageMaData, aboveAverageMaLabels, belowAverageMaLabels, stockMaData, stockMa, "Momentum Comparison", ctx3);
 bubbleChart(aboveAverageBetaData, belowAverageBetaData, aboveAverageBetaLabels, belowAverageBetaLabels, stockBetaData, stockBeta, "Beta Comparison", ctx4);

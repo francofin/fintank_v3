@@ -12,7 +12,6 @@ from heapq import nlargest
 
 def stock_profile(request):
     from scipy.optimize import minimize
-    import statsmodels.api as sm
     from requests_html import HTMLSession
     from datetime import date
     from datetime import datetime
@@ -535,18 +534,58 @@ def stock_profile(request):
         else:
             bs_table = balance_sheet
 
+
         cash_flow_statement = json.loads(requests.get(f"https://fmpcloud.io/api/v3/cash-flow-statement/{stock}?period=quarter&limit=400&apikey={fmp_api}").content)
+        cash_flow_statement.reverse()
+        cash_flow_for_chart =  [cash_flow_statement[x] for x in range(0, len(cash_flow_statement)) if datetime.fromisoformat(cash_flow_statement[x]['date']) > datetime(2011, 1, 1)]
+        try:
+            cf_dates_for_chart = json.dumps([datetime.strptime(cash_flow_for_chart[x]['date'], "%Y-%m-%d").strftime('%b-%d-%Y') for x in range(0, len(cash_flow_for_chart))])
+        except:
+            cf_dates_for_chart = []
+        try:
+            stock_issues_chart = [cash_flow_for_chart[x]['commonStockIssued'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            stock_issues_chart = []
+        try:
+            stock_repurchased_chart = [-cash_flow_for_chart[x]['commonStockRepurchased'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            stock_repurchased_chart = []
+        try:
+            div_for_chart = [-cash_flow_for_chart[x]['dividendsPaid'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            div_for_chart = []
+        try:
+            fcf_for_chart = [cash_flow_for_chart[x]['freeCashFlow'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            fcf_for_chart = []
+        try:
+            capex_for_chart = [-cash_flow_for_chart[x]['capitalExpenditure'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            capex_for_chart = []
+        try:
+            ocf_for_chart = [cash_flow_for_chart[x]['operatingCashFlow'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            ocf_for_chart = []
+        try:
+            inventory_for_chart = [cash_flow_for_chart[x]['inventory'] for x in range(0, len(cash_flow_for_chart))]
+        except:
+            inventory_for_chart = []
+
         q1_cf = [x for x in cash_flow_statement if x['period'] == 'Q1']
         q2_cf = [x for x in cash_flow_statement if x['period'] == 'Q2']
         q3_cf = [x for x in cash_flow_statement if x['period'] == 'Q3']
         q4_cf = [x for x in cash_flow_statement if x['period'] == 'Q4']
         if len(cash_flow_statement)>4:
-            cf_table = cash_flow_statement[0:4]
+            cf_table = cash_flow_statement[-4:]
         else:
             cf_table = cash_flow_statement
 
+        cash_flow_data = [stock_issues_chart,stock_repurchased_chart, div_for_chart, fcf_for_chart, capex_for_chart, ocf_for_chart, inventory_for_chart ]
+        cash_flow_labels = ['Stock Issued', 'Stock Repurchased', 'Dividends Paid', 'Free Cash Flow', 'Capital Expenditures', 'Operating Cash Flow', 'Inventory']
+
         metrics_list_is = ['Date', 'Revenue', 'Cost of Revenue', 'Gross Profit', 'Gross Profit Ratio', 'R&D', 'Selling/General/Admin Expenses', 'Operating Expenses', 'Interest Expense', 'Dep/Amort', 'EBITDA', 'EBITDA Ratio', 'Operating Income', 'Operating Income Ratio', 'Income Before Tax', 'Income Before Tax ratio', 'Income Tax Expense', 'Net Income', 'Net Income Ratio', 'EPS', 'Shares Outstanding (Weighted Avg)']
         metrics_list_bs = ['Date', 'Cash and Short Term Investments','Net Receivables', 'Inventory', 'Total Current Assets', 'Property Plant Equipment', 'Long Term Investments', 'Total Non Current Assets', 'Total Assets', 'Accounts Payables', 'Short Term Debt', 'Tax Payables', 'Deferred Revenue (Current)', 'Total Current Liabilities', 'Long Term Debt', 'Deferred Revenue (Non Current)', 'Total Non Current Liabilities','Total Liabilities', 'Common Stock', 'Retained Earnings', 'Comprehensive income/Losss', 'Total Stockholders Equity', 'Liabilities and Equity', 'Total Investments', 'Total Debt', 'Net Debt']
+        metrics_list_cf = ['Date', 'Net Income', 'Dep/A', 'Deferred Income tax', 'Stock Based Compensation', 'Change in Working Cap', 'Accounts Receivables', 'Inventory', 'Accounts Payables', 'Other Working Capital', 'Other Non Cash Items', 'Cash from Operations (Net)', 'Property, Plant and Equip', 'Acquisitions', 'Purchase of Investments', 'Maturities of Investments', 'Other Investing Activities', 'Cash used in Investing', 'Debt Repayment', 'Stock Issues', 'Stock Repurchased', 'Dividends paid', 'Other Financing Activities', 'Cash From Financing', 'FX Effects', 'Change in Cash', 'Cash at End', 'Cash at Start', 'Operating Cash Flow', 'Capital Expenditure', 'Free Cash Flow']
     except:
         return redirect('stock_profile')
 
@@ -619,12 +658,16 @@ def stock_profile(request):
     'table_headers':table_headers,
     'metrics_list_is':metrics_list_is,
     'metrics_list_bs':metrics_list_bs,
+    'metrics_list_cf':metrics_list_cf,
     'is_dates_for_chart':is_dates_for_chart,
     'income_statement_data':income_statement_data,
     'income_statement_labels':income_statement_labels,
     'bs_dates_for_chart':bs_dates_for_chart,
     'balance_sheet_data':balance_sheet_data,
-    'balance_sheet_labels':balance_sheet_labels
+    'balance_sheet_labels':balance_sheet_labels,
+    'cf_dates_for_chart':cf_dates_for_chart,
+    'cash_flow_data':cash_flow_data,
+    'cash_flow_labels':cash_flow_labels
     }
 
 

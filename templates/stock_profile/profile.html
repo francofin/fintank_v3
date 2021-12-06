@@ -244,7 +244,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-4 col-lg-4">
+        <div class="col-12 col-lg-12">
           <div class="single-blog-content mb-100">
             <div class="post-meta">
               <h5> Income Statement</h5>
@@ -391,17 +391,19 @@
             </table>
           </div>
         </div>
-        <div class="col-8 col-lg-8" style="padding-left:200px; padding-top:200px;">
+      </div>
+      <div class="row justify-content-center" style="padding-top:0px;">
+        <div class="col-12 col-lg-12">
           <div class="single-blog-content">
             <div class="post-content" style="max-width:100%">
-              <canvas id="income-statement-chart" width="300" height="400" data-url="{% url 'stock_profile' %}"></canvas>
+              <canvas id="income-statement-chart" width="100" height="45" data-url="{% url 'stock_profile' %}"></canvas>
             </div>
           </div>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-4 col-lg-4">
+        <div class="col-12 col-lg-12">
           <div class="single-blog-content mb-100">
             <div class="post-meta">
               <h5> Balance Sheet </h5>
@@ -578,10 +580,233 @@
             </table>
           </div>
         </div>
-        <div class="col-8 col-lg-8" style="padding-left:200px; padding-top:200px;">
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
           <div class="single-blog-content">
             <div class="post-content" style="max-width:100%">
-              <canvas id="balance-sheet-chart" width="300" height="400" data-url="{% url 'stock_profile' %}"></canvas>
+              <canvas id="balance-sheet-chart" width="100" height="45" data-url="{% url 'stock_profile' %}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
+          <div class="single-blog-content mb-100">
+            <div class="post-meta">
+              <h5> Cash Flow Statement </h5>
+            </div>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Metric</th>
+                  {% for header in table_headers %}
+                  <th scope="col">{{header}}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% if metrics_list_cf %}
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.0 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.date }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.1 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.netIncome|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.2 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.depreciationAndAmortization|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.3 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.deferredIncomeTax|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.4 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.stockBasedCompensation|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.5 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.changeInWorkingCapital|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.6 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.accountsReceivables|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.7 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.inventory|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.8 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.accountsPayables|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.9 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.otherWorkingCapital|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.10 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.otherNonCashItems|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.11 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.netCashProvidedByOperatingActivities|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.12 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.investmentsInPropertyPlantAndEquipment|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.13 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.acquisitionsNet|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.14 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.purchasesOfInvestments|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.15 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.salesMaturitiesOfInvestments|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.16 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.otherInvestingActivites|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.17 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.netCashUsedForInvestingActivites|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.18 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.debtRepayment|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.19 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.commonStockIssued|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.20 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.commonStockRepurchased|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.21 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.dividendsPaid|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.22 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.otherFinancingActivites|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.23 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.netCashUsedProvidedByFinancingActivities|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.24 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.effectOfForexChangesOnCash|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.25 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.netChangeInCash|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.26 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.cashAtEndOfPeriod|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.27 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.cashAtBeginningOfPeriod|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.28 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.operatingCashFlow|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.29 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.capitalExpenditure|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <th scope='row'><b>{{ metrics_list_cf.30 }}</b></th>
+                  {% for item2 in cf_table %}
+                  <td>{{ item2.freeCashFlow|floatformat:2|intcomma  }}</td>
+                  {% endfor %}
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
+          <div class="single-blog-content">
+            <div class="post-content" style="max-width:100%">
+              <canvas id="cash-flow-chart" width="100" height="45" data-url="{% url 'stock_profile' %}"></canvas>
             </div>
           </div>
         </div>
@@ -621,6 +846,7 @@
   <script> var dataDates = {{json_dates|safe}}; var chartData={{json_prices|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
   <script> var incomeStatementDates = {{is_dates_for_chart|safe}}; var incomeStatementData={{income_statement_data|safe}}; var incomeStatementLabels= {{income_statement_labels|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
   <script> var balanceSheetDates = {{bs_dates_for_chart|safe}}; var balanceSheetData={{balance_sheet_data|safe}}; var balanceSheetLabels= {{balance_sheet_labels|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
+  <script> var cashFlowDates = {{cf_dates_for_chart|safe}}; var cashFlowData={{cash_flow_data|safe}}; var cashFlowLabels= {{cash_flow_labels|safe}}; var stock='{{live_quote_data.symbol}}'; var companyName='{{live_quote_data.companyName}}';</script>
   <script> var aboveAveragePeData = {{above_pe_data_for_chart | safe}}; var belowAveragePeData = {{below_pe_data_for_chart | safe}}; var aboveAveragePeLabels = {{above_average_pe_labels | safe}}; var belowAveragePeLabels = {{below_average_pe_labels | safe}};var stockPeData = {{stock_pe_data_for_chart | safe}}; var stockPe = "{{stock_pe_label | safe}}"; </script>
   <script> var aboveAverageMaData = {{above_ma_data_for_chart | safe}}; var belowAverageMaData = {{below_ma_data_for_chart | safe}}; var aboveAverageMaLabels = {{above_average_ma_labels | safe}}; var belowAverageMaLabels = {{below_average_ma_labels | safe}};var stockMaData = {{stock_ma_data_for_chart | safe}}; var stockMa = "{{stock_ma_label | safe}}"; </script>
   <script> var aboveAverageBetaData = {{above_beta_data_for_chart | safe}}; var belowAverageBetaData = {{below_beta_data_for_chart | safe}}; var aboveAverageBetaLabels = {{above_average_beta_labels | safe}}; var belowAverageBetaLabels = {{below_average_beta_labels | safe}};var stockBetaData = {{stock_beta_data_for_chart | safe}}; var stockBeta = "{{stock_beta_label | safe}}"; </script>
