@@ -1,14 +1,14 @@
 from django.shortcuts import render
 import html5lib
-from .models import ResearchPageImages, Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF, ProfileStock
-from .resources import StockResource, SP500Resource, NasdaqResource, MutualFundResource, TSXResource, ETFResource, CommoditieResource, ProfileStockResource
+from .models import ResearchPageImages, Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF, ProfileStock, Crypto
+from .resources import StockResource, SP500Resource, NasdaqResource, MutualFundResource, TSXResource, ETFResource, CommoditieResource, ProfileStockResource, CryptoResource
 from django.contrib import messages
 from django.http import HttpResponse
 from tablib import Dataset
 
 def upload(request):
     if request.method == 'POST':
-        stock_resource = ProfileStockResource()
+        stock_resource = CryptoResource()
         dataset = Dataset()
         new_stock = request.FILES['myfile']
 
@@ -18,10 +18,11 @@ def upload(request):
 
         imported_dataset = dataset.load(new_stock.read(),format='xlsx')
         for data in imported_dataset:
-            value = ProfileStock(
+            value = Crypto(
                 data[0],
                 data[1],
-                data[2]
+                data[2],
+                data[3]
             )
             value.save()
     return render(request, 'upload.html')

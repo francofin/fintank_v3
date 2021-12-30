@@ -29,4 +29,5 @@ urlpatterns = [
     path('canadian_equities/', include('canadian_equities.urls')),
     path('us_equities/', include('us_equities.urls')),
     path('stock_profile/', include('stock_profile.urls')),
+    path('crypto_profile/', include('cryptos.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -182,8 +182,8 @@ def home(request):
         gainer5_price = gainers[4]['price']
         gainer5_perc_change = gainers[4]['changesPercentage']
 
-        losers = losers = json.loads(requests.get(f"https://fmpcloud.io/api/v3/losers?apikey={fmp_api}").content)
-        losers = [loser for loser in losers if float(loser['price']) > 10]
+        losers = json.loads(requests.get(f"https://fmpcloud.io/api/v3/losers?apikey={fmp_api}").content)
+        losers = [loser for loser in losers if float(loser['price']) > 5]
 
         loser1_ticker = losers[0]['ticker']
         loser1_name = losers[0]['companyName']

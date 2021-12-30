@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %} | Profile {% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- Preloader Start -->
+<div id="preloader">
+  <div class="preload-content">
+    <div id="world-load"></div>
+  </div>
+</div>
+<!-- Preloader End -->
+
+
+{% for item in francois %}
+<div class="hero-area height-600 bg-img background-overlay" style="background-image: url({{item.home_images5.url}});">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="single-blog-title text-center">
+                    <!-- Catagory -->
+                    <h1 style="color: white; font-size: 52px;">Fintank</h1>
+                    <p style="color: white;  font-size: 28px;">Your Portfolio Just Got Easier To Manage</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<div class="main-content-wrapper section-padding-100-20">
+  <div class="container" style="max-width:90%;">
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-lg-12">
+        <div class="single-blog-content" style="margin:0px;">
+          <!-- Post Meta -->
+          <div class="post-meta" style="margin:0px;">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="{% url 'home'%}">
+                    <i class="fas fa-home"></i> Home</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    {% if crypto_for_breadcrumb_data %}
+                    &nbsp; &nbsp; Symbol: {{ crypto_for_breadcrumb_data.symbol |safe }} &nbsp; |  Name: {{ crypto_for_breadcrumb_data.name }} &nbsp; | Price: ${{ crypto_for_breadcrumb_data.price|floatformat:2|intcomma}} &nbsp; |  Percent Change: {{ crypto_for_breadcrumb_data.changesPercentage|floatformat:2|intcomma }}% &nbsp; |  Market Cap: {{ crypto_for_breadcrumb_data.marketCap | safe }} &nbsp; | Volume: {{ crypto_for_breadcrumb_data.volume | safe }}
+                    {% endif %}
+                  </li>
+                </ol>
+              </nav>
+            </div>
+            <!-- Post Content -->
+            <div class="row justify-content-center">
+              <div class="col-12 col-lg-12">
+                <div class="single-blog-content mb-100">
+                  <div class="post-meta">
+                    <h5> Headline Cryptos</h5>
+                  </div>
+                  <table class="table table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        {% for header in crypto_table_headers %}
+                        <th scope="col">{{header}}</th>
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for crypto in cryptos_for_dashboard %}
+                      <tr>
+                        <th scope='row'><b>{{ crypto.symbol }}</b></th>
+                        <td>{{ crypto.name }}</td>
+                        <td>{{ crypto.price }}</td>
+                        <td>{{ crypto.changesPercentage }}</td>
+                        <td>{{ crypto.dayLow }}</td>
+                        <td>{{ crypto.dayHigh }}</td>
+                        <td>{{ crypto.yearLow }}</td>
+                        <td>{{ crypto.yearHigh }}</td>
+                        <td>{{ crypto.marketCap }}</td>
+                        <td>{{ crypto.priceAvg50 }}</td>
+                        <td>{{ crypto.priceAvg200 }}</td>
+                        <td>{{ crypto.volume }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

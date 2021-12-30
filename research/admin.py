@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import ResearchPageImages, Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF, ProfileStock
+from .models import ResearchPageImages, Stock, SP500, Nasdaq, MutualFund, TSX, Commoditie, ETF, ProfileStock, Crypto
 # Register your models here.
 
 
@@ -28,6 +28,9 @@ class ETFAdmin(ImportExportModelAdmin):
 class ProfileStockAdmin(ImportExportModelAdmin):
     list_display = ('ticker', 'name')
 
+class CryptoAdmin(ImportExportModelAdmin):
+    list_display = ('symbol', 'name')
+
 admin.site.register(ResearchPageImages)
 admin.site.register(Stock)
 admin.site.register(SP500)
@@ -37,3 +40,4 @@ admin.site.register(TSX)
 admin.site.register(Commoditie)
 admin.site.register(ETF)
 admin.site.register(ProfileStock)
+admin.site.register(Crypto)
