@@ -412,7 +412,6 @@ const charting = function(dataDates, chartData, stock, companyName) {
   console.log(chart);
 }
 
-
 const annualStatementCharting = function(dataDates, plotData , plotLabels, stock, companyName) {
   // var labels = [];
   //   for (let i=0; i<dataDates.length; i++) {

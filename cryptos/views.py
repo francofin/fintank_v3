@@ -37,11 +37,25 @@ def crypto_profile(request):
 
     crypto_prices = json.loads(requests.get(f'https://fmpcloud.io/api/v3/quotes/crypto?apikey={fmp_api}').content)
     cryptos_for_dashboard =  sorted(crypto_prices, key = lambda i: i['changesPercentage'], reverse=True)[0:10]
-    
+
 
     crypto_for_breadcrumb_data = [curr for curr in crypto_prices if curr['symbol'] == str(crypto)]
     crypto_table_headers = ['Symbol', 'Name','Price', '%Change', 'Day Low', 'Day High', 'Year Low', 'Year high', 'Market Cap', '50 Day price Average', '200 Day Price Average', 'Volume', ]
 
+    symbol_chart = json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-price-full/'+str(crypto)+'?&apikey='+fmp_api).content)['historical']
+    symbol_chart.reverse()
+
+    data_for_chart = []
+    data_dates = []
+    i = 0
+    while i < len(symbol_chart):
+        data_for_chart.append(symbol_chart[i]['adjClose'])
+        data_dates.append(datetime.strptime(symbol_chart[i]['date'], "%Y-%m-%d").strftime('%b-%d-%Y'))
+        i+=1
+
+        #dump data to json to pass to javascript chart functionality
+    crypto_dates = json.dumps(data_dates)
+    crypto_prices = json.dumps(data_for_chart)
 
     data = {
     'crypto':crypto,
@@ -49,6 +63,8 @@ def crypto_profile(request):
     'cryptos_for_dashboard':cryptos_for_dashboard,
     'crypto_for_breadcrumb_data':crypto_for_breadcrumb_data[0],
     'crypto_table_headers':crypto_table_headers,
+    'crypto_dates':crypto_dates,
+    'crypto_prices':crypto_prices,
     }
 
 
