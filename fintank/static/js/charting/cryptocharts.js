@@ -42,6 +42,10 @@ const movingAverage = function(prices, dates, windowOne, windowTwo) {
 }
 
 
+const adl = function(openPrices, closePrices, lowPrices, highPrices, volumeData){
+
+}
+
 const cryptoCharting = function(dataDates, chartData, crypto, cryptoName) {
   var labels = [];
     for (let i=0; i<dataDates.length; i++) {

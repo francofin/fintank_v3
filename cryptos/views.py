@@ -47,15 +47,27 @@ def crypto_profile(request):
 
     data_for_chart = []
     data_dates = []
+    open_data = []
+    high_data = []
+    low_data = []
+    volume_data = []
     i = 0
     while i < len(symbol_chart):
         data_for_chart.append(symbol_chart[i]['adjClose'])
+        open_data.append(symbol_chart[i]['open'])
+        high_data.append(symbol_chart[i]['high'])
+        low_data.append(symbol_chart[i]['low'])
+        volume_data.append(symbol_chart[i]['volume'])
         data_dates.append(datetime.strptime(symbol_chart[i]['date'], "%Y-%m-%d").strftime('%b-%d-%Y'))
         i+=1
 
         #dump data to json to pass to javascript chart functionality
     crypto_dates = json.dumps(data_dates)
     crypto_prices = json.dumps(data_for_chart)
+    crypto_high_prices = json.dumps(high_data)
+    crypto_open_prices = json.dumps(open_data)
+    crypto_low_prices = json.dumps(low_data)
+    crypto_volume = json.dumps(volume_data)
 
     data = {
     'crypto':crypto,
@@ -65,6 +77,10 @@ def crypto_profile(request):
     'crypto_table_headers':crypto_table_headers,
     'crypto_dates':crypto_dates,
     'crypto_prices':crypto_prices,
+    'crypto_open_prices':crypto_open_prices,
+    'crypto_low_prices':crypto_low_prices,
+    'crypto_high_prices':crypto_high_prices,
+    'crypto_volume':crypto_volume,
     }
 
 
