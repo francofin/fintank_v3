@@ -57,7 +57,10 @@ def crypto_profile(request):
         open_data.append(symbol_chart[i]['open'])
         high_data.append(symbol_chart[i]['high'])
         low_data.append(symbol_chart[i]['low'])
-        volume_data.append(symbol_chart[i]['volume'])
+        try:
+            volume_data.append(symbol_chart[i]['volume'])
+        except:
+            volume_data.append(0)
         data_dates.append(datetime.strptime(symbol_chart[i]['date'], "%Y-%m-%d").strftime('%b-%d-%Y'))
         i+=1
 
@@ -67,7 +70,7 @@ def crypto_profile(request):
     crypto_high_prices = json.dumps(high_data)
     crypto_open_prices = json.dumps(open_data)
     crypto_low_prices = json.dumps(low_data)
-    crypto_volume = json.dumps(volume_data)
+    # crypto_volume = json.dumps(volume_data)
 
     data = {
     'crypto':crypto,
@@ -80,7 +83,7 @@ def crypto_profile(request):
     'crypto_open_prices':crypto_open_prices,
     'crypto_low_prices':crypto_low_prices,
     'crypto_high_prices':crypto_high_prices,
-    'crypto_volume':crypto_volume,
+    # 'crypto_volume':crypto_volume,
     }
 
 
