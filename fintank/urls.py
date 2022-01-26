@@ -30,4 +30,5 @@ urlpatterns = [
     path('us_equities/', include('us_equities.urls')),
     path('stock_profile/', include('stock_profile.urls')),
     path('crypto_profile/', include('cryptos.urls')),
+    path('screener/', include('screener.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

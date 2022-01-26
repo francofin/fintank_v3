@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'canadian_equities.apps.CanadianEquitiesConfig',
     'us_equities.apps.UsEquitiesConfig',
     'stock_profile.apps.StockProfileConfig',
+    'screener.apps.ScreenerConfig',
     'ckeditor',
     'import_export',
     'django.contrib.humanize',

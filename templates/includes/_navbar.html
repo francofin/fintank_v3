@@ -48,6 +48,7 @@
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" href="{% url 'canadian_equities' %}">Canadian Equities</a>
                                 <a class="nav-link" href="{% url 'us_equities' %}">US Equities</a>
+                                <a class="nav-link" href="{% url 'screen' %}">Stock Screener</a>
                               </div>
                             </li>
                             <li
@@ -85,7 +86,7 @@
                         </ul>
                         <!-- Search Form  -->
                         <div id="search-wrapper">
-                            <form action="" method='POST'>
+                            <form action="{% url 'stock-search' %}" method='POST'>
                                   {% csrf_token %}
                                   {{ form.as_p }}
                                 <input type="text" id="search" placeholder="Search ticker" name='ticker'>
